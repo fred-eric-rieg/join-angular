@@ -1,0 +1,10 @@
+footer {
+    position: relative;
+    bottom: -2rem;
+    left: -2rem;
+    width: calc(100% + 4rem);
+    display: flex;
+    flex-direction: row;
+    height: 5rem;
+    background: #2A3647;
+}

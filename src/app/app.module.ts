@@ -8,6 +8,8 @@ import { SignupComponent } from './signup/signup.component';
 import { ForgotPwComponent } from './forgot-pw/forgot-pw.component';
 import { ResetPwComponent } from './reset-pw/reset-pw.component';
 import { SummaryComponent } from './summary/summary.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { SummaryComponent } from './summary/summary.component';
     SignupComponent,
     ForgotPwComponent,
     ResetPwComponent,
-    SummaryComponent
+    SummaryComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
