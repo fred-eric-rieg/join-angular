@@ -9,6 +9,8 @@ import { SignupComponent } from './signup/signup.component';
 import { SignupCardComponent } from './signup-card/signup-card.component';
 import { ForgotPwComponent } from './forgot-pw/forgot-pw.component';
 import { ForgotPwCardComponent } from './forgot-pw-card/forgot-pw-card.component';
+import { ResetPwComponent } from './reset-pw/reset-pw.component';
+import { ResetPwCardComponent } from './reset-pw-card/reset-pw-card.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { ForgotPwCardComponent } from './forgot-pw-card/forgot-pw-card.component
     SignupComponent,
     SignupCardComponent,
     ForgotPwComponent,
-    ForgotPwCardComponent
+    ForgotPwCardComponent,
+    ResetPwComponent,
+    ResetPwCardComponent
   ],
   imports: [
     BrowserModule,
