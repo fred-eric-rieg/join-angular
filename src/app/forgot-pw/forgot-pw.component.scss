@@ -1,0 +1,20 @@
+.background {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: #F6F7F8;
+    margin: 0 auto;
+
+    .logo {
+        position: absolute;
+        left: 3rem;
+        top: 5%;
+        background-image: url(/../assets/img/login/logo_black.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 40px;
+        height: 40px;
+    }
+}
