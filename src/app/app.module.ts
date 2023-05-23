@@ -7,6 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { LoginCardComponent } from './login-card/login-card.component';
 import { SignupComponent } from './signup/signup.component';
 import { SignupCardComponent } from './signup-card/signup-card.component';
+import { ForgotPwComponent } from './forgot-pw/forgot-pw.component';
+import { ForgotPwCardComponent } from './forgot-pw-card/forgot-pw-card.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { SignupCardComponent } from './signup-card/signup-card.component';
     LoginComponent,
     LoginCardComponent,
     SignupComponent,
-    SignupCardComponent
+    SignupCardComponent,
+    ForgotPwComponent,
+    ForgotPwCardComponent
   ],
   imports: [
     BrowserModule,
