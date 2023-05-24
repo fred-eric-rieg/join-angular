@@ -1,72 +1,70 @@
-<section>
-    <div class="background">
+<div class="background">
 
-        <app-header></app-header>
-        <app-menu></app-menu>
+    <app-header></app-header>
+    <app-menu></app-menu>
 
-        <div class="title">
-            <span>Kanban Project Management Tool</span>
-            <h2>Summary</h2>
-            <span>Everything in a nutshell!</span>
-            <div class="blue-line"></div>
+    <div class="title">
+        <span>Kanban Project Management Tool</span>
+        <h2>Summary</h2>
+        <span>Everything in a nutshell!</span>
+        <div class="blue-line"></div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="tile small">
+                <span class="big-number">5</span>
+                <span class="twoliner">Tasks on Board</span>
+            </div>
+            <div class="tile small">
+                <span class="big-number">2</span>
+                <span>Tasks in Progress</span>
+            </div>
+            <div class="tile small">
+                <span class="big-number">2</span>
+                <span>Awaiting Feedback</span>
+            </div>
         </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="tile small">
-                    <span class="big-number">5</span>
-                    <span class="twoliner">Tasks on Board</span>
-                </div>
-                <div class="tile small">
-                    <span class="big-number">2</span>
-                    <span>Tasks in Progress</span>
-                </div>
-                <div class="tile small">
-                    <span class="big-number">2</span>
-                    <span>Awaiting Feedback</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="tile big even">
-                    <div class="flexrow gap">
-                        <img src="/../assets/img/summary/urgent_icon.svg" alt="urgent_icon">
-                        <div class="flexcolumn">
-                            <span class="big-number">2</span>
-                            <span>Urgent</span>
-                        </div>
-                    </div>
-                    <div class="grey-line">
-
-                    </div>
-                    <div class="flexcolumn bold">
-                        <span>October 16, 2022</span>
-                        <span>Upcoming Deadline</span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="tile medium flexrow gap">
-                    <div class="image-todo"></div>
+        <div class="row">
+            <div class="tile big even">
+                <div class="flexrow gap">
+                    <img src="/../assets/img/summary/urgent_icon.svg" alt="urgent_icon">
                     <div class="flexcolumn">
-                        <span class="big-number">1</span>
-                        <span>To-do</span>
+                        <span class="big-number">2</span>
+                        <span>Urgent</span>
                     </div>
                 </div>
-                <div class="tile medium flexrow gap">
-                    <div class="image-done"></div>
-                    <div class="flexcolumn">
-                        <span class="big-number">1</span>
-                        <span>Done</span>
-                    </div>
+                <div class="grey-line">
+
+                </div>
+                <div class="flexcolumn bold">
+                    <span>October 16, 2022</span>
+                    <span>Upcoming Deadline</span>
                 </div>
             </div>
         </div>
-
-        <app-footer></app-footer>
+        <div class="row">
+            <div class="tile medium flexrow gap">
+                <div class="image-todo"></div>
+                <div class="flexcolumn">
+                    <span class="big-number">1</span>
+                    <span>To-do</span>
+                </div>
+            </div>
+            <div class="tile medium flexrow gap">
+                <div class="image-done"></div>
+                <div class="flexcolumn">
+                    <span class="big-number">1</span>
+                    <span>Done</span>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="greeting" #greeting>
-        <h2>Welcome abord,</h2>
-        <h1>{{username}}</h1>
-    </div>
-</section>
+    <app-footer></app-footer>
+</div>
+
+<div class="greeting" #greeting>
+    <h2>Welcome abord,</h2>
+    <h1>{{username}}</h1>
+</div>
