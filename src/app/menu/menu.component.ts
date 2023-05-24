@@ -10,5 +10,7 @@ export class MenuComponent {
 
   constructor(public service: MenuService) { }
 
-
+  closeMenu() {
+    this.service.getMenuVisibility();
+  }
 }
