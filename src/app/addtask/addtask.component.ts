@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./addtask.component.scss']
 })
 export class AddtaskComponent {
-
+  today: number = Date.now();
+  constructor() { }
 }

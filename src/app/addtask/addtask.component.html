@@ -1,1 +1,47 @@
-<p>addtask works!</p>
+<div class="background">
+
+    <app-header></app-header>
+
+    <div class="title">
+        <span>Kanban Project Management Tool</span>
+        <div class="row">
+            <h2>Add Task</h2>
+            <img class="add-primary-btn" src="/../assets/img/board/add_icon_dark.svg" alt="add_icon_dark">
+        </div>
+    </div>
+
+    <div class="scrollable">
+        <form action="">
+            <span>Title</span>
+            <input type="text" placeholder="Enter a title">
+            <span>Description</span>
+            <textarea name="" id="" cols="30" rows="10" placeholder="Enter a description"></textarea>
+            <span>Prio</span>
+            <div class="row">
+                <div class="prio-btn">Urgent</div>
+                <div class="prio-btn">Medium</div>
+                <div class="prio-btn">Low</div>
+            </div>
+            <span>Due date</span>
+            <input type="date" value="{{today}}">
+            <span>Category</span>
+            <div class="dropdown">
+                <span>Select task category</span>
+            </div>
+            <span>Assigned to</span>
+            <div class="dropdown">
+                <span>Assign contacts to task</span>
+            </div>
+            <span>Subtasks</span>
+            <div class="row">
+                <input type="text" placeholder="Add new subtask">
+                <img class="add-primary-btn" src="/../assets/img/board/add_icon_dark.svg" alt="add_subtask">
+            </div>
+            
+
+        </form>
+    </div>
+
+    <app-footer></app-footer>
+
+</div>
