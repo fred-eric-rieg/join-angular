@@ -1,5 +1,5 @@
 footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -7,6 +7,7 @@ footer {
     flex-direction: row;
     height: 6rem;
     background: #2A3647;
+    z-index: 100;
 
     .row {
         padding: 0 1.5rem;
