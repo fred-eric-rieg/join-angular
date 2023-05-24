@@ -13,7 +13,12 @@
         position: relative;
         display: flex;
         flex-direction: column;
-        margin-top: 2rem;
+        margin-top: 1rem;
+
+        h2 {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
     }
 
     .blue-line {
@@ -21,8 +26,8 @@
         height: 0;
         border: 3px solid #29ABE2;
         border-radius: 5px;
-        margin-top: 1.5rem;
-        margin-bottom: 2rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
     }
 
     .container {
@@ -58,11 +63,24 @@
                     background: #2A3647;
                     color: #FFFFFF;
                 }
+
+                &:hover .image-todo {
+                    background-image: url(/../assets/img/summary/todo_icon_white.svg);
+                }
+
+                &:hover .image-done {
+                    background-image: url(/../assets/img/summary/done_icon_white.svg);
+                }
             }
 
             span {
                 font-size: 0.75rem;
                 text-align: center;
+            }
+
+            .twoliner {
+                width: 52px;
+                height: 31px;
             }
 
             .big-number {
@@ -80,6 +98,41 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+            }
+
+            .bold {
+                font-weight: 700;
+            }
+
+            .grey-line {
+                width: 0;
+                height: 3rem;
+                border: 1px solid #D1D1D1;
+                border-radius: 10px;
+            }
+
+            .even {
+                justify-content: space-around;
+            }
+
+            .gap {
+                gap: 1rem;
+            }
+
+            .image-todo {
+                width: 40px;
+                height: 40px;
+                background-image: url(/../assets/img/summary/todo_icon.svg);
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            .image-done {
+                width: 40px;
+                height: 40px;
+                background-image: url(/../assets/img/summary/done_icon.svg);
+                background-repeat: no-repeat;
+                background-position: center;
             }
 
             .small {
