@@ -8,6 +8,10 @@ import { MenuService } from '../menu.service';
 })
 export class HeaderComponent {
 
-  constructor(private service: MenuService) { }
+  constructor(public service: MenuService) { }
+
+  setMenuVisibility() {
+    return this.service.getMenuVisibility();
+  }
 
 }
