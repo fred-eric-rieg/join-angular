@@ -10,6 +10,8 @@ import { ResetPwComponent } from './reset-pw/reset-pw.component';
 import { SummaryComponent } from './summary/summary.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { MenuComponent } from './menu/menu.component';
+import { MenuService } from './menu.service';
 
 @NgModule({
   declarations: [
@@ -20,13 +22,14 @@ import { FooterComponent } from './footer/footer.component';
     ResetPwComponent,
     SummaryComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [MenuService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
