@@ -51,4 +51,30 @@
             }
         }
     }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1rem;
+
+        .headline {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: fit-content;
+            padding: 1rem;
+            background: #FFFFFF;
+            box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+            border-radius: 30px;
+        }
+    }
 }
