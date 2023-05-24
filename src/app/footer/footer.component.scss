@@ -18,6 +18,7 @@ footer {
     }
 
     .column {
+        transition: all 225ms ease-in-out;
         height: 100%;
         width: 60px;
         display: flex;
@@ -27,7 +28,24 @@ footer {
         cursor: pointer;
 
         &:hover {
+            transition: all 225ms ease-in-out;
             background: #091931;
+        }
+
+        &:hover .summary {
+            background-image: url(/../assets/img/summary/summary_icon_white.svg);
+        }
+
+        &:hover .board {
+            background-image: url(/../assets/img/summary/board_icon_white.svg);
+        }
+
+        &:hover .addtask {
+            background-image: url(/../assets/img/summary/addtask_icon_white.svg);
+        }
+
+        &:hover .contacts {
+            background-image: url(/../assets/img/summary/contacts_icon_white.svg);
         }
     }
 
