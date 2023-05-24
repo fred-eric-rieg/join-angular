@@ -10,7 +10,6 @@ import { ResetPwComponent } from './reset-pw/reset-pw.component';
 import { SummaryComponent } from './summary/summary.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { MenuComponent } from './menu/menu.component';
 import { BoardComponent } from './board/board.component';
 
 @NgModule({
@@ -23,7 +22,6 @@ import { BoardComponent } from './board/board.component';
     SummaryComponent,
     HeaderComponent,
     FooterComponent,
-    MenuComponent,
     BoardComponent
   ],
   imports: [
