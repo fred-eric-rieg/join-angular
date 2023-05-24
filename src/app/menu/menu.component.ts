@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { MenuService } from '../menu.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-menu',
@@ -8,9 +7,7 @@ import { MenuService } from '../menu.service';
 })
 export class MenuComponent {
 
-  constructor(public service: MenuService) { }
+  constructor() { }
 
-  closeMenu() {
-    this.service.getMenuVisibility();
-  }
+  
 }

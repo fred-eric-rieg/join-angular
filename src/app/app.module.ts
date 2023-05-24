@@ -11,7 +11,6 @@ import { SummaryComponent } from './summary/summary.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { MenuComponent } from './menu/menu.component';
-import { MenuService } from './menu.service';
 import { BoardComponent } from './board/board.component';
 
 @NgModule({
@@ -31,7 +30,7 @@ import { BoardComponent } from './board/board.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [MenuService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

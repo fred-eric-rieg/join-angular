@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MenuService } from '../menu.service';
 
 @Component({
   selector: 'app-header',
@@ -8,10 +7,17 @@ import { MenuService } from '../menu.service';
 })
 export class HeaderComponent {
 
-  constructor(public service: MenuService) { }
+  menuVisibility: boolean = false;
+
+  constructor() { }
 
   setMenuVisibility() {
-    return this.service.getMenuVisibility();
+    if (!this.menuVisibility) {
+      this.menuVisibility = true;
+      return true;
+    } else {
+      this.menuVisibility = false;
+      return false;
+    }
   }
-
 }
