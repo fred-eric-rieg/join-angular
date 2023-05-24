@@ -11,6 +11,7 @@ import { SummaryComponent } from './summary/summary.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { BoardComponent } from './board/board.component';
+import { AddtaskComponent } from './addtask/addtask.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BoardComponent } from './board/board.component';
     SummaryComponent,
     HeaderComponent,
     FooterComponent,
-    BoardComponent
+    BoardComponent,
+    AddtaskComponent
   ],
   imports: [
     BrowserModule,
