@@ -15,6 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 import { BoardComponent } from './board/board.component';
 import { AddtaskComponent } from './addtask/addtask.component';
 import { ContactsComponent } from './contacts/contacts.component';
+import { LegalComponent } from './legal/legal.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ContactsComponent } from './contacts/contacts.component';
     FooterComponent,
     BoardComponent,
     AddtaskComponent,
-    ContactsComponent
+    ContactsComponent,
+    LegalComponent
   ],
   imports: [
     BrowserModule,

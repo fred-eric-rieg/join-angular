@@ -8,6 +8,7 @@ import { SummaryComponent } from './summary/summary.component';
 import { BoardComponent } from './board/board.component';
 import { AddtaskComponent } from './addtask/addtask.component';
 import { ContactsComponent } from './contacts/contacts.component';
+import { LegalComponent } from './legal/legal.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'summary', component: SummaryComponent },
   { path: 'board', component: BoardComponent },
   { path: 'addtask', component: AddtaskComponent },
-  { path: 'contacts', component: ContactsComponent}
+  { path: 'contacts', component: ContactsComponent },
+  { path: 'legal', component: LegalComponent }
 ];
 
 @NgModule({
