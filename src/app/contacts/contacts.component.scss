@@ -41,7 +41,8 @@
     flex-direction: column;
     width: min(100%, 350px);
     height: fit-content;
-    padding-bottom: 7rem; /** This makes it scrolling **/
+    padding-bottom: 7rem;
+    /** This makes it scrolling **/
 
     .letter {
         display: flex;
@@ -59,11 +60,20 @@
     }
 
     .contact {
+        transition: all 125ms ease-in-out;
         display: flex;
         flex-direction: row;
         align-items: center;
         height: 3rem;
-        margin: 0.5rem;
+        padding: 0.5rem;
+        cursor: pointer;
+
+        &:hover {
+            transition: all 125ms ease-in-out;
+            background: #2A3647;
+            border-radius: 10px;
+            color: #FFFFFF;
+        }
 
         .circle {
             display: flex;
@@ -72,7 +82,7 @@
             width: 2.5rem;
             height: 2.5rem;
             border-radius: 50%;
-            border: 1px solid #FFFFFF;
+            border: 2px solid #FFFFFF;
             margin-right: 1rem;
             color: #FFFFFF;
         }

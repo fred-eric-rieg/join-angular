@@ -17,6 +17,7 @@ import { AddtaskComponent } from './addtask/addtask.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { LegalComponent } from './legal/legal.component';
 import { HelpinfoComponent } from './helpinfo/helpinfo.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { HelpinfoComponent } from './helpinfo/helpinfo.component';
     AddtaskComponent,
     ContactsComponent,
     LegalComponent,
-    HelpinfoComponent
+    HelpinfoComponent,
+    ContactFormComponent
   ],
   imports: [
     BrowserModule,
