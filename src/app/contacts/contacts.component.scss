@@ -35,10 +35,89 @@
     }
 }
 
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: min(100%, 350px);
+    height: fit-content;
+    padding-bottom: 7rem; /** This makes it scrolling **/
+
+    .letter {
+        display: flex;
+        height: 3rem;
+        align-items: center;
+        margin-left: 1rem;
+    }
+
+    .grey-line {
+        display: flex;
+        width: 100%;
+        height: 0px;
+        border: 1px solid #D1D1D1;
+        border-radius: 10px;
+    }
+
+    .contact {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 3rem;
+        margin: 0.5rem;
+
+        .circle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            border: 1px solid #FFFFFF;
+            margin-right: 1rem;
+            color: #FFFFFF;
+        }
+
+        .details {
+            display: flex;
+            flex-direction: column;
+
+            .name {
+                font-size: 1rem;
+                font-weight: 500;
+            }
+
+            .email {
+                font-size: 0.75rem;
+                color: #007CEE;
+            }
+        }
+    }
+}
+
 .row {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
+}
+
+.blue {
+    background: #007CEE;
+}
+
+.green {
+    background: #00B74A;
+}
+
+.red {
+    background: #FF0000;
+}
+
+.pink {
+    background: #FF00FF;
+}
+
+.background::-webkit-scrollbar {
+    display: none;
 }
