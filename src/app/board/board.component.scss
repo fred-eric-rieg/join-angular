@@ -12,11 +12,14 @@
     scrollbar-width: none;
 
     .title {
-        position: relative;
+        position: sticky;
+        top: 0;
         display: flex;
+        background: #F6F7F8;
         flex-direction: column;
-        margin-top: 1rem;
+        padding-top: 1rem;
         width: min(100%, 350px);
+        z-index: 4;
 
         h2 {
             margin-top: 1rem;
