@@ -10,4 +10,75 @@
     padding: 0 1.5rem;
     -ms-overflow-style: none;
     scrollbar-width: none;
+
+    .title {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        margin-top: 1rem;
+        width: min(100%, 350px);
+
+        h2 {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        img {
+            cursor: pointer;
+        }
+    }
+
+    .blue-line {
+        width: 5rem;
+        height: 0;
+        border: 3px solid #29ABE2;
+        border-radius: 5px;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: min(100%, 350px);
+    margin-top: 1rem;
+    gap: 1rem;
+
+    .circle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        background: #29ABE2;
+        color: #FFFFFF;
+        font-size: 2rem;
+        border: 3px solid #FFFFFF;
+    }
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.row-short {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+}
+
+.btn-container {
+    width: min(100%, 350px);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
 }
