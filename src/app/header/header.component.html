@@ -6,7 +6,7 @@
 </header>
 
 <div class="container" [class.open]="menuVisibility">
-    <div class="option" (click)="setMenuVisibility()">Help</div>
+    <div class="option" routerLink="/helpinfo" (click)="setMenuVisibility()">Help</div>
     <div class="option" routerLink="/legal" (click)="setMenuVisibility()">Legal notice</div>
     <div class="option" routerLink="" (click)="setMenuVisibility()">Log out</div>
 </div>

@@ -16,6 +16,7 @@ import { BoardComponent } from './board/board.component';
 import { AddtaskComponent } from './addtask/addtask.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { LegalComponent } from './legal/legal.component';
+import { HelpinfoComponent } from './helpinfo/helpinfo.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { LegalComponent } from './legal/legal.component';
     BoardComponent,
     AddtaskComponent,
     ContactsComponent,
-    LegalComponent
+    LegalComponent,
+    HelpinfoComponent
   ],
   imports: [
     BrowserModule,

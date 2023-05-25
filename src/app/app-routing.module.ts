@@ -9,6 +9,7 @@ import { BoardComponent } from './board/board.component';
 import { AddtaskComponent } from './addtask/addtask.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { LegalComponent } from './legal/legal.component';
+import { HelpinfoComponent } from './helpinfo/helpinfo.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'board', component: BoardComponent },
   { path: 'addtask', component: AddtaskComponent },
   { path: 'contacts', component: ContactsComponent },
-  { path: 'legal', component: LegalComponent }
+  { path: 'legal', component: LegalComponent },
+  { path: 'helpinfo', component: HelpinfoComponent }
 ];
 
 @NgModule({
