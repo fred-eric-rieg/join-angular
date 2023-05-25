@@ -22,10 +22,6 @@
             margin-top: 1rem;
             margin-bottom: 1rem;
         }
-
-        img {
-            cursor: pointer;
-        }
     }
 
     .blue-line {
@@ -71,14 +67,48 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .btn-container {
+    position: absolute;
+    bottom: 6.6rem;
     width: min(100%, 350px);
     position: relative;
     display: flex;
     align-items: flex-end;
-    justify-content: center;
+    gap: 1rem;
     flex-direction: column;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: fit-content;
+    max-width: 200px;
+
+    img {
+        height: 1.5rem;
+        width: 7rem;
+    }
+}
+
+img {
+    cursor: pointer;
+}
+
+.large {
+    display: flex;
+    word-break: break-all;
+    font-size: 1.25rem;
+}
+
+.big {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.fat {
+    font-weight: 700;
 }
