@@ -18,6 +18,11 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { LegalComponent } from './legal/legal.component';
 import { HelpinfoComponent } from './helpinfo/helpinfo.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideDatabase,getDatabase } from '@angular/fire/database';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,11 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideDatabase(() => getDatabase()),
+    provideFirestore(() => getFirestore())
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

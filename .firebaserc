@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "join-angular-7f784": {
+      "hosting": {
+        "join-angular": [
+          "join-angular-7f784"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "join-angular-7f784"
+  }
+}
