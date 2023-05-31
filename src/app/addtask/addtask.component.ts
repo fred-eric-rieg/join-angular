@@ -7,19 +7,29 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./addtask.component.scss']
 })
 export class AddtaskComponent {
-  today: string | null = this.formatTodayDate();
 
-  constructor(private datePipe: DatePipe) { }
+  today: string | null = '';
+
+  constructor(private datePipe: DatePipe) {
+    this.today = this.formatToday(new Date());
+    console.log(this.today);
+  }
 
   ngOnInit() {
 
   }
 
   /**
-   * Getting today's date in yyyy-MM-dd format for the date input field.
-   * @returns today's date in yyyy-MM-dd format
+   * Transforms a date to yyyy-MM-dd format.
+   * @returns as string
    */
-  formatTodayDate() {
-    return this.datePipe.transform(Date.now(), 'yyyy-MM-dd');
+  formatToday(date?: Date, numberDate?: number, stringDate?: string) {
+    if (numberDate) {
+      return this.datePipe.transform(numberDate, 'yyyy-MM-dd');;
+    } else if (stringDate) {
+      return this.datePipe.transform(stringDate, 'yyyy-MM-dd');
+    } else {
+      return this.datePipe.transform(date, 'yyyy-MM-dd');
+    }
   }
 }
