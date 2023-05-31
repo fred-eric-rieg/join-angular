@@ -13,11 +13,25 @@ export class FirebaseService {
 
   constructor(private firestore: Firestore) { }
 
-
+  /**
+   * Creates a task in Firestore collection "tasks".
+   */
   createTask() {
     const collectionInstance = collection(this.firestore, 'tasks');
     addDoc(collectionInstance, this.task.toJSON()).then(() => {
       console.log('Task created successfully!');
+    }).catch((error: any) => {
+      console.log(error);
+    });
+  }
+
+  /**
+   * Creates a user in Firestore collection "users".
+   */
+  createUser() {
+    const collectionInstance = collection(this.firestore, 'users');
+    addDoc(collectionInstance, this.user.toJSON()).then(() => {
+      console.log('User created successfully!');
     }).catch((error: any) => {
       console.log(error);
     });
