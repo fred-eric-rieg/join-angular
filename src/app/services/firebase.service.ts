@@ -34,10 +34,12 @@ export class FirebaseService {
    * Gets all tasks from Firestore collection "tasks".
    */
   getAllTasks() {
+    let tasks: object = [];
     const collectionInstance = collection(this.firestore, 'tasks');
-    collectionData(collectionInstance).subscribe((tasks) => {
-      return tasks;
-    })
+    collectionData(collectionInstance).subscribe((subscribedTasks) => {
+      tasks = subscribedTasks;
+    });
+    return tasks;
   }
 
   /**
@@ -45,16 +47,18 @@ export class FirebaseService {
    * @param id as string
    */
   getSpecificTask(id: string) {
+    let task: object = [];
     const collectionInstance = collection(this.firestore, 'tasks');
-    collectionData(collectionInstance, { idField: 'id' }).subscribe((tasks) => {
-      tasks.forEach((task) => {
-        if (task['id'] === id) {
-          return task;
+    collectionData(collectionInstance, { idField: 'id' }).subscribe((subscribedTasks) => {
+      subscribedTasks.forEach((singleTask) => {
+        if (singleTask['id'] === id) {
+          task = singleTask;
         } else {
-          return null;
+          task = [];
         }
       });
     });
+    return task;
   }
 
   /**
@@ -103,10 +107,12 @@ export class FirebaseService {
    * Gets all users from Firestore collection "users".
    */
   getAllUsers() {
+    let users: object = [];
     const collectionInstance = collection(this.firestore, 'users');
-    collectionData(collectionInstance).subscribe((users) => {
-      return users;
+    collectionData(collectionInstance).subscribe((subscribedUsers) => {
+      users = subscribedUsers;
     });
+    return users;
   }
 
   /**
@@ -114,15 +120,17 @@ export class FirebaseService {
    * @param id as string
    */
   getSpecificUser(id: string) {
+    let user: object = [];
     const collectionInstance = collection(this.firestore, 'users');
-    collectionData(collectionInstance, { idField: 'userId' }).subscribe((users) => {
-      users.forEach((user) => {
-        if (user['userId'] === id) {
-          return user;
+    collectionData(collectionInstance, { idField: 'userId' }).subscribe((subscribedUsers) => {
+      subscribedUsers.forEach((singleUser) => {
+        if (singleUser['userId'] === id) {
+          user = singleUser;
         } else {
-          return null;
+          user = [];
         }
       });
     });
+    return user;
   }
 }
