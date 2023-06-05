@@ -12,7 +12,7 @@ export class Task {
     creatorId!: string;
     dueDate!: Date;
     category!: string;
-    assignedTo!: string;
+    assignedTo!: string[];
     subtasks!: string[];
 
     /**
@@ -34,7 +34,7 @@ export class Task {
         id: string, title: string, description: string,
         status: string, creationDate: Date, lastUpdated: Date,
         priority: string, creatorId: string, dueDate: Date,
-        category: string, assignedTo: string, subtasks: string[]
+        category: string, assignedTo: string[], subtasks: string[]
         ) {
 
         this.id = id;

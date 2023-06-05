@@ -3,6 +3,8 @@ import { DatePipe } from '@angular/common';
 import { FirebaseService } from '../services/firebase.service';
 import { Task } from '../models/task.class';
 
+import { FormBuilder } from '@angular/forms';
+
 @Component({
   selector: 'app-addtask',
   templateUrl: './addtask.component.html',
@@ -13,7 +15,22 @@ export class AddtaskComponent {
   // For setting the date input to today's date as default.
   today: string | null = '';
 
-  constructor(private datePipe: DatePipe, private firebaseService: FirebaseService) {
+  chechoutForm = this.formBuilder.group({
+    id: '',
+    title: '',
+    description: '',
+    status: '',
+    creationDate: new Date,
+    lastUpdated: new Date,
+    priority: '',
+    creatorId: '',
+    dueDate: new Date,
+    category: '',
+    assignedTo: [],
+    subtasks: []
+  });
+
+  constructor(private datePipe: DatePipe, private firebaseService: FirebaseService, private formBuilder: FormBuilder) {
     this.today = this.formatToday(new Date());
     console.log(this.today);
   }
@@ -38,6 +55,6 @@ export class AddtaskComponent {
 
 
   createTask() {
-    this.firebaseService.createTask(new Task('id', 'Finish Addtask Form', 'Within the next days finish the addtask form design', 'todo', new Date(), new Date(), 'high', 'guest', new Date(), 'Design', 'guest', []));
+    this.firebaseService.createTask(new Task('id', 'Finish Addtask Form', 'Within the next days finish the addtask form design', 'todo', new Date(), new Date(), 'high', 'guest', new Date(), 'Design', ['guest'], []));
   }
 }
