@@ -15,6 +15,14 @@ export class AddtaskComponent {
   // For setting the date input to today's date as default.
   today: string | null = '';
 
+  // For setting the priority buttons to default (low = true).
+  lowPrio: boolean = true;
+  mediumPrio: boolean = false;
+  urgentPrio: boolean = false;
+
+  expandedCategory: boolean = false;
+  expandedAssigned: boolean = false;
+
   taskForm!: FormGroup;
 
   constructor(private datePipe: DatePipe, private firebaseService: FirebaseService, private formBuilder: FormBuilder) {
@@ -57,13 +65,41 @@ export class AddtaskComponent {
 
 
   setPrio(prio: string) {
+    if (prio === 'low') {
+      this.lowPrio = true;
+      this.mediumPrio = false;
+      this.urgentPrio = false;
+    } else if (prio === 'medium') {
+      this.lowPrio = false;
+      this.mediumPrio = true;
+      this.urgentPrio = false;
+    } else if (prio === 'urgent') {
+      this.lowPrio = false;
+      this.mediumPrio = false;
+      this.urgentPrio = true;
+    }
     this.taskForm.patchValue({ priority: prio });
   }
 
 
+  expandCategory() {
+
+  }
+
+
+  expandAssigned() {
+    
+  }
+
+
   createTask() {
-    console.log(this.taskForm.value);
-    this.taskForm.reset();
+    if (this.taskForm.valid) {
+      console.log(this.taskForm.value);
+      this.taskForm.reset();
+    } else {
+      console.log('Form is not valid!');
+    }
+    
     //this.firebaseService.createTask(new Task('id', 'Finish Addtask Form', 'Within the next days finish the addtask form design', 'todo', new Date(), new Date(), 'high', 'guest', new Date(), 'Design', ['guest'], []));
   }
 }

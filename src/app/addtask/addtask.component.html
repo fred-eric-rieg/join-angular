@@ -19,18 +19,18 @@
             <textarea cols="30" rows="10" placeholder="Enter a description" formControlName="description"></textarea>
             <span>Prio</span>
             <div class="row">
-                <div class="prio-btn" (click)="setPrio('urgent')">Urgent</div>
-                <div class="prio-btn" (click)="setPrio('medium')">Medium</div>
-                <div class="prio-btn" (click)="setPrio('low')">Low</div>
+                <div class="prio-btn" [class.urgent-selected]="urgentPrio" (click)="setPrio('urgent')">Urgent</div>
+                <div class="prio-btn" [class.medium-selected]="mediumPrio" (click)="setPrio('medium')">Medium</div>
+                <div class="prio-btn" [class.low-selected]="lowPrio" (click)="setPrio('low')">Low</div>
             </div>
             <span>Due date</span>
             <input type="date" [(ngModel)]="today" name="today" formControlName="dueDate">
             <span>Category</span>
-            <div class="dropdown">
+            <div class="dropdown" [class.expanded]="expandedCategory" (click)="expandCategory()">
                 <span>Select task category</span>
             </div>
             <span>Assigned to</span>
-            <div class="dropdown">
+            <div class="dropdown" [class.expanded]="expandedAssigned" (click)="expandAssigned()">
                 <span>Assign contacts to task</span>
             </div>
             <span>Subtasks</span>
