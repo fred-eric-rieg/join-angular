@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-board',
@@ -8,13 +9,20 @@ import { FirebaseService } from '../services/firebase.service';
 })
 export class BoardComponent implements OnInit {
 
-  tasks: object = [];
+  tasks!: any;
+  users!: any;
 
-  constructor(private firebaseService: FirebaseService) { }
+  constructor(private firebaseService: FirebaseService) {
+    this.firebaseService.users.subscribe(users => {
+      this.users = users;
+    });
+    this.firebaseService.tasks.subscribe(tasks => {
+      this.tasks = tasks;
+    });
+  }
 
   
   ngOnInit() {
-    this.tasks = this.firebaseService.getAllTasks();
     this.renderTasks();
   }
 

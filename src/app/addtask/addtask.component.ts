@@ -30,7 +30,6 @@ export class AddtaskComponent {
 
   constructor(private datePipe: DatePipe, private firebaseService: FirebaseService, private formBuilder: FormBuilder) {
     this.today = this.formatToday(new Date());
-    console.log(this.today);
   }
 
   ngOnInit() {
@@ -104,13 +103,14 @@ export class AddtaskComponent {
 
 
   createTask() {
+    /*
     if (this.taskForm.valid) {
       console.log(this.taskForm.value);
       this.taskForm.reset();
     } else {
       console.log('Form is not valid!');
-    }
+    }*/
     
-    //this.firebaseService.createTask(new Task('id', 'Finish Addtask Form', 'Within the next days finish the addtask form design', 'todo', new Date(), new Date(), 'high', 'guest', new Date(), 'Design', ['guest'], []));
+    this.firebaseService.createTask(new Task('id', 'Finish Addtask Form', 'Within the next days finish the addtask form design', 'todo', new Date(), new Date(), 'high', 'guest', new Date(), 'Design', ['guest'], []));
   }
 }

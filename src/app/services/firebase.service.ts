@@ -3,16 +3,22 @@ import { Firestore, addDoc, collection, collectionData, doc, setDoc, updateDoc }
 import { Task } from '../models/task.class';
 import { User } from '../models/user.class';
 import { deleteDoc } from 'firebase/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
 
-  users: object = [];
-  tasks: object = [];
+  users!: Observable<any>;
+  tasks!: Observable<any>;
 
-  constructor(private firestore: Firestore) { }
+
+  constructor(private firestore: Firestore) {
+    this.getAllUsers();
+    this.getAllTasks();
+  }
+
 
   /**
    * Creates a task in Firestore collection "tasks".
@@ -34,12 +40,8 @@ export class FirebaseService {
    * Gets all tasks from Firestore collection "tasks".
    */
   getAllTasks() {
-    let tasks: object = [];
     const collectionInstance = collection(this.firestore, 'tasks');
-    collectionData(collectionInstance).subscribe((subscribedTasks) => {
-      tasks = subscribedTasks;
-    });
-    return tasks;
+    this.tasks = collectionData(collectionInstance);
   }
 
   /**
@@ -49,7 +51,7 @@ export class FirebaseService {
   getSpecificTask(id: string) {
     let task: object = [];
     const collectionInstance = collection(this.firestore, 'tasks');
-    collectionData(collectionInstance, { idField: 'id' }).subscribe((subscribedTasks) => {
+    collectionData(collectionInstance, { idField: 'id' }).subscribe(subscribedTasks => {
       subscribedTasks.forEach((singleTask) => {
         if (singleTask['id'] === id) {
           task = singleTask;
@@ -107,12 +109,8 @@ export class FirebaseService {
    * Gets all users from Firestore collection "users".
    */
   getAllUsers() {
-    let users: object = [];
     const collectionInstance = collection(this.firestore, 'users');
-    collectionData(collectionInstance).subscribe((subscribedUsers) => {
-      users = subscribedUsers;
-    });
-    return users;
+    this.users = collectionData(collectionInstance);
   }
 
   /**
@@ -122,7 +120,7 @@ export class FirebaseService {
   getSpecificUser(id: string) {
     let user: object = [];
     const collectionInstance = collection(this.firestore, 'users');
-    collectionData(collectionInstance, { idField: 'userId' }).subscribe((subscribedUsers) => {
+    collectionData(collectionInstance, { idField: 'userId' }).subscribe(subscribedUsers => {
       subscribedUsers.forEach((singleUser) => {
         if (singleUser['userId'] === id) {
           user = singleUser;
