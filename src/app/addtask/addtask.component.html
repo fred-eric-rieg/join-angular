@@ -13,26 +13,46 @@
     <div class="scrollable">
         <!-- The Form -->
         <form [formGroup]="taskForm">
+
+            <!-- Title -->
             <span>Title</span>
             <input type="text" placeholder="Enter a title" formControlName="title">
+
+            <!-- Description -->
             <span>Description</span>
             <textarea cols="30" rows="10" placeholder="Enter a description" formControlName="description"></textarea>
+
+            <!-- Priority buttons -->
             <span>Prio</span>
             <div class="row">
                 <div class="prio-btn" [class.urgent-selected]="urgentPrio" (click)="setPrio('urgent')">Urgent</div>
                 <div class="prio-btn" [class.medium-selected]="mediumPrio" (click)="setPrio('medium')">Medium</div>
                 <div class="prio-btn" [class.low-selected]="lowPrio" (click)="setPrio('low')">Low</div>
             </div>
+
+            <!-- Due date picker -->
             <span>Due date</span>
             <input type="date" [(ngModel)]="today" name="today" formControlName="dueDate">
+
+            <!-- Category dropdown -->
             <span>Category</span>
             <div class="dropdown" [class.expanded]="expandedCategory" (click)="expandCategory()">
-                <span>Select task category</span>
+                <span *ngIf="!expandedCategory">Select task category</span>
+                <div class="column" *ngIf="expandedCategory">
+                    <span *ngFor="let category of categories">{{ category }}</span>
+                </div>
             </div>
+
+            <!-- Assigned to dropdown -->
             <span>Assigned to</span>
             <div class="dropdown" [class.expanded]="expandedAssigned" (click)="expandAssigned()">
-                <span>Assign contacts to task</span>
+                <span *ngIf="!expandedAssigned">Assign contacts to task</span>
+                <div class="column" *ngIf="expandedAssigned">
+                    <span *ngFor="let assign of assigned">{{ assign }}</span>
+                </div>
             </div>
+
+            <!-- Subtasks input -->
             <span>Subtasks</span>
             <div class="row">
                 <input type="text" placeholder="Add new subtask">

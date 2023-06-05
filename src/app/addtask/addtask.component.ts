@@ -23,6 +23,9 @@ export class AddtaskComponent {
   expandedCategory: boolean = false;
   expandedAssigned: boolean = false;
 
+  categories = ['Design', 'Marketing', 'Backoffice', 'Sales'];
+  assigned = ['Karl', 'Dieter', 'Anne-Marie', 'Gustel'];
+
   taskForm!: FormGroup;
 
   constructor(private datePipe: DatePipe, private firebaseService: FirebaseService, private formBuilder: FormBuilder) {
@@ -83,12 +86,20 @@ export class AddtaskComponent {
 
 
   expandCategory() {
-
+    if(this.expandedCategory) {
+      this.expandedCategory = false;
+    } else {
+      this.expandedCategory = true;
+    }
   }
 
 
   expandAssigned() {
-    
+    if(this.expandedAssigned) {
+      this.expandedAssigned = false;
+    } else {
+      this.expandedAssigned = true;
+    }
   }
 
 
