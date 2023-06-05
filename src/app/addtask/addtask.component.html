@@ -11,19 +11,20 @@
     </div>
 
     <div class="scrollable">
-        <form action="">
+        <!-- The Form -->
+        <form [formGroup]="taskForm">
             <span>Title</span>
-            <input type="text" placeholder="Enter a title">
+            <input type="text" placeholder="Enter a title" formControlName="title">
             <span>Description</span>
-            <textarea name="" id="" cols="30" rows="10" placeholder="Enter a description"></textarea>
+            <textarea cols="30" rows="10" placeholder="Enter a description" formControlName="description"></textarea>
             <span>Prio</span>
             <div class="row">
-                <div class="prio-btn">Urgent</div>
-                <div class="prio-btn">Medium</div>
-                <div class="prio-btn">Low</div>
+                <div class="prio-btn" (click)="setPrio('urgent')">Urgent</div>
+                <div class="prio-btn" (click)="setPrio('medium')">Medium</div>
+                <div class="prio-btn" (click)="setPrio('low')">Low</div>
             </div>
             <span>Due date</span>
-            <input type="date" [(ngModel)]="today" name="today">
+            <input type="date" [(ngModel)]="today" name="today" formControlName="dueDate">
             <span>Category</span>
             <div class="dropdown">
                 <span>Select task category</span>
@@ -38,6 +39,7 @@
                 <img class="add-primary-btn" src="/../assets/img/board/add_icon_dark.svg" alt="add_subtask">
             </div>
         </form>
+
     </div>
 
     <app-footer></app-footer>
