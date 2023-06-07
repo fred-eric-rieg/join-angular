@@ -67,23 +67,41 @@
                 <h3>In Progress</h3>
                 <img src="/../assets/img/board/add_icon_white.svg" alt="add_icon">
             </div>
-            <div class="card">
-                <div class="card-category">Sales</div>
-                <div class="card-title">Website redesign</div>
-                <p>Modify the contents of the main website. Adjust the UI to the company's brand design.</p>
-                <div class="row margin-bottom">
-                    <div class="progressbar">
-                        <div class="progress"></div>
+
+            <!-- Progress Template -->
+            <div *ngFor="let task of tasks">
+                <div class="card" *ngIf="task.status === 'progress'">
+                    <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
+                    <div class="card-title">{{ task.title }}</div>
+                    <p>{{ task.description }}</p>
+                    <div class="row margin-bottom" *ngIf="task.subtasks.length > 0">
+                        <div class="progressbar">
+                            <div class="progress" [style]="this.returnProgressWidth(task.subtasks)"></div>
+                        </div>
+                        <div class="progressbar-text"> {{ this.countDoneSubtasks(task.subtasks) }}/{{ task.subtasks.length }} Done</div>
                     </div>
-                    <div class="progressbar-text">1/2 Done</div>
-                </div>
-                <div class="row">
                     <div class="row">
-                        <div class="circle pink">AS</div>
-                        <div class="circle blue overlap">DE</div>
-                        <div class="circle dark overlap2">+2</div>
+                        <div class="row" *ngIf="task.assignedTo.length === 1">
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                        </div>
+                        <div class="row" *ngIf="task.assignedTo.length === 2">
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1])}}</div>
+                        </div>
+                        <div class="row" *ngIf="task.assignedTo.length === 3">
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1]) }}</div>
+                            <div class="circle dark overlap2">{{ this.returnFirstLetter(task.assignedTo[2]) }}</div>
+                        </div>
+                        <div class="row" *ngIf="task.assignedTo.length > 3">
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1]) }}</div>
+                            <div class="circle dark overlap2">+{{ task.assignedTo.length }}</div>
+                        </div>
+                        <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">
+                        <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'medium'">
+                        <img src="/../assets/img/board/prio_high_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'high'">
                     </div>
-                    <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon">
                 </div>
             </div>
         </div>
@@ -93,23 +111,40 @@
                 <h3>Awaiting Feedback</h3>
                 <img src="/../assets/img/board/add_icon_white.svg" alt="add_icon">
             </div>
-            <div class="card">
-                <div class="card-category">Sales</div>
-                <div class="card-title">Website redesign</div>
-                <p>Modify the contents of the main website. Adjust the UI to the company's brand design.</p>
-                <div class="row margin-bottom">
-                    <div class="progressbar">
-                        <div class="progress"></div>
+            <!-- Feedback Template -->
+            <div *ngFor="let task of tasks">
+                <div class="card" *ngIf="task.status === 'feedback'">
+                    <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
+                    <div class="card-title">{{ task.title }}</div>
+                    <p>{{ task.description }}</p>
+                    <div class="row margin-bottom" *ngIf="task.subtasks.length > 0">
+                        <div class="progressbar">
+                            <div class="progress" [style]="this.returnProgressWidth(task.subtasks)"></div>
+                        </div>
+                        <div class="progressbar-text"> {{ this.countDoneSubtasks(task.subtasks) }}/{{ task.subtasks.length }} Done</div>
                     </div>
-                    <div class="progressbar-text">1/2 Done</div>
-                </div>
-                <div class="row">
                     <div class="row">
-                        <div class="circle pink">AS</div>
-                        <div class="circle blue overlap">DE</div>
-                        <div class="circle dark overlap2">+2</div>
+                        <div class="row" *ngIf="task.assignedTo.length === 1">
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                        </div>
+                        <div class="row" *ngIf="task.assignedTo.length === 2">
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1])}}</div>
+                        </div>
+                        <div class="row" *ngIf="task.assignedTo.length === 3">
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1]) }}</div>
+                            <div class="circle dark overlap2">{{ this.returnFirstLetter(task.assignedTo[2]) }}</div>
+                        </div>
+                        <div class="row" *ngIf="task.assignedTo.length > 3">
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1]) }}</div>
+                            <div class="circle dark overlap2">+{{ task.assignedTo.length }}</div>
+                        </div>
+                        <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">
+                        <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'medium'">
+                        <img src="/../assets/img/board/prio_high_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'high'">
                     </div>
-                    <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon">
                 </div>
             </div>
         </div>
@@ -119,23 +154,40 @@
                 <h3>Done</h3>
                 <img src="/../assets/img/board/add_icon_white.svg" alt="add_icon">
             </div>
-            <div class="card">
-                <div class="card-category">Sales</div>
-                <div class="card-title">Website redesign</div>
-                <p>Modify the contents of the main website. Adjust the UI to the company's brand design.</p>
-                <div class="row margin-bottom">
-                    <div class="progressbar">
-                        <div class="progress"></div>
+            <!-- Done Template -->
+            <div *ngFor="let task of tasks">
+                <div class="card" *ngIf="task.status === 'done'">
+                    <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
+                    <div class="card-title">{{ task.title }}</div>
+                    <p>{{ task.description }}</p>
+                    <div class="row margin-bottom" *ngIf="task.subtasks.length > 0">
+                        <div class="progressbar">
+                            <div class="progress" [style]="this.returnProgressWidth(task.subtasks)"></div>
+                        </div>
+                        <div class="progressbar-text"> {{ this.countDoneSubtasks(task.subtasks) }}/{{ task.subtasks.length }} Done</div>
                     </div>
-                    <div class="progressbar-text">1/2 Done</div>
-                </div>
-                <div class="row">
                     <div class="row">
-                        <div class="circle pink">AS</div>
-                        <div class="circle blue overlap">DE</div>
-                        <div class="circle dark overlap2">+2</div>
+                        <div class="row" *ngIf="task.assignedTo.length === 1">
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                        </div>
+                        <div class="row" *ngIf="task.assignedTo.length === 2">
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1])}}</div>
+                        </div>
+                        <div class="row" *ngIf="task.assignedTo.length === 3">
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1]) }}</div>
+                            <div class="circle dark overlap2">{{ this.returnFirstLetter(task.assignedTo[2]) }}</div>
+                        </div>
+                        <div class="row" *ngIf="task.assignedTo.length > 3">
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1]) }}</div>
+                            <div class="circle dark overlap2">+{{ task.assignedTo.length }}</div>
+                        </div>
+                        <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">
+                        <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'medium'">
+                        <img src="/../assets/img/board/prio_high_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'high'">
                     </div>
-                    <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon">
                 </div>
             </div>
         </div>
