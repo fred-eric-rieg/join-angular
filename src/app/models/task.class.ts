@@ -11,7 +11,7 @@ export class Task {
     priority!: string;
     creatorId!: string;
     dueDate!: Date;
-    category!: string;
+    category!: string[];
     assignedTo!: string[];
     subtasks!: object[];
 
@@ -26,15 +26,15 @@ export class Task {
      * @param priority as string
      * @param creatorId as string
      * @param dueDate as Date
-     * @param category as string
-     * @param assignedTo as string
-     * @param subtasks as string[]
+     * @param category as string[]
+     * @param assignedTo as string[]
+     * @param subtasks as object[]
      */
     constructor (
         id: string, title: string, description: string,
         status: string, creationDate: Date, lastUpdated: Date,
         priority: string, creatorId: string, dueDate: Date,
-        category: string, assignedTo: string[], subtasks: object[]
+        category: string[], assignedTo: string[], subtasks: object[]
         ) {
 
         this.id = id;

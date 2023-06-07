@@ -111,7 +111,7 @@ export class AddtaskComponent {
       console.log('Form is not valid!');
     }*/
     
-    this.firebaseService.createTask(new Task('id', 'Finish Addtask Form', 'Within the next days finish the addtask form design.', 'todo', new Date(), new Date(), 'high', 'guest', new Date(), 'Design', ['guest'], [{ description: 'Make creating tasks work', status: 0 }]));
-    this.firebaseService.createTask(new Task('id', 'Create Marketing Strategy', 'We need a strategy to promote our product within our target audience.', 'todo', new Date(), new Date(), 'high', 'guest', new Date(), 'Marketing', ['guest'], [{ description: 'Write a user story', status: 0 }, { description: 'Create a marketing plan', status: 0 }]));
+    this.firebaseService.createTask(new Task('id', 'Finish Addtask Form', 'Within the next days finish the addtask form design.', 'todo', new Date(), new Date(), 'high', 'guest', new Date(), ['Design', 'red'], ['guest'], [{ description: 'Make creating tasks work', status: 0 }]));
+    this.firebaseService.createTask(new Task('id', 'Create Marketing Strategy', 'We need a strategy to promote our product within our target audience.', 'todo', new Date(), new Date(), 'high', 'guest', new Date(), ['Marketing', 'orange'], ['guest'], [{ description: 'Write a user story', status: 0 }, { description: 'Create a marketing plan', status: 0 }]));
   }
 }

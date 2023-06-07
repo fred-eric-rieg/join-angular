@@ -31,12 +31,6 @@ export class BoardComponent implements OnInit {
   }
 
 
-  showUsers() {
-    console.log(this.users);
-    console.log(this.tasks);
-  }
-
-
   countDoneSubtasks(subtasks: any) {
     let doneSubtasks: number = 0;
     subtasks.forEach((subtask: any) => {
@@ -48,7 +42,17 @@ export class BoardComponent implements OnInit {
   }
 
 
-  returnWidth(subtasks: any) {
+  returnProgressWidth(subtasks: any) {
     return `width: ` + this.countDoneSubtasks(subtasks)/subtasks.length * 100 + '%';
+  }
+
+
+  returnFirstLetter(name: string) {
+    let cleanName = name.trim().toUpperCase(); 
+    if (cleanName.includes(' ')) {
+      return cleanName.charAt(0) + cleanName.charAt(cleanName.indexOf(' ') + 1);
+    } else {
+      return cleanName.charAt(0);
+    }
   }
 }

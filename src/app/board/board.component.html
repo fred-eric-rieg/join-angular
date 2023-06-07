@@ -6,7 +6,7 @@
         <span>Kanban Project Management Tool</span>
         <div class="row">
             <h2>Board</h2>
-            <img class="add-primary-btn" src="/../assets/img/board/add_icon_dark.svg" alt="add_icon_dark" (click)="showUsers()">
+            <img class="add-primary-btn" src="/../assets/img/board/add_icon_dark.svg" alt="add_icon_dark">
         </div>
 
         <div class="searchfield">
@@ -26,20 +26,32 @@
             <!-- Todo Template -->
             <div *ngFor="let task of tasks">
                 <div class="card" *ngIf="task.status === 'todo'">
-                    <div class="card-category">{{ task.category }}</div>
+                    <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
                     <div class="card-title">{{ task.title }}</div>
                     <p>{{ task.description }}</p>
                     <div class="row margin-bottom" *ngIf="task.subtasks.length > 0">
                         <div class="progressbar">
-                            <div class="progress" [style]="this.returnWidth(task.subtasks)"></div>
+                            <div class="progress" [style]="this.returnProgressWidth(task.subtasks)"></div>
                         </div>
                         <div class="progressbar-text"> {{ this.countDoneSubtasks(task.subtasks) }}/{{ task.subtasks.length }} Done</div>
                     </div>
                     <div class="row">
-                        <div class="row">
-                            <div class="circle pink">AS</div>
-                            <div class="circle blue overlap">DE</div>
-                            <div class="circle dark overlap2">+2</div>
+                        <div class="row" *ngIf="task.assignedTo.length === 1">
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                        </div>
+                        <div class="row" *ngIf="task.assignedTo.length === 2">
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1])}}</div>
+                        </div>
+                        <div class="row" *ngIf="task.assignedTo.length === 3">
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1]) }}</div>
+                            <div class="circle dark overlap2">{{ this.returnFirstLetter(task.assignedTo[2]) }}</div>
+                        </div>
+                        <div class="row" *ngIf="task.assignedTo.length > 3">
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1]) }}</div>
+                            <div class="circle dark overlap2">+{{ task.assignedTo.length }}</div>
                         </div>
                         <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">
                         <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'medium'">
@@ -71,7 +83,7 @@
                         <div class="circle blue overlap">DE</div>
                         <div class="circle dark overlap2">+2</div>
                     </div>
-                    <img src="/../assets/img/board/priority_low_icon.svg" alt="priority_low_icon">
+                    <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon">
                 </div>
             </div>
         </div>
@@ -97,7 +109,7 @@
                         <div class="circle blue overlap">DE</div>
                         <div class="circle dark overlap2">+2</div>
                     </div>
-                    <img src="/../assets/img/board/priority_low_icon.svg" alt="priority_low_icon">
+                    <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon">
                 </div>
             </div>
         </div>
@@ -123,7 +135,7 @@
                         <div class="circle blue overlap">DE</div>
                         <div class="circle dark overlap2">+2</div>
                     </div>
-                    <img src="/../assets/img/board/priority_low_icon.svg" alt="priority_low_icon">
+                    <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon">
                 </div>
             </div>
         </div>
