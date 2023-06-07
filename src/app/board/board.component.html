@@ -22,6 +22,7 @@
                 <h3>Todo</h3>
                 <img src="/../assets/img/board/add_icon_white.svg" alt="add_icon">
             </div>
+
             <!-- Todo Template -->
             <div *ngFor="let task of tasks">
                 <div class="card" *ngIf="task.status === 'todo'">
@@ -40,7 +41,9 @@
                             <div class="circle blue overlap">DE</div>
                             <div class="circle dark overlap2">+2</div>
                         </div>
-                        <img src="/../assets/img/board/priority_low_icon.svg" alt="priority_low_icon">
+                        <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">
+                        <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'medium'">
+                        <img src="/../assets/img/board/prio_high_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'high'">
                     </div>
                 </div>
             </div>
