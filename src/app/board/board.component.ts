@@ -29,4 +29,26 @@ export class BoardComponent implements OnInit {
 
   renderTasks() {
   }
+
+
+  showUsers() {
+    console.log(this.users);
+    console.log(this.tasks);
+  }
+
+
+  countDoneSubtasks(subtasks: any) {
+    let doneSubtasks: number = 0;
+    subtasks.forEach((subtask: any) => {
+      if (subtask.status === 1) {
+        doneSubtasks++;
+      }
+    });
+    return doneSubtasks;
+  }
+
+
+  returnWidth(subtasks: any) {
+    return `width: ` + this.countDoneSubtasks(subtasks)/subtasks.length * 100 + '%';
+  }
 }
