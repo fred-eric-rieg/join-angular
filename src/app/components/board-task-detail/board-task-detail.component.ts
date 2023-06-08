@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Task } from '../models/task.class';
+import { Task } from '../../models/task.class';
 import { formatDate } from '@angular/common';
-import { FirebaseService } from '../services/firebase.service';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-board-task-detail',

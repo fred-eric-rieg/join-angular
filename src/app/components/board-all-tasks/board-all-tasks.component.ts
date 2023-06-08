@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FirebaseService } from '../services/firebase.service';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-board-all-tasks',

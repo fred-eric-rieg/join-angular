@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { FirebaseService } from '../services/firebase.service';
-import { Task } from '../models/task.class';
+import { FirebaseService } from '../../services/firebase.service';
+import { Task } from '../../models/task.class';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 

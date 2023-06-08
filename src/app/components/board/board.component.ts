@@ -1,5 +1,5 @@
 import { Component, Output } from '@angular/core';
-import { Task } from '../models/task.class';
+import { Task } from '../../models/task.class';
 
 @Component({
   selector: 'app-board',
@@ -24,7 +24,10 @@ export class BoardComponent {
     this.toggleOverlay = $event;
   }
 
-
+  /**
+   * Reads the event from the board-all-tasks component and sets the task variable.
+   * @param $event as Task
+   */
   readTaskEvent($event: Task) {
     this.task = $event;
   }

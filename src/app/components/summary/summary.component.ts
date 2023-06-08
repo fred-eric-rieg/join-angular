@@ -5,7 +5,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss']
 })
-export class SummaryComponent {
+export class SummaryComponent implements OnInit {
 
   username: string = 'Sofia Müller';
   @ViewChild('greeting') greeting: any;
