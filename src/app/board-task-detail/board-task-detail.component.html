@@ -1,6 +1,6 @@
 <div class="overlay" (click)="closeOverlay()">
 
-    <div class="card" (click)="stopPropagation($event)">
+    <div class="card" (click)="stopPropagation($event)" *ngIf="task">
 
         <!-- Close button -->
         <div class="rowend">

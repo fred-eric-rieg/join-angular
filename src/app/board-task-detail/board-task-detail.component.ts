@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from '../models/task.class';
 import { formatDate } from '@angular/common';
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-board-task-detail',
@@ -9,26 +10,19 @@ import { formatDate } from '@angular/common';
 })
 export class BoardTaskDetailComponent {
 
+  tasks!: any;
+  users!: any;
   @Output() toggleOverlay = new EventEmitter();
-  @Input() task: Task = {
-    id: '',
-    title: '',
-    description: '',
-    status: '',
-    creationDate: new Date(),
-    lastUpdated: new Date(),
-    priority: '',
-    creatorId: '',
-    dueDate: new Date(),
-    category: [],
-    assignedTo: [],
-    subtasks: [],
-    toJSON: function (): { id: string; title: string; description: string; status: string; creationDate: Date; lastUpdated: Date; priority: string; creatorId: string; dueDate: Date; category: string[]; assignedTo: string[]; subtasks: object[]; } {
-      throw new Error('Function not implemented.');
-    }
-  };
+  @Input() task!: Task;
 
-  constructor() {}
+  constructor(private firebaseService: FirebaseService) {
+    this.firebaseService.users.subscribe(users => {
+      this.users = users;
+    });
+    this.firebaseService.tasks.subscribe(tasks => {
+      this.tasks = tasks;
+    });
+  }
 
 
   /**
