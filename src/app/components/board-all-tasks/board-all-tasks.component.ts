@@ -37,7 +37,6 @@ export class BoardAllTasksComponent {
     this.tasks.forEach((t: any) => {
       if (t.id === id) {
         task = t;
-        console.log(task);
       }
     });
     return task;
