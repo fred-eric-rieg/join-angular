@@ -4,7 +4,7 @@
 
         <!-- Close button -->
         <div class="rowend">
-            <button (click)="closeOverlay()">Close</button>
+            <img class="arrow" src="/../assets/img/arrow_icon.svg" alt="arrow_icon" (click)="closeOverlay()">
         </div>
 
         <div *ngIf="task.category" class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
