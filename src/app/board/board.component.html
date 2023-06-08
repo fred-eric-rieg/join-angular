@@ -2,6 +2,12 @@
 
     <app-header></app-header>
 
+    <app-board-task-detail 
+        [class.hidden]="!toggleOverlay"
+        (toggleOverlay)="readEvent($event)"
+        [task] = "this.task">
+    </app-board-task-detail>
+
     <div class="title">
         <span>Kanban Project Management Tool</span>
         <div class="row">
@@ -10,7 +16,7 @@
         </div>
 
         <div class="searchfield">
-            <input type="text" placeholder="Search">
+            <input type="text" placeholder="Search" value="{{ this.toggleOverlay }}">
             <div class="grey-line"></div>
             <img src="/../assets/img/board/search_icon.svg" alt="search_icon">
         </div>
@@ -25,7 +31,7 @@
 
             <!-- Todo Template -->
             <div *ngFor="let task of tasks">
-                <div class="card" *ngIf="task.status === 'todo'">
+                <div class="card" *ngIf="task.status === 'todo'" (click)="showTaskDetails(task.id)">
                     <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
                     <div class="card-title">{{ task.title }}</div>
                     <p>{{ task.description }}</p>
@@ -37,20 +43,20 @@
                     </div>
                     <div class="row">
                         <div class="row" *ngIf="task.assignedTo.length === 1">
-                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                            <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
                         </div>
                         <div class="row" *ngIf="task.assignedTo.length === 2">
-                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
-                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1])}}</div>
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1].name)}}</div>
                         </div>
                         <div class="row" *ngIf="task.assignedTo.length === 3">
-                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
-                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1]) }}</div>
-                            <div class="circle dark overlap2">{{ this.returnFirstLetter(task.assignedTo[2]) }}</div>
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1].name) }}</div>
+                            <div class="circle dark overlap2">{{ this.returnFirstLetter(task.assignedTo[2].name) }}</div>
                         </div>
                         <div class="row" *ngIf="task.assignedTo.length > 3">
-                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
-                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1]) }}</div>
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1].name) }}</div>
                             <div class="circle dark overlap2">+{{ task.assignedTo.length }}</div>
                         </div>
                         <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">
@@ -70,7 +76,7 @@
 
             <!-- Progress Template -->
             <div *ngFor="let task of tasks">
-                <div class="card" *ngIf="task.status === 'progress'">
+                <div class="card" *ngIf="task.status === 'progress'" (click)="showTaskDetails(task.id)">
                     <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
                     <div class="card-title">{{ task.title }}</div>
                     <p>{{ task.description }}</p>
@@ -82,20 +88,20 @@
                     </div>
                     <div class="row">
                         <div class="row" *ngIf="task.assignedTo.length === 1">
-                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
                         </div>
                         <div class="row" *ngIf="task.assignedTo.length === 2">
-                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
-                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1])}}</div>
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1].name)}}</div>
                         </div>
                         <div class="row" *ngIf="task.assignedTo.length === 3">
-                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
-                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1]) }}</div>
-                            <div class="circle dark overlap2">{{ this.returnFirstLetter(task.assignedTo[2]) }}</div>
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1].name) }}</div>
+                            <div class="circle dark overlap2">{{ this.returnFirstLetter(task.assignedTo[2].name) }}</div>
                         </div>
                         <div class="row" *ngIf="task.assignedTo.length > 3">
-                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
-                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1]) }}</div>
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1].name) }}</div>
                             <div class="circle dark overlap2">+{{ task.assignedTo.length }}</div>
                         </div>
                         <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">
@@ -113,7 +119,7 @@
             </div>
             <!-- Feedback Template -->
             <div *ngFor="let task of tasks">
-                <div class="card" *ngIf="task.status === 'feedback'">
+                <div class="card" *ngIf="task.status === 'feedback'" (click)="showTaskDetails(task.id)">
                     <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
                     <div class="card-title">{{ task.title }}</div>
                     <p>{{ task.description }}</p>
@@ -125,20 +131,20 @@
                     </div>
                     <div class="row">
                         <div class="row" *ngIf="task.assignedTo.length === 1">
-                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
                         </div>
                         <div class="row" *ngIf="task.assignedTo.length === 2">
-                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
-                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1])}}</div>
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1].name)}}</div>
                         </div>
                         <div class="row" *ngIf="task.assignedTo.length === 3">
-                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
-                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1]) }}</div>
-                            <div class="circle dark overlap2">{{ this.returnFirstLetter(task.assignedTo[2]) }}</div>
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1].name) }}</div>
+                            <div class="circle dark overlap2">{{ this.returnFirstLetter(task.assignedTo[2].name) }}</div>
                         </div>
                         <div class="row" *ngIf="task.assignedTo.length > 3">
-                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
-                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1]) }}</div>
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1].name) }}</div>
                             <div class="circle dark overlap2">+{{ task.assignedTo.length }}</div>
                         </div>
                         <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">
@@ -156,7 +162,7 @@
             </div>
             <!-- Done Template -->
             <div *ngFor="let task of tasks">
-                <div class="card" *ngIf="task.status === 'done'">
+                <div class="card" *ngIf="task.status === 'done'" (click)="showTaskDetails(task.id)">
                     <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
                     <div class="card-title">{{ task.title }}</div>
                     <p>{{ task.description }}</p>
@@ -168,20 +174,20 @@
                     </div>
                     <div class="row">
                         <div class="row" *ngIf="task.assignedTo.length === 1">
-                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
                         </div>
                         <div class="row" *ngIf="task.assignedTo.length === 2">
-                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
-                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1])}}</div>
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1].name)}}</div>
                         </div>
                         <div class="row" *ngIf="task.assignedTo.length === 3">
-                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
-                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1]) }}</div>
-                            <div class="circle dark overlap2">{{ this.returnFirstLetter(task.assignedTo[2]) }}</div>
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1].name) }}</div>
+                            <div class="circle dark overlap2">{{ this.returnFirstLetter(task.assignedTo[2].name) }}</div>
                         </div>
                         <div class="row" *ngIf="task.assignedTo.length > 3">
-                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0]) }}</div>
-                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1]) }}</div>
+                            <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                            <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1].name) }}</div>
                             <div class="circle dark overlap2">+{{ task.assignedTo.length }}</div>
                         </div>
                         <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">

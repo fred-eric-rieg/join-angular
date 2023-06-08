@@ -23,6 +23,7 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { BoardTaskDetailComponent } from './board-task-detail/board-task-detail.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     ContactsComponent,
     LegalComponent,
     HelpinfoComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    BoardTaskDetailComponent
   ],
   imports: [
     BrowserModule,

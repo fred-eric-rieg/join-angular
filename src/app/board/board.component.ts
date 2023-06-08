@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-board',
@@ -11,6 +10,8 @@ export class BoardComponent implements OnInit {
 
   tasks!: any;
   users!: any;
+  toggleOverlay: boolean = false;
+  task: any = {};
 
   constructor(private firebaseService: FirebaseService) {
     this.firebaseService.users.subscribe(users => {
@@ -21,13 +22,38 @@ export class BoardComponent implements OnInit {
     });
   }
 
-  
+
   ngOnInit() {
-    this.renderTasks();
+
+  }
+
+  /**
+   * Toggles the overlay and shows the task details.
+   * @param id as string
+   */
+  showTaskDetails(id: string) {
+    this.toggleOverlay ? this.toggleOverlay = false : this.toggleOverlay = true;
+    this.task = this.returnTaskById(id);
   }
 
 
-  renderTasks() {
+  returnTaskById(id: string) {
+    let task: any = {};
+    this.tasks.forEach((t: any) => {
+      if (t.id === id) {
+        task = t;
+        console.log(task);
+      }
+    });
+    return task;
+  }
+
+  /**
+   * Reads the event from the board-task-detail component and sets the toggleOverlay variable.
+   * @param $event as boolean
+   */
+  readEvent($event: boolean) {
+    this.toggleOverlay = $event;
   }
 
 
@@ -43,16 +69,21 @@ export class BoardComponent implements OnInit {
 
 
   returnProgressWidth(subtasks: any) {
-    return `width: ` + this.countDoneSubtasks(subtasks)/subtasks.length * 100 + '%';
+    return `width: ` + this.countDoneSubtasks(subtasks) / subtasks.length * 100 + '%';
   }
 
 
   returnFirstLetter(name: string) {
-    let cleanName = name.trim().toUpperCase(); 
+    let cleanName = name.trim().toUpperCase();
     if (cleanName.includes(' ')) {
       return cleanName.charAt(0) + cleanName.charAt(cleanName.indexOf(' ') + 1);
     } else {
       return cleanName.charAt(0);
     }
+  }
+
+
+  returnUserColor(color: string) {
+    return `background: ${color}`;
   }
 }

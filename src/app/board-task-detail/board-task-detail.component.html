@@ -1,0 +1,50 @@
+<div class="overlay" (click)="closeOverlay()">
+
+    <div class="card" (click)="stopPropagation($event)">
+
+        <!-- Close button -->
+        <div class="rowend">
+            <button (click)="closeOverlay()">Close</button>
+        </div>
+
+        <div *ngIf="task.category" class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
+        <div class="card-title headline">{{ task.title }}</div>
+        <p>{{ task.description }}</p>
+
+        <div class="duedate" *ngIf="task.dueDate">
+            <div class="card-title">Due date:</div>
+            <span>{{ formatDate(task.dueDate) }}</span>
+        </div>
+
+        <div class="subtask-container" *ngIf="task.subtasks">
+            <div class="card-title">Subtasks:</div>
+            <div class="subtask" *ngFor="let subtask of task.subtasks">
+                <input type="checkbox" [checked]="subtask.status === 1">
+                <div class="subtask-description">{{ subtask.description }}</div>
+            </div>
+        </div>
+
+        <div class="priority">
+            <div class="card-title">Priority:</div>
+            <span>{{ task.priority }}</span>
+            <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">
+            <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'medium'">
+            <img src="/../assets/img/board/prio_high_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'high'">
+        </div>
+
+        <div *ngIf="task.assignedTo">
+            <div class="card-title">Assigned to:</div>
+            <div class="row" *ngFor="let user of task.assignedTo">
+                <div class="circle" [style]="this.returnUserColor(user.color)">{{ this.returnFirstLetter(user.name) }}</div>
+                <div class="name">{{ user.name }}</div>
+            </div>
+        </div>
+
+        <div class="rowend">
+            <button>Delete</button>
+            <button>Edit</button>
+        </div>
+       
+    </div>
+
+</div>

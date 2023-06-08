@@ -1,0 +1,112 @@
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba($color: #000000, $alpha: .2);
+    z-index: 5;
+
+    .card {
+        padding: 1rem;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+        border-radius: 30px;
+        height: fit-content;
+        width: 375px;
+        z-index: 6;
+
+        .card-category {
+            border-radius: 10px;
+            padding: 0.5rem 1rem;
+            color: #FFFFFF;
+            font-weight: 500;
+            width: fit-content;
+        }
+
+        .card-title {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            margin-right: 1rem;
+            font-weight: 700;
+            color: #2A3647;
+        }
+
+        .headline {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        p {
+            color: #A8A8A8;
+        }
+
+        .duedate {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .subtask-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .subtask {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .circle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            border: 1px solid #FFFFFF;
+            color: #FFFFFF;
+        }
+
+        .overlap {
+            z-index: 2;
+            left: -1rem;
+        }
+
+        .overlap2 {
+            z-index: 3;
+            left: -2rem;
+        }
+
+        .priority {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rowend {
+    position: sticky;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.5rem;
+}

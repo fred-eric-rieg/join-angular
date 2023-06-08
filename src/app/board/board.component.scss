@@ -176,18 +176,11 @@
     gap: 0.5rem;
 }
 
-.pink {
-    background: #ef2c4c;
-}
-
-.blue {
-    background: #2780f5;
-}
-
-.dark {
-    background: #2A3647;
-}
-
 .background::-webkit-scrollbar {
+    display: none;
+}
+
+.hidden {
+    z-index: 20;
     display: none;
 }
