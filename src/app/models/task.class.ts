@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 /**
  * Defines the Task class with its values and parameters for construction.
  */
@@ -12,8 +14,8 @@ export class Task {
     creatorId!: string;
     dueDate!: Date;
     category!: string[];
-    assignedTo!: string[];
-    subtasks!: object[];
+    assignedTo!: any[];
+    subtasks!: any[];
 
     /**
      * Creates an instance of Task.
@@ -27,14 +29,14 @@ export class Task {
      * @param creatorId as string
      * @param dueDate as Date
      * @param category as string[]
-     * @param assignedTo as string[]
-     * @param subtasks as object[]
+     * @param assignedTo as array[]
+     * @param subtasks as array[]
      */
     constructor (
         id: string, title: string, description: string,
         status: string, creationDate: Date, lastUpdated: Date,
         priority: string, creatorId: string, dueDate: Date,
-        category: string[], assignedTo: string[], subtasks: object[]
+        category: string[], assignedTo: any[], subtasks: any[]
         ) {
 
         this.id = id;
