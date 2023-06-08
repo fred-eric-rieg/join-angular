@@ -7,12 +7,9 @@ export class User {
     lastName!: string;
     email!: string;
     phone!: number;
-    password!: string;
-    role!: string;
     creationDate!: Date;
     lastUpdated!: Date;
-    tasks!: string[];
-    assignedTasks!: string[];
+    color!: string;
 
     /**
      * Creates an instance of User.
@@ -25,21 +22,17 @@ export class User {
      * @param role as string
      * @param creationDate as Date
      * @param lastUpdated as Date
-     * @param tasks as string[]
-     * @param assignedTasks as string[]
+     * @param color as string
      */
-    constructor (userId: string, firstName: string, lastName: string, email: string, phone: number, password: string, role: string, creationDate: Date, lastUpdated: Date, tasks: string[], assignedTasks: string[]) {
+    constructor (userId: string, firstName: string, lastName: string, email: string, phone: number, creationDate: Date, lastUpdated: Date, color: string) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
-        this.password = password;
-        this.role = role;
         this.creationDate = creationDate;
         this.lastUpdated = lastUpdated;
-        this.tasks = tasks;
-        this.assignedTasks = assignedTasks;
+        this.color = color;
     }
 
     /**
@@ -53,12 +46,9 @@ export class User {
             lastName: this.lastName,
             email: this.email,
             phone: this.phone,
-            password: this.password,
-            role: this.role,
             creationDate: this.creationDate,
             lastUpdated: this.lastUpdated,
-            tasks: this.tasks,
-            assignedTasks: this.assignedTasks
+            color: this.color
         }
     }
 }
