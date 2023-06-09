@@ -134,7 +134,7 @@ export class AddtaskComponent {
       console.log(this.taskForm.value);
 
     } else {
-      console.log('Form is not valid!');
+      alert('All fields (except subtasks) are required! Please fill them.');
     }
 
     //this.firebaseService.createTask(new Task('id', 'Finish Addtask Form', 'Within the next days finish the addtask form design.', 'todo', new Date(), new Date(), 'high', 'guest', new Date(), ['Design', 'red'], [{ id: 'guest', name: 'guest', color: 'pink' }], [{ description: 'Make creating tasks work', status: 0 }]));
