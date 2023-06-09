@@ -69,7 +69,7 @@
                 <input type="text" placeholder="Add new subtask" [(ngModel)]="subtask" [ngModelOptions]="{standalone: true}">
                 <img class="add-primary-btn" src="/../assets/img/board/add_icon_dark.svg" alt="add_subtask" (click)="addSubtask()">
             </div>
-            <div *ngFor="let subtask of subtasks" class="subtask-row selection">
+            <div *ngFor="let subtask of subtasks; index as i" class="subtask-row selection" (click)="toggleSubtaskStatus(i)">
                 <input type="checkbox" name="subtask" [checked]="subtask.status === 1"><p>{{ subtask.description }}</p>
             </div>
         </form>
