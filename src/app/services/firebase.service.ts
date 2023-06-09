@@ -12,11 +12,13 @@ export class FirebaseService {
 
   users!: Observable<any>;
   tasks!: Observable<any>;
+  categories!: Observable<any>;
 
 
   constructor(private firestore: Firestore) {
     this.getAllUsers();
     this.getAllTasks();
+    this.getCategories();
   }
 
 
@@ -130,5 +132,11 @@ export class FirebaseService {
       });
     });
     return user;
+  }
+
+
+  getCategories() {
+    const collectionInstance = collection(this.firestore, 'categories');
+    this.categories = collectionData(collectionInstance);
   }
 }
