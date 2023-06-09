@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FirebaseService } from '../../services/firebase.service';
 import { Task } from '../../models/task.class';
@@ -23,8 +23,11 @@ export class AddtaskComponent {
   expandedCategory: boolean = false;
   expandedAssigned: boolean = false;
 
-  categories = ['Design', 'Marketing', 'Backoffice', 'Sales'];
-  assigned = ['Karl', 'Dieter', 'Anne-Marie', 'Gustel'];
+  subtasks: any = [];
+  subtask: string = '';
+
+  categories: any = [];
+  users: any = [];
 
   taskForm!: FormGroup;
 
@@ -47,7 +50,17 @@ export class AddtaskComponent {
       assignedTo: [[], [Validators.required]],
       subtasks: [[], [Validators.required]]
     });
-
+    this.firebaseService.categories.subscribe(categories => {
+      categories.forEach((category: any) => {
+        this.categories.push(category);
+      });
+    });
+    this.firebaseService.users.subscribe(users => {
+      users.forEach((user: any) => {
+        this.users.push(user);
+      });
+    });
+    console.log(this.users)
     this.taskForm.valueChanges.subscribe(console.log);
   }
 
@@ -102,16 +115,24 @@ export class AddtaskComponent {
   }
 
 
+  addSubtask() {
+    if (this.subtask) {
+      this.subtasks.push({ description: this.subtask, status: 0 });
+      this.taskForm.patchValue({ subtasks: this.subtasks })
+      this.subtask = '';
+    }
+  }
+
+
   createTask() {
-    /*
     if (this.taskForm.valid) {
       console.log(this.taskForm.value);
-      this.taskForm.reset();
+      
     } else {
       console.log('Form is not valid!');
-    }*/
+    }
     
-    this.firebaseService.createTask(new Task('id', 'Finish Addtask Form', 'Within the next days finish the addtask form design.', 'todo', new Date(), new Date(), 'high', 'guest', new Date(), ['Design', 'red'], [{ id: 'guest', name: 'guest', color: 'pink' }], [{ description: 'Make creating tasks work', status: 0 }]));
-    this.firebaseService.createTask(new Task('id', 'Create Marketing Strategy', 'We need a strategy to promote our product within our target audience.', 'todo', new Date(), new Date(), 'high', 'guest', new Date(), ['Marketing', 'orange'], [{ id: 'guest', name: 'guest', color: 'pink' }], [{ description: 'Write a user story', status: 0 }, { description: 'Create a marketing plan', status: 0 }]));
+    //this.firebaseService.createTask(new Task('id', 'Finish Addtask Form', 'Within the next days finish the addtask form design.', 'todo', new Date(), new Date(), 'high', 'guest', new Date(), ['Design', 'red'], [{ id: 'guest', name: 'guest', color: 'pink' }], [{ description: 'Make creating tasks work', status: 0 }]));
+    //this.firebaseService.createTask(new Task('id', 'Create Marketing Strategy', 'We need a strategy to promote our product within our target audience.', 'todo', new Date(), new Date(), 'high', 'guest', new Date(), ['Marketing', 'orange'], [{ id: 'guest', name: 'guest', color: 'pink' }], [{ description: 'Write a user story', status: 0 }, { description: 'Create a marketing plan', status: 0 }]));
   }
 }

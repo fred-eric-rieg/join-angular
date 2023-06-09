@@ -6,7 +6,8 @@
         <span>Kanban Project Management Tool</span>
         <div class="row">
             <h2>Add Task</h2>
-            <img class="create-btn" src="/../assets/img/addtask/create_btn.svg" alt="add_icon_dark" (click)="createTask()">
+            <img class="create-btn" src="/../assets/img/addtask/create_btn.svg" alt="add_icon_dark"
+                (click)="createTask()">
         </div>
     </div>
 
@@ -15,15 +16,15 @@
         <form [formGroup]="taskForm">
 
             <!-- Title -->
-            <span>Title</span>
+            <span class="margin">Title</span>
             <input type="text" placeholder="Enter a title" formControlName="title">
 
             <!-- Description -->
-            <span>Description</span>
+            <span class="margin">Description</span>
             <textarea cols="30" rows="10" placeholder="Enter a description" formControlName="description"></textarea>
 
             <!-- Priority buttons -->
-            <span>Prio</span>
+            <span class="margin">Prio</span>
             <div class="row">
                 <div class="prio-btn" [class.urgent-selected]="urgentPrio" (click)="setPrio('urgent')">Urgent</div>
                 <div class="prio-btn" [class.medium-selected]="mediumPrio" (click)="setPrio('medium')">Medium</div>
@@ -31,32 +32,45 @@
             </div>
 
             <!-- Due date picker -->
-            <span>Due date</span>
+            <span class="margin">Due date</span>
             <input type="date" [(ngModel)]="today" name="today" formControlName="dueDate">
 
             <!-- Category dropdown -->
-            <span>Category</span>
-            <div class="dropdown" [class.expanded]="expandedCategory" (click)="expandCategory()">
-                <span *ngIf="!expandedCategory">Select task category</span>
+            <span class="margin">Category</span>
+            <div class="dropdown" [class.expanded]="expandedCategory">
+                <span *ngIf="!expandedCategory" (click)="expandCategory()">Select task category</span>
                 <div class="column" *ngIf="expandedCategory">
-                    <span *ngFor="let category of categories">{{ category }}</span>
+                    <div class="row selection">
+                        <span (click)="expandCategory()">Create new category</span>
+                    </div>
+                    <div *ngFor="let category of categories" class="row selection">
+                        <input type="checkbox" name="category"><span >{{ category.name }}</span>
+                    </div>
                 </div>
             </div>
 
             <!-- Assigned to dropdown -->
-            <span>Assigned to</span>
-            <div class="dropdown" [class.expanded]="expandedAssigned" (click)="expandAssigned()">
-                <span *ngIf="!expandedAssigned">Assign contacts to task</span>
+            <span class="margin">Assigned to</span>
+            <div class="dropdown" [class.expanded]="expandedAssigned">
+                <span *ngIf="!expandedAssigned" (click)="expandAssigned()">Assign contacts to task</span>
                 <div class="column" *ngIf="expandedAssigned">
-                    <span *ngFor="let assign of assigned">{{ assign }}</span>
+                    <div class="row selection">
+                        <span (click)="expandAssigned()">Create new contact</span>
+                    </div>
+                    <div *ngFor="let user of users" class="row selection">
+                        <input type="checkbox" name="assigned"><span>{{ user.firstName + " " + user.lastName }}</span>
+                    </div>
                 </div>
             </div>
 
             <!-- Subtasks input -->
-            <span>Subtasks</span>
+            <span class="margin">Subtasks</span>
             <div class="row">
-                <input type="text" placeholder="Add new subtask">
-                <img class="add-primary-btn" src="/../assets/img/board/add_icon_dark.svg" alt="add_subtask">
+                <input type="text" placeholder="Add new subtask" [(ngModel)]="subtask" [ngModelOptions]="{standalone: true}">
+                <img class="add-primary-btn" src="/../assets/img/board/add_icon_dark.svg" alt="add_subtask" (click)="addSubtask()">
+            </div>
+            <div *ngFor="let subtask of subtasks" class="subtask-row selection">
+                <input type="checkbox" name="subtask" [checked]="subtask.status === 1"><p>{{ subtask.description }}</p>
             </div>
         </form>
 
