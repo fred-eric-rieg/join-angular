@@ -12,15 +12,15 @@
     <div class="container">
         <div class="row">
             <div class="tile small" routerLink="/board">
-                <span class="big-number">5</span>
+                <span class="big-number">{{ countTasks() }}</span>
                 <span class="twoliner">Tasks on Board</span>
             </div>
             <div class="tile small" routerLink="/board">
-                <span class="big-number">2</span>
+                <span class="big-number">{{ countSpecificTasks('progress') }}</span>
                 <span>Tasks in Progress</span>
             </div>
             <div class="tile small" routerLink="/board">
-                <span class="big-number">2</span>
+                <span class="big-number">{{ countSpecificTasks('feedback') }}</span>
                 <span>Awaiting Feedback</span>
             </div>
         </div>
@@ -29,7 +29,7 @@
                 <div class="flexrow gap">
                     <img src="/../assets/img/summary/urgent_icon.svg" alt="urgent_icon">
                     <div class="flexcolumn">
-                        <span class="big-number">2</span>
+                        <span class="big-number">{{ countSpecificTasks('high') }}</span>
                         <span>Urgent</span>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
 
                 </div>
                 <div class="flexcolumn bold">
-                    <span>October 16, 2022</span>
+                    <span>{{ calculateMostUrgentDeadline() }}</span>
                     <span>Upcoming Deadline</span>
                 </div>
             </div>
@@ -46,14 +46,14 @@
             <div class="tile medium flexrow gap" routerLink="/board">
                 <div class="image-todo"></div>
                 <div class="flexcolumn">
-                    <span class="big-number">1</span>
+                    <span class="big-number">{{ countSpecificTasks('todo') }}</span>
                     <span>To-do</span>
                 </div>
             </div>
             <div class="tile medium flexrow gap" routerLink="/board">
                 <div class="image-done"></div>
                 <div class="flexcolumn">
-                    <span class="big-number">1</span>
+                    <span class="big-number">{{ countSpecificTasks('done') }}</span>
                     <span>Done</span>
                 </div>
             </div>
