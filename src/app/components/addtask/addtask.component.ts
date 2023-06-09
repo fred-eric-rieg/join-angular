@@ -23,6 +23,7 @@ export class AddtaskComponent {
   expandedCategory: boolean = false;
   expandedAssigned: boolean = false;
 
+  // Temporary variables for subtasks.
   subtasks: any = [];
   subtask: string = '';
 
@@ -31,9 +32,11 @@ export class AddtaskComponent {
 
   taskForm!: FormGroup;
 
+
   constructor(private datePipe: DatePipe, private firebaseService: FirebaseService, private formBuilder: FormBuilder) {
     this.today = this.formatToday(new Date());
   }
+
 
   ngOnInit() {
     this.taskForm = this.formBuilder.group({
