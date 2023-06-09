@@ -129,6 +129,12 @@ export class AddtaskComponent {
   }
 
 
+  deleteSubtask(index: number) {
+    this.subtasks.splice(index, 1);
+    this.taskForm.patchValue({ subtasks: this.subtasks });
+  }
+
+
   createTask() {
     if (this.taskForm.valid) {
       console.log(this.taskForm.value);

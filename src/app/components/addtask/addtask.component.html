@@ -44,7 +44,7 @@
                         <span (click)="expandCategory()">Create new category</span>
                     </div>
                     <div *ngFor="let category of categories" class="row selection">
-                        <input type="checkbox" name="category"><span >{{ category.name }}</span>
+                        <input type="checkbox" name="category"><span>{{ category.name }}</span>
                     </div>
                 </div>
             </div>
@@ -66,11 +66,18 @@
             <!-- Subtasks input -->
             <span class="margin">Subtasks</span>
             <div class="row">
-                <input type="text" placeholder="Add new subtask" [(ngModel)]="subtask" [ngModelOptions]="{standalone: true}">
-                <img class="add-primary-btn" src="/../assets/img/board/add_icon_dark.svg" alt="add_subtask" (click)="addSubtask()">
+                <input type="text" placeholder="Add new subtask" [(ngModel)]="subtask"
+                    [ngModelOptions]="{standalone: true}">
+                <img class="add-primary-btn" src="/../assets/img/board/add_icon_dark.svg" alt="add_subtask"
+                    (click)="addSubtask()">
             </div>
-            <div *ngFor="let subtask of subtasks; index as i" class="subtask-row selection" (click)="toggleSubtaskStatus(i)">
-                <input type="checkbox" name="subtask" [checked]="subtask.status === 1"><p>{{ subtask.description }}</p>
+            <div *ngFor="let subtask of subtasks; index as i" class="subtask-row selection"
+                (click)="toggleSubtaskStatus(i)">
+                <input type="checkbox" name="subtask" [checked]="subtask.status === 1">
+                <p>{{ subtask.description }}</p>
+                <button (click)="deleteSubtask(i)">
+                    <img src="/../assets/img/addtask/delete_icon.svg" alt="delete icon">
+                </button>
             </div>
         </form>
 

@@ -170,10 +170,33 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: "...";
+    margin-top: 0.5rem;
 
     &:hover {
         overflow: visible;
         white-space: pre-wrap;
+
+        button {
+            display: flex;
+        }
+    }
+
+    button {
+        display: none;
+        width: 28px;
+        height: 28px;
+        cursor: pointer;
+        border-radius: 8px;
+        border: none;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        &:hover {
+            background: orange;
+        }
     }
 }
 
