@@ -1,5 +1,3 @@
-import { Timestamp } from "firebase/firestore";
-
 /**
  * Defines the Task class with its values and parameters for construction.
  */
