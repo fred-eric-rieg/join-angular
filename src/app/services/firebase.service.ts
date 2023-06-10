@@ -24,14 +24,14 @@ export class FirebaseService {
 
   /**
    * Creates a task in Firestore collection "tasks".
-   * @param task as Task
+   * @param task as object
    */
   createTask(task: Task) {
     const collectionInstance = collection(this.firestore, 'tasks');
     const docRef = doc(collectionInstance);
     task.id = docRef.id;
 
-    setDoc(docRef, task.toJSON()).then(() => {
+    setDoc(docRef, task).then(() => {
       console.log('Task created successfully! Task ID: ', task.id);
     }).catch((error: any) => {
       console.log(error);
@@ -138,5 +138,15 @@ export class FirebaseService {
   getCategories() {
     const collectionInstance = collection(this.firestore, 'categories');
     this.categories = collectionData(collectionInstance);
+  }
+
+
+  createCategory(category: string, color: string) {
+    const collectionInstance = collection(this.firestore, 'categories');
+    addDoc(collectionInstance, { category, color }).then(() => {
+      console.log('Category created successfully!');
+    }).catch((error: any) => {
+      console.log(error);
+    });
   }
 }
