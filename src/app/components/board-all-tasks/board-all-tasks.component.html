@@ -38,18 +38,18 @@
                         <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
                     </div>
                     <div class="row" *ngIf="task.assignedTo.length === 2">
-                        <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                        <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1].name)}}</div>
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                        <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{ this.returnFirstLetter(task.assignedTo[1].name)}}</div>
                     </div>
                     <div class="row" *ngIf="task.assignedTo.length === 3">
-                        <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                        <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1].name) }}</div>
-                        <div class="circle dark overlap2">{{ this.returnFirstLetter(task.assignedTo[2].name) }}</div>
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                        <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{ this.returnFirstLetter(task.assignedTo[1].name) }}</div>
+                        <div class="circle overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">{{ this.returnFirstLetter(task.assignedTo[2].name) }}</div>
                     </div>
                     <div class="row" *ngIf="task.assignedTo.length > 3">
-                        <div class="circle pink">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                        <div class="circle blue overlap">{{ this.returnFirstLetter(task.assignedTo[1].name) }}</div>
-                        <div class="circle dark overlap2">+{{ task.assignedTo.length }}</div>
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{ this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                        <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{ this.returnFirstLetter(task.assignedTo[1].name) }}</div>
+                        <div class="circle dark overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">+{{ task.assignedTo.length }}</div>
                     </div>
                     <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">
                     <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'medium'">

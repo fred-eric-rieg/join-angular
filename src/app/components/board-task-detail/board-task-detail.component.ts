@@ -52,9 +52,16 @@ export class BoardTaskDetailComponent {
     return `background: ${color}`;
   }
 
-
+  /**
+   * Format the date to a readable format, if it is a timestamp.
+   * @param timestamp as any
+   * @returns formatted date as string
+   */
   formatDate(timestamp: any) {
-    let date = timestamp.toDate();
-    return formatDate(date, 'dd.MM.yyyy', 'en-US');
+    if (typeof timestamp === 'object') {
+      let date = timestamp.toDate();
+      return formatDate(date, 'dd.MM.yyyy', 'en-US');
+    }
+    return timestamp;
   }
 }
