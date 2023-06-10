@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-addtask',
@@ -39,7 +40,7 @@ export class AddtaskComponent {
   taskForm!: FormGroup;
 
 
-  constructor(private firebaseService: FirebaseService, private formBuilder: FormBuilder) {
+  constructor(private firebaseService: FirebaseService, private formBuilder: FormBuilder, private router: Router) {
 
   }
 
@@ -136,6 +137,7 @@ export class AddtaskComponent {
     if (this.newCategory) {
       this.selectedCategory = [this.newCategory, this.newColor];
       this.taskForm.patchValue({ category: this.selectedCategory });
+      this.firebaseService.createCategory(this.newCategory, this.newColor);
       this.creatingCategory = false;
       this.newCategory = '';
       this.expandedCategory = false;
@@ -166,7 +168,7 @@ export class AddtaskComponent {
     }
   }
 
-  
+
   isAssigned(userId: string) {
     let assigned = false;
     this.assignedUsers.forEach((user: any) => {
@@ -177,7 +179,7 @@ export class AddtaskComponent {
     return assigned;
   }
 
-  
+
   returnFirstLetter(name: string) {
     let cleanName = name.trim().toUpperCase();
     if (cleanName.includes(' ')) {
@@ -213,12 +215,9 @@ export class AddtaskComponent {
     if (this.taskForm.valid) {
       console.log(this.taskForm.value);
       this.firebaseService.createTask(this.taskForm.value);
-      this.taskForm.reset();
+      this.router.navigate(['board']);
     } else {
       alert('All fields (except subtasks) are required! Please fill them.');
     }
-
-    //this.firebaseService.createTask(new Task('id', 'Finish Addtask Form', 'Within the next days finish the addtask form design.', 'todo', new Date(), new Date(), 'high', 'guest', new Date(), ['Design', 'red'], [{ id: 'guest', name: 'guest', color: 'pink' }], [{ description: 'Make creating tasks work', status: 0 }]));
-    //this.firebaseService.createTask(new Task('id', 'Create Marketing Strategy', 'We need a strategy to promote our product within our target audience.', 'todo', new Date(), new Date(), 'high', 'guest', new Date(), ['Marketing', 'orange'], [{ id: 'guest', name: 'guest', color: 'pink' }], [{ description: 'Write a user story', status: 0 }, { description: 'Create a marketing plan', status: 0 }]));
   }
 }
