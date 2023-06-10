@@ -143,7 +143,7 @@ export class FirebaseService {
 
   createCategory(category: string, color: string) {
     const collectionInstance = collection(this.firestore, 'categories');
-    addDoc(collectionInstance, { category, color }).then(() => {
+    addDoc(collectionInstance, { name: category, color: color }).then(() => {
       console.log('Category created successfully!');
     }).catch((error: any) => {
       console.log(error);
