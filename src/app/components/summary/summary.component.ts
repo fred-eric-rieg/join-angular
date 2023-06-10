@@ -105,10 +105,8 @@ export class SummaryComponent implements OnInit {
   mostUrgentDueDate() {
     let urgentDueDate = 'No urgent';
     let today = new Date();
-    console.log(today.toDateString())
     this.tasks.forEach(task => {
       if (task.priority === 'high') {
-        console.log(task.dueDate)
         if (urgentDueDate != 'No urgent') {
           // If an dueDate has already been copied, then check if the next dueDate is younger ( e.g. even closer to today's date).
           task.dueDate < urgentDueDate ? urgentDueDate = task.dueDate : null;
