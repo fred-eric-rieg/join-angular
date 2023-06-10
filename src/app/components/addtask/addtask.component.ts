@@ -1,7 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { Component } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
-import { Task } from '../../models/task.class';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -12,9 +10,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddtaskComponent {
 
-  // For setting the date input to today's date as default.
-  today: string | null = '';
-
   // For setting the priority buttons to default (low = true).
   lowPrio: boolean = true;
   mediumPrio: boolean = false;
@@ -22,6 +17,17 @@ export class AddtaskComponent {
 
   expandedCategory: boolean = false;
   expandedAssigned: boolean = false;
+
+  // Temporary variables for category.
+  availableColors: any = ['yellow', 'purple', 'pink', 'brown', '#556B2F', '#E9967A', '#4682B4', '#FF6347', '#FFFACD', '#E6E6FA', '#4B0082', '#CD5C5C', '#DAA520', '#BDB76B', '#7FFFD4'];
+  selectedCategory: any = ['Select a category', ''];
+  creatingCategory: boolean = false;
+  newCategory: string = '';
+  newColor: string = this.availableColors[0];
+  colorSelector: boolean = false;
+
+  // Temporary variables for assigned users.
+  assignedUsers: any = [];
 
   // Temporary variables for subtasks.
   subtasks: any = [];
@@ -33,8 +39,8 @@ export class AddtaskComponent {
   taskForm!: FormGroup;
 
 
-  constructor(private datePipe: DatePipe, private firebaseService: FirebaseService, private formBuilder: FormBuilder) {
-    this.today = this.formatToday(new Date());
+  constructor(private firebaseService: FirebaseService, private formBuilder: FormBuilder) {
+
   }
 
 
@@ -43,15 +49,15 @@ export class AddtaskComponent {
       id: '',
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      status: ['', [Validators.required]],
+      status: ['todo'],
       creationDate: [new Date, [Validators.required]],
-      lastUpdated: [new Date, [Validators.required]],
+      lastUpdated: [new Date],
       priority: ['low', [Validators.required]],
-      creatorId: ['guest', [Validators.required]],
-      dueDate: [new Date, [Validators.required]],
+      creatorId: ['guest'],
+      dueDate: [, [Validators.required]],
       category: ['', [Validators.required]],
       assignedTo: [[], [Validators.required]],
-      subtasks: [[], [Validators.required]]
+      subtasks: [[]]
     });
     this.firebaseService.categories.subscribe(categories => {
       categories.forEach((category: any) => {
@@ -66,20 +72,6 @@ export class AddtaskComponent {
     this.taskForm.valueChanges.subscribe(console.log);
   }
 
-  /**
-   * Transforms a date to yyyy-MM-dd format.
-   * @returns as string
-   */
-  formatToday(date?: Date, numberDate?: number, stringDate?: string) {
-    if (numberDate) {
-      return this.datePipe.transform(numberDate, 'yyyy-MM-dd');;
-    } else if (stringDate) {
-      return this.datePipe.transform(stringDate, 'yyyy-MM-dd');
-    } else {
-      return this.datePipe.transform(date, 'yyyy-MM-dd');
-    }
-  }
-
 
   setPrio(prio: string) {
     if (prio === 'low') {
@@ -90,7 +82,7 @@ export class AddtaskComponent {
       this.lowPrio = false;
       this.mediumPrio = true;
       this.urgentPrio = false;
-    } else if (prio === 'urgent') {
+    } else if (prio === 'high') {
       this.lowPrio = false;
       this.mediumPrio = false;
       this.urgentPrio = true;
@@ -108,11 +100,90 @@ export class AddtaskComponent {
   }
 
 
+  selectCategory(index: number) {
+    this.selectedCategory = [this.categories[index].name, this.categories[index].color];
+    this.taskForm.patchValue({ category: this.selectedCategory });
+    this.expandedCategory = false;
+  }
+
+
+  toggleNewCategory() {
+    if (this.creatingCategory) {
+      this.newCategory = '';
+      this.creatingCategory = false;
+    } else {
+      this.creatingCategory = true;
+    }
+  }
+
+
+  toggleColorSelector() {
+    if (this.colorSelector) {
+      this.colorSelector = false;
+    } else {
+      this.colorSelector = true;
+    }
+  }
+
+
+  selectColor(index: number) {
+    this.newColor = this.availableColors[index];
+    this.colorSelector = false;
+  }
+
+
+  createNewCategory() {
+    if (this.newCategory) {
+      this.selectedCategory = [this.newCategory, this.newColor];
+      this.taskForm.patchValue({ category: this.selectedCategory });
+      this.creatingCategory = false;
+      this.newCategory = '';
+      this.expandedCategory = false;
+    }
+  }
+
+
   expandAssigned() {
     if (this.expandedAssigned) {
       this.expandedAssigned = false;
     } else {
       this.expandedAssigned = true;
+    }
+  }
+
+
+  toggleAssignment(userId: string) {
+    if (this.isAssigned(userId)) {
+      this.assignedUsers.splice(this.assignedUsers.findIndex((user: any) => user.id === userId), 1);
+      this.taskForm.patchValue({ assignedTo: this.assignedUsers });
+    } else {
+      this.users.forEach((user: any) => {
+        if (user.userId === userId) {
+          this.assignedUsers.push({ id: user.userId, name: user.firstName + ' ' + user.lastName, color: user.color });
+          this.taskForm.patchValue({ assignedTo: this.assignedUsers });
+        }
+      });
+    }
+  }
+
+  
+  isAssigned(userId: string) {
+    let assigned = false;
+    this.assignedUsers.forEach((user: any) => {
+      if (user.id === userId) {
+        assigned = true;
+      }
+    });
+    return assigned;
+  }
+
+  
+  returnFirstLetter(name: string) {
+    let cleanName = name.trim().toUpperCase();
+    if (cleanName.includes(' ')) {
+      return cleanName.charAt(0) + cleanName.charAt(cleanName.indexOf(' ') + 1);
+    } else {
+      return cleanName.charAt(0);
     }
   }
 
@@ -141,7 +212,8 @@ export class AddtaskComponent {
   createTask() {
     if (this.taskForm.valid) {
       console.log(this.taskForm.value);
-
+      this.firebaseService.createTask(this.taskForm.value);
+      this.taskForm.reset();
     } else {
       alert('All fields (except subtasks) are required! Please fill them.');
     }

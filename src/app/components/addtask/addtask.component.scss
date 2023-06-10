@@ -217,3 +217,50 @@
     height: 40px;
     cursor: pointer;
 }
+
+.small-input {
+    width: 180px;
+}
+
+.circle {
+    box-sizing: border-box;
+    display: flex;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #FFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+.color-selector {
+    box-sizing: border-box;
+    padding: 1rem;
+    position: relative;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+.assigned-users {
+    box-sizing: border-box;
+    padding: 0.5rem;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+
+    .big-circle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        color: white;
+        border: 2px solid white;
+    }
+}

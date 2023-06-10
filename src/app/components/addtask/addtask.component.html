@@ -6,7 +6,7 @@
         <span>Kanban Project Management Tool</span>
         <div class="row">
             <h2>Add Task</h2>
-            <img class="create-btn" src="/../assets/img/addtask/create_btn.svg" alt="add_icon_dark"
+            <img class="create-btn" src="/../assets/img/addtask/create_btn.svg" alt="add icon dark"
                 (click)="createTask()">
         </div>
     </div>
@@ -26,27 +26,46 @@
             <!-- Priority buttons -->
             <span class="margin">Prio</span>
             <div class="row">
-                <div class="prio-btn" [class.urgent-selected]="urgentPrio" (click)="setPrio('urgent')">Urgent</div>
+                <div class="prio-btn" [class.urgent-selected]="urgentPrio" (click)="setPrio('high')">Urgent</div>
                 <div class="prio-btn" [class.medium-selected]="mediumPrio" (click)="setPrio('medium')">Medium</div>
                 <div class="prio-btn" [class.low-selected]="lowPrio" (click)="setPrio('low')">Low</div>
             </div>
 
             <!-- Due date picker -->
             <span class="margin">Due date</span>
-            <input type="date" [(ngModel)]="today" name="today" formControlName="dueDate">
+            <input type="date" name="today" formControlName="dueDate">
 
             <!-- Category dropdown -->
             <span class="margin">Category</span>
             <div class="dropdown" [class.expanded]="expandedCategory">
-                <span *ngIf="!expandedCategory" (click)="expandCategory()">Select task category</span>
+                <div class="row" *ngIf="!expandedCategory">
+                    <div *ngIf="this.selectedCategory[1] != ''" class="circle"
+                        [style]='"background: " + this.selectedCategory[1]'></div>
+                    <span (click)="expandCategory()">{{ selectedCategory[0] }}</span>
+                </div>
                 <div class="column" *ngIf="expandedCategory">
                     <div class="row selection">
-                        <span (click)="expandCategory()">Create new category</span>
+                        <span (click)="toggleNewCategory()" *ngIf="!creatingCategory">Create new category</span>
+                        <input class="small-input" type="text" name="category" placeholder="Write a name"
+                            *ngIf="creatingCategory" [(ngModel)]="newCategory" [ngModelOptions]="{standalone: true}">
+                        <div class="circle" [style]='"background: " + this.newColor' *ngIf="creatingCategory"
+                            (click)="toggleColorSelector()"></div>
+                        <img src="/../assets/img/addtask/check_icon.svg" alt="check icon" *ngIf="newCategory != ''"
+                            (click)="createNewCategory()">
+                        <img src="/../assets/img/addtask/cancel_icon.svg" alt="cancel icon" *ngIf="creatingCategory"
+                            (click)="toggleNewCategory()">
                     </div>
-                    <div *ngFor="let category of categories" class="row selection">
-                        <input type="checkbox" name="category"><span>{{ category.name }}</span>
+                    <div *ngFor="let category of categories; index as i" class="row selection"
+                        (click)="selectCategory(i)">
+                        <div class="circle" [style]='"background: " + this.categories[i].color'></div><span>{{
+                            category.name }}</span>
                     </div>
                 </div>
+            </div>
+
+            <div class="color-selector" *ngIf="colorSelector && creatingCategory && newCategory != ''">
+                <div *ngFor="let color of availableColors; index as i" class="circle"
+                    [style]='"background: " + this.availableColors[i]' (click)="selectColor(i)"></div>
             </div>
 
             <!-- Assigned to dropdown -->
@@ -55,12 +74,15 @@
                 <span *ngIf="!expandedAssigned" (click)="expandAssigned()">Assign contacts to task</span>
                 <div class="column" *ngIf="expandedAssigned">
                     <div class="row selection">
-                        <span (click)="expandAssigned()">Create new contact</span>
+                        <span (click)="expandAssigned()">Choose contacts</span>
                     </div>
-                    <div *ngFor="let user of users" class="row selection">
-                        <input type="checkbox" name="assigned"><span>{{ user.firstName + " " + user.lastName }}</span>
+                    <div *ngFor="let user of users; index as i" class="row selection" (click)="toggleAssignment(user.userId)">
+                        <input type="checkbox" name="assigned" [checked]="isAssigned(user.userId)"><span>{{ user.firstName + " " + user.lastName }}</span>
                     </div>
                 </div>
+            </div>
+            <div class="assigned-users" *ngIf="assignedUsers.length > 0">
+                <div *ngFor="let user of assignedUsers;" class="big-circle" [style]='"background: " + user.color'>{{ this.returnFirstLetter(user.name) }}</div>
             </div>
 
             <!-- Subtasks input -->
@@ -68,7 +90,7 @@
             <div class="row">
                 <input type="text" placeholder="Add new subtask" [(ngModel)]="subtask"
                     [ngModelOptions]="{standalone: true}">
-                <img class="add-primary-btn" src="/../assets/img/board/add_icon_dark.svg" alt="add_subtask"
+                <img class="add-primary-btn" src="/../assets/img/board/add_icon_dark.svg" alt="add subtask"
                     (click)="addSubtask()">
             </div>
             <div *ngFor="let subtask of subtasks; index as i" class="subtask-row selection"
