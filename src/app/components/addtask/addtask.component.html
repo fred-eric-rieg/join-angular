@@ -44,6 +44,9 @@
                     <span (click)="expandCategory()">{{ selectedCategory[0] }}</span>
                 </div>
                 <div class="column" *ngIf="expandedCategory">
+                    <div class="row selection" (click)="expandCategory()">
+                        <span>Select a category</span>
+                    </div>
                     <div class="row selection">
                         <span (click)="toggleNewCategory()" *ngIf="!creatingCategory">Create new category</span>
                         <input class="small-input" type="text" name="category" placeholder="Write a name"
@@ -74,15 +77,18 @@
                 <span *ngIf="!expandedAssigned" (click)="expandAssigned()">Assign contacts to task</span>
                 <div class="column" *ngIf="expandedAssigned">
                     <div class="row selection">
-                        <span (click)="expandAssigned()">Choose contacts</span>
+                        <span (click)="expandAssigned()">Assign contacts to task</span>
                     </div>
-                    <div *ngFor="let user of users; index as i" class="row selection" (click)="toggleAssignment(user.userId)">
-                        <input type="checkbox" name="assigned" [checked]="isAssigned(user.userId)"><span>{{ user.firstName + " " + user.lastName }}</span>
+                    <div *ngFor="let user of users; index as i" class="row selection"
+                        (click)="toggleAssignment(user.userId)">
+                        <input type="checkbox" name="assigned" [checked]="isAssigned(user.userId)"><span>{{
+                            user.firstName + " " + user.lastName }}</span>
                     </div>
                 </div>
             </div>
             <div class="assigned-users" *ngIf="assignedUsers.length > 0">
-                <div *ngFor="let user of assignedUsers;" class="big-circle" [style]='"background: " + user.color'>{{ this.returnFirstLetter(user.name) }}</div>
+                <div *ngFor="let user of assignedUsers;" class="big-circle" [style]='"background: " + user.color'>{{
+                    this.returnFirstLetter(user.name) }}</div>
             </div>
 
             <!-- Subtasks input -->
