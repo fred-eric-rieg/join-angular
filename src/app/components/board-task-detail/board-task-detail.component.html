@@ -22,7 +22,7 @@
         <div class="subtask-container" *ngIf="task.subtasks">
             <div class="card-title">Subtasks:</div>
             <div class="subtask" *ngFor="let subtask of task.subtasks">
-                <input type="checkbox" [checked]="subtask.status === 1">
+                <input type="checkbox" disabled [checked]="subtask.status === 1">
                 <div class="subtask-description">{{ subtask.description }}</div>
             </div>
         </div>
