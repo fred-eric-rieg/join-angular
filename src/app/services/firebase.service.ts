@@ -114,25 +114,6 @@ export class FirebaseService {
     this.users = collectionData(collectionInstance);
   }
 
-  /**
-   * Returns a specific user from Firestore collection "users" according to the id.
-   * @param id as string
-   */
-  getSpecificUser(id: string) {
-    let user: object = [];
-    const collectionInstance = collection(this.firestore, 'users');
-    collectionData(collectionInstance, { idField: 'userId' }).subscribe(subscribedUsers => {
-      subscribedUsers.forEach((singleUser) => {
-        if (singleUser['userId'] === id) {
-          user = singleUser;
-        } else {
-          user = [];
-        }
-      });
-    });
-    return user;
-  }
-
 
   getCategories() {
     const collectionInstance = collection(this.firestore, 'categories');

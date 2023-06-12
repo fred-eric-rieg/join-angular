@@ -13,18 +13,18 @@
 
     <div class="container">
         <div class="row-short">
-            <div class="circle">AM</div>
+            <div class="circle" [style]="'background: ' + displayedUser.color">{{ returnFirstLetter(displayedUser.firstName + ' ' + displayedUser.lastName) }}</div>
             <div class="column">
-                <div class="large">Andrei Munteanu</div>
+                <div class="large">{{ displayedUser.firstName + ' ' + displayedUser.lastName }}</div>
                 <img src="/../assets/img/contacts/addtask_icon.svg" alt="add_icon">
             </div>
         </div>
 
         <span class="big">Contact Information</span>
         <span class="fat">Email</span>
-        <span>munteanu@mail.com</span>
+        <span>{{ displayedUser.email }}</span>
         <span class="fat">Phone</span>
-        <span>0745 123 456</span>
+        <span>{{ displayedUser.phone }}</span>
     </div>
 
     <div class="btn-container">

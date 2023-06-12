@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'contacts', component: ContactsComponent },
   { path: 'legal', component: LegalComponent },
   { path: 'helpinfo', component: HelpinfoComponent },
-  { path: 'contact-form', component: ContactFormComponent }
+  { path: 'contact-form/:id', component: ContactFormComponent }
 ];
 
 @NgModule({

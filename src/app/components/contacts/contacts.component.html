@@ -10,89 +10,27 @@
     </div>
 
     <div class="container">
-        <div class="letter">
-            <span>A</span>
-        </div>
-        <div class="grey-line"></div>
 
-        <div class="contact" routerLink="/contact-form">
-            <div class="circle red">AB</div>
-            <div class="details">
-                <span class="name">Amanda Bynes</span>
-                <span class="email">bynes@mail.com</span>
+        <div *ngFor="let letter of firstLetters">
+            <div class="letter">
+                <span>{{ letter }}</span>
             </div>
-        </div>
+            <div class="grey-line"></div>
 
-        <div class="contact">
-            <div class="circle blue">AZ</div>
-            <div class="details">
-                <span class="name">Almond Zafiri</span>
-                <span class="email">almond@gmx.de</span>
+            <div *ngFor="let user of users">
+                <div class="contact" [routerLink]="['/contact-form/', user.userId]" *ngIf="returnFirstLetter(user.firstName) === letter">
+                    <div class="circle" [style]="'background: ' + user.color">{{ returnFirstLetter(user.firstName + ' ' + user.lastName) }}</div>
+                    <div class="details">
+                        <span class="name">{{ user.firstName + ' ' + user.lastName }}</span>
+                        <span class="email">{{ user.email }}</span>
+                    </div>
+                </div>
             </div>
+
         </div>
 
-        <div class="letter">
-            <span>B</span>
-        </div>
-        <div class="grey-line"></div>
 
-        <div class="contact">
-            <div class="circle green">BB</div>
-            <div class="details">
-                <span class="name">Berta Bynes</span>
-                <span class="email">bynes2@mail.com</span>
-            </div>
-        </div>
-
-        <div class="contact">
-            <div class="circle pink">BD</div>
-            <div class="details">
-                <span class="name">Bartholomeos Defrakis</span>
-                <span class="email">defrakis@gmx.ro</span>
-            </div>
-        </div>
-
-        <div class="letter">
-            <span>C</span>
-        </div>
-        <div class="grey-line"></div>
-
-        <div class="contact">
-            <div class="circle blue">CU</div>
-            <div class="details">
-                <span class="name">Clementine Sauchois</span>
-                <span class="email">c.sauchois@mail.fr</span>
-            </div>
-        </div>
-
-        <div class="contact">
-            <div class="circle green">CL</div>
-            <div class="details">
-                <span class="name">Cleopratra Azouq</span>
-                <span class="email">cleopratra@mail.egy</span>
-            </div>
-        </div>
-
-        <div class="letter">
-            <span>D</span>
-        </div>
-        <div class="grey-line"></div>
-
-        <div class="contact">
-            <div class="circle red">DA</div>
-            <div class="details">
-                <span class="name">Dandeloin Fourrier</span>
-                <span class="email">fourrier@mail.fr</span>
-            </div>
-        </div>
-
-        <div class="contact">
-            <div class="circle blue">DK</div>
-            <div class="details">
-                <span class="name">Detlef Müller</span>
-                <span class="email">derdetlef@t-online.de</span>
-            </div>
-        </div>
+        
 
     </div>
 
