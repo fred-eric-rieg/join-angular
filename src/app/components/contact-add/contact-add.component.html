@@ -12,6 +12,22 @@
         <div class="blue-line"></div>
     </div>
 
+    <div>
+        <form [formGroup]="contactForm">
+            <img src="/../assets/img/contacts/default_profile.svg" alt="default profile picture">
+
+            <input type="text" placeholder="Enter name and surname" formControlName="name">
+
+            <input type="text" placeholder="Enter an email" formControlName="email">
+
+            <input type="text" placeholder="Enter a phone number" formControlName="phone">
+
+            <button *ngIf="type === 'new'">Create contact</button>
+            <button *ngIf="type === 'edit'">Confirm changes</button>
+
+        </form>
+    </div>
+
 
 
 
