@@ -11,6 +11,7 @@ import { ContactsComponent } from './components/contacts/contacts.component';
 import { LegalComponent } from './components/legal/legal.component';
 import { HelpinfoComponent } from './components/helpinfo/helpinfo.component';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
+import { ContactAddComponent } from './components/contact-add/contact-add.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'contacts', component: ContactsComponent },
   { path: 'legal', component: LegalComponent },
   { path: 'helpinfo', component: HelpinfoComponent },
-  { path: 'contact-form/:id', component: ContactFormComponent }
+  { path: 'contact-form/:id', component: ContactFormComponent },
+  { path: 'contact-add/:id', component: ContactAddComponent }
 ];
 
 @NgModule({

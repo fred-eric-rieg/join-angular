@@ -25,6 +25,7 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { BoardTaskDetailComponent } from './components/board-task-detail/board-task-detail.component';
 import { BoardAllTasksComponent } from './components/board-all-tasks/board-all-tasks.component';
+import { ContactAddComponent } from './components/contact-add/contact-add.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { BoardAllTasksComponent } from './components/board-all-tasks/board-all-t
     HelpinfoComponent,
     ContactFormComponent,
     BoardTaskDetailComponent,
-    BoardAllTasksComponent
+    BoardAllTasksComponent,
+    ContactAddComponent
   ],
   imports: [
     BrowserModule,
