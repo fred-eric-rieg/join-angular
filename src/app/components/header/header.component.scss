@@ -71,6 +71,17 @@ header {
             text-decoration: underline;
         }
     }
+
+    .login {
+        padding: 0.5rem;
+        font-size: 0.6rem;
+        color: #29abe2;
+    }
+}
+
+.bigger {
+    height: 160px !important;
+    width: 150px !important;
 }
 
 .open {

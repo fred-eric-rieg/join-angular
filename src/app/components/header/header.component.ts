@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ export class HeaderComponent {
 
   menuVisibility: boolean = false;
 
-  constructor() { }
+  constructor(public afAuth: AngularFireAuth) { }
 
   setMenuVisibility() {
     if (!this.menuVisibility) {

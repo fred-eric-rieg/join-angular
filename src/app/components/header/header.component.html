@@ -5,8 +5,9 @@
     </div>
 </header>
 
-<div class="container" [class.open]="menuVisibility">
+<div class="container" [class.bigger]="afAuth.authState | async" [class.open]="menuVisibility">
+    <span *ngIf="afAuth.authState | async as user" class="login">Logged in as {{ user.email }}</span>
     <div class="option" routerLink="/helpinfo" (click)="setMenuVisibility()">Help</div>
     <div class="option" routerLink="/legal" (click)="setMenuVisibility()">Legal notice</div>
-    <div class="option" routerLink="" (click)="setMenuVisibility()">Log out</div>
+    <div class="option" routerLink="" (click)="setMenuVisibility(); afAuth.signOut()">Log out</div>
 </div>
