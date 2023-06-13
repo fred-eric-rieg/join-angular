@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-
 import { AppRoutingModule } from './app-routing.module';
+
+// Components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -18,14 +19,20 @@ import { ContactsComponent } from './components/contacts/contacts.component';
 import { LegalComponent } from './components/legal/legal.component';
 import { HelpinfoComponent } from './components/helpinfo/helpinfo.component';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
-import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideDatabase,getDatabase } from '@angular/fire/database';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { BoardTaskDetailComponent } from './components/board-task-detail/board-task-detail.component';
 import { BoardAllTasksComponent } from './components/board-all-tasks/board-all-tasks.component';
 import { ContactAddComponent } from './components/contact-add/contact-add.component';
+
+// Firebase 
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideDatabase, getDatabase } from '@angular/fire/database';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat'; // for compat version required by AngularFireAuth
+
+// Directives
+import { GoogleSigninDirective } from './directives/google-signin.directive';
 
 @NgModule({
   declarations: [
@@ -45,19 +52,23 @@ import { ContactAddComponent } from './components/contact-add/contact-add.compon
     ContactFormComponent,
     BoardTaskDetailComponent,
     BoardAllTasksComponent,
-    ContactAddComponent
+    ContactAddComponent,
+    GoogleSigninDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
-    provideFirestore(() => getFirestore()),
-    ReactiveFormsModule
+    provideFirestore(() => getFirestore())
   ],
-  providers: [DatePipe],
+  providers: [
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }, // for compat version required by AngularFireAuth
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

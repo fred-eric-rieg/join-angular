@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -8,7 +9,7 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() {}
+  constructor(public afAuth: AngularFireAuth) {}
 
   ngOnInit(): void {
     localStorage.clear();
