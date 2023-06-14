@@ -109,6 +109,21 @@ export class FirebaseService {
     });
   }
 
+
+  updateUser(user: User) {
+    const documentInstance = collection(this.firestore, 'users');
+    const docRef = doc(documentInstance, user.userId);
+
+    setDoc(docRef, user).then(() => {
+      console.log('User updated successfully!');
+    }
+    ).catch((error: any) => {
+      console.log(error);
+    }
+    );
+  }
+
+
   /**
    * Gets all users from Firestore collection "users".
    */
