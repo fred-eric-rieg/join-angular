@@ -4,8 +4,8 @@
 
     <div class="title">
         <div class="row">
-            <h2 *ngIf="type === 'new'">Add new contact</h2>
-            <h2 *ngIf="type === 'edit'">Edit contact</h2>
+            <h2 *ngIf="id === 'new'">Add new contact</h2>
+            <h2 *ngIf="id != 'new'">Edit contact</h2>
             <img src="/../assets/img/arrow_icon.svg" alt="arrow_icon" routerLink="/contacts">
         </div>
         <span>Better with a team!</span>
@@ -22,8 +22,8 @@
 
             <input type="text" placeholder="Enter a phone number" formControlName="phone">
 
-            <button *ngIf="type === 'new'" (click)="createUser()">Create contact</button>
-            <button *ngIf="type === 'edit'">Confirm changes</button>
+            <button *ngIf="id === 'new'" (click)="createUser()">Create contact</button>
+            <button *ngIf="id != 'new'" (click)="updateUser()">Confirm changes</button>
 
         </form>
     </div>

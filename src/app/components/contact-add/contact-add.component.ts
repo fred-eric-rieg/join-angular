@@ -11,7 +11,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class ContactAddComponent {
 
-  type: string = '';
+  id: string = '';
   user: User = new User(
     'id',
     'firstName',
@@ -30,9 +30,10 @@ export class ContactAddComponent {
   ngOnInit(): void {
     this.createFormGroup();
     this.route.params.subscribe(params => {
-      this.type = params['id'];
+      this.id = params['id'];
     });
     this.contactForm.valueChanges.subscribe(console.log);
+    this.id != 'add' ? this.loadUserForEdit() : null;
   }
 
 
@@ -44,6 +45,24 @@ export class ContactAddComponent {
       phone: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")])
     });
   }
+
+
+  loadUserForEdit() {
+    this.firebaseService.users.subscribe((user: any) => {
+      user.forEach((singleUser: any) => {
+        if (singleUser.userId === this.id) {
+          this.user = singleUser;
+          this.contactForm.patchValue({
+            id: this.user.userId,
+            name: this.user.firstName + ' ' + this.user.lastName,
+            email: this.user.email,
+            phone: this.user.phone
+          });
+        };
+      });
+    });
+  }
+
 
 
   createUser() {
@@ -76,5 +95,18 @@ export class ContactAddComponent {
   addEmailPhone() {
     this.user.email = this.contactForm.value.email;
     this.user.phone = this.contactForm.value.phone;
+  }
+
+
+  updateUser() {
+    if (this.contactForm.valid) {
+      this.separateName();
+      this.addEmailPhone();
+      this.user.lastUpdated = new Date();
+      this.firebaseService.updateUser(this.user);
+      this.router.navigate(['contacts']);
+    } else {
+      alert('All fields are required! Please fill them.');
+    }
   }
 }

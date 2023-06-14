@@ -27,6 +27,7 @@ export class ContactsComponent implements OnInit {
    * and stores them in the firstLetters array.
    */
   listSortedFirstLetters() {
+    this.firstLetters = [];
     this.users.forEach(user => {
       this.firstLetters.push(this.returnFirstLetter(user.firstName));
     });
