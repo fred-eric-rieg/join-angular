@@ -33,7 +33,7 @@ export class ContactAddComponent {
       this.id = params['id'];
     });
     this.contactForm.valueChanges.subscribe(console.log);
-    this.id != 'add' ? this.loadUserForEdit() : null;
+    this.id != 'add' ? this.loadUsersFromFirebase() : null;
   }
 
 
@@ -47,24 +47,36 @@ export class ContactAddComponent {
   }
 
 
-  loadUserForEdit() {
+  loadUsersFromFirebase() {
     this.firebaseService.users.subscribe((user: any) => {
-      user.forEach((singleUser: any) => {
-        if (singleUser.userId === this.id) {
-          this.user = singleUser;
-          this.contactForm.patchValue({
-            id: this.user.userId,
-            name: this.user.firstName + ' ' + this.user.lastName,
-            email: this.user.email,
-            phone: this.user.phone
-          });
-        };
-      });
+      this.findUser(user);
     });
   }
 
 
+  findUser(user: any) {
+    user.forEach((singleUser: any) => {
+      if (singleUser.userId === this.id) {
+        this.setUserAndUpdateForm(singleUser);
+      };
+    });
+  }
 
+
+  setUserAndUpdateForm(singleUser: any) {
+    this.user = singleUser;
+    this.contactForm.patchValue({
+      id: this.user.userId,
+      name: this.user.firstName + ' ' + this.user.lastName,
+      email: this.user.email,
+      phone: this.user.phone
+    });
+  }
+
+
+  /**
+   * Prepares the user object to be sent to the FirebaseService.
+   */
   createUser() {
     if (this.contactForm.valid) {
       this.separateName();
@@ -98,6 +110,9 @@ export class ContactAddComponent {
   }
 
 
+  /**
+   * Prepares the user object to be sent to the FirebaseService.
+   */
   updateUser() {
     if (this.contactForm.valid) {
       this.separateName();
