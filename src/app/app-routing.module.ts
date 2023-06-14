@@ -25,7 +25,8 @@ const routes: Routes = [
   { path: 'legal', component: LegalComponent },
   { path: 'helpinfo', component: HelpinfoComponent },
   { path: 'contact-form/:id', component: ContactFormComponent },
-  { path: 'contact-add/:id', component: ContactAddComponent }
+  { path: 'contact-add/:id', component: ContactAddComponent },
+  { path: 'contact-add/edit/:id', component: ContactAddComponent }
 ];
 
 @NgModule({
