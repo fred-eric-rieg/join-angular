@@ -22,7 +22,7 @@
 
             <input type="text" placeholder="Enter a phone number" formControlName="phone">
 
-            <button *ngIf="type === 'new'">Create contact</button>
+            <button *ngIf="type === 'new'" (click)="createUser()">Create contact</button>
             <button *ngIf="type === 'edit'">Confirm changes</button>
 
         </form>

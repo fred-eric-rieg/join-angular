@@ -99,7 +99,10 @@ export class FirebaseService {
    */
   createUser(user: User) {
     const collectionInstance = collection(this.firestore, 'users');
-    addDoc(collectionInstance, user.toJSON()).then(() => {
+    const docRef = doc(collectionInstance);
+    user.userId = docRef.id;
+
+    setDoc(docRef, user.toJSON()).then(() => {
       console.log('User created successfully!');
     }).catch((error: any) => {
       console.log(error);
