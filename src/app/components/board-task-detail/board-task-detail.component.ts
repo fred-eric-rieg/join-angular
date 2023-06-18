@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from '../../models/task.class';
 import { formatDate } from '@angular/common';
 import { FirebaseService } from '../../services/firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board-task-detail',
@@ -15,7 +16,7 @@ export class BoardTaskDetailComponent {
   @Output() toggleOverlay = new EventEmitter();
   @Input() task!: Task;
 
-  constructor(private firebaseService: FirebaseService) {
+  constructor(private firebaseService: FirebaseService, private router: Router) {
     this.firebaseService.users.subscribe(users => {
       this.users = users;
     });
@@ -69,5 +70,10 @@ export class BoardTaskDetailComponent {
   deleteTask(id: string) {
     this.firebaseService.deleteTask(id);
     this.toggleOverlay.emit(false);
+  }
+
+
+  editTask(id: string) {
+    this.router.navigate([`/addtask/${id}`]);
   }
 }

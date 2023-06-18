@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'summary', component: SummaryComponent },
   { path: 'board', component: BoardComponent },
   { path: 'addtask', component: AddtaskComponent },
+  { path: 'addtask/:id', component: AddtaskComponent },
   { path: 'contacts', component: ContactsComponent },
   { path: 'legal', component: LegalComponent },
   { path: 'helpinfo', component: HelpinfoComponent },
