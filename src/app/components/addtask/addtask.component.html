@@ -5,9 +5,12 @@
     <div class="title">
         <span>Kanban Project Management Tool</span>
         <div class="row">
-            <h2>Add Task</h2>
-            <img class="create-btn" src="/../assets/img/addtask/create_btn.svg" alt="add icon dark"
-                (click)="createTask()">
+            <h2 *ngIf="taskId === ''">Add Task</h2>
+            <h2 *ngIf="taskId != ''">Edit Task</h2>
+            <img *ngIf="taskId === ''" class="create-btn" src="/../assets/img/addtask/create_btn.svg"
+                alt="add icon dark" (click)="createTask()">
+            <img *ngIf="taskId != ''" class="create-btn" src="/../assets/img/addtask/create_btn.svg"
+                alt="add icon dark" (click)="updateTask()">
         </div>
     </div>
 

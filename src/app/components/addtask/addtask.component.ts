@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-addtask',
@@ -42,15 +42,20 @@ export class AddtaskComponent {
   // The form group data collection
   taskForm!: FormGroup;
 
+  // The id of the task to be edited
+  taskId: string = '';
 
-  constructor(private firebaseService: FirebaseService, private formBuilder: FormBuilder, private router: Router) { }
+
+  constructor(private firebaseService: FirebaseService, private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute) { }
 
 
   ngOnInit() {
     this.setTaskFormGroup();
     this.subscribeToCategories();
     this.subscribeToUsers();
-    this.taskForm.valueChanges.subscribe();
+    this.subscribeToRoute();
+    this.prepareDataForEditation();
+    this.taskForm.valueChanges.subscribe(console.log);
   }
 
 
@@ -94,6 +99,37 @@ export class AddtaskComponent {
     this.firebaseService.users.subscribe(users => {
       users.forEach((user: any) => {
         this.users.push(user);
+      });
+    });
+  }
+
+
+  /**
+   * Observing changes on route and copying the id into taskId variable.
+   */
+  subscribeToRoute() {
+    this.route.params.subscribe(params => {
+      if (params['id']) {
+        this.taskId = params['id'];
+      } else {
+        this.taskId = '';
+      }
+    });
+  }
+
+  /**
+   * If the user is editing a task, this function will fetch the data from Firestore and prepare it for editation.
+   */
+  prepareDataForEditation() {
+    this.firebaseService.tasks.subscribe(tasks => {
+      tasks.forEach((task: any) => {
+        if (task.id === this.taskId) {
+          this.taskForm.patchValue(task);
+          this.selectedCategory = task.category;
+          this.assignedUsers = task.assignedTo;
+          this.subtasks = task.subtasks;
+          this.setPrio(task.priority);
+        }
       });
     });
   }
@@ -291,6 +327,16 @@ export class AddtaskComponent {
   createTask() {
     if (this.taskForm.valid) {
       this.firebaseService.createTask(this.taskForm.value);
+      this.router.navigate(['board']);
+    } else {
+      alert('All fields (except subtasks) are required! Please fill them.');
+    }
+  }
+
+
+  updateTask() {
+    if (this.taskForm.valid) {
+      this.firebaseService.updateTask(this.taskForm.value);
       this.router.navigate(['board']);
     } else {
       alert('All fields (except subtasks) are required! Please fill them.');

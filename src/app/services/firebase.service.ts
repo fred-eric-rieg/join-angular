@@ -68,9 +68,11 @@ export class FirebaseService {
    * Updates a task in Firestore collection "tasks" according to the id.
    * @param task as Task
    */
-  setTask(task: Task) {
-    const documentInstance = doc(this.firestore, 'tasks', task.id);
-    updateDoc(documentInstance, task.toJSON()).then(() => {
+  updateTask(task: Task) {
+    const documentInstance = collection(this.firestore, 'tasks');
+    const docRef = doc(documentInstance, task.id);
+
+    setDoc(docRef, task).then(() => {
       console.log('Task updated successfully!');
     }
     ).catch((error: any) => {
