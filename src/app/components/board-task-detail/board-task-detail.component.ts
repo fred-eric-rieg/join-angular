@@ -64,4 +64,10 @@ export class BoardTaskDetailComponent {
     }
     return timestamp;
   }
+
+
+  deleteTask(id: string) {
+    this.firebaseService.deleteTask(id);
+    this.toggleOverlay.emit(false);
+  }
 }

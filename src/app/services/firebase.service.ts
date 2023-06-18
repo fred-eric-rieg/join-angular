@@ -83,8 +83,8 @@ export class FirebaseService {
    * Deletes a task in Firestore collection "tasks" according to the id.
    * @param task as Task
    */
-  deleteTask(task: Task) {
-    const documentInstance = doc(this.firestore, 'tasks', task.id);
+  deleteTask(id: string) {
+    const documentInstance = doc(this.firestore, 'tasks', id);
     deleteDoc(documentInstance).then(() => {
       console.log('Task deleted successfully!');
     }
