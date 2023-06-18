@@ -3,6 +3,7 @@ import { FirebaseService } from '../../services/firebase.service';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Task } from 'src/app/models/task.class';
 
 @Component({
   selector: 'app-addtask',
@@ -21,8 +22,8 @@ export class AddtaskComponent {
   expandedAssigned: boolean = false;
 
   // Temporary variables for category.
-  availableColors: any = ['yellow', 'purple', 'pink', 'brown', '#556B2F', '#E9967A', '#4682B4', '#FF6347', '#FFFACD', '#E6E6FA', '#4B0082', '#CD5C5C', '#DAA520', '#BDB76B', '#7FFFD4'];
-  selectedCategory: any = ['Select a category', ''];
+  availableColors: string[] = ['yellow', 'purple', 'pink', 'brown', '#556B2F', '#E9967A', '#4682B4', '#FF6347', '#FFFACD', '#E6E6FA', '#4B0082', '#CD5C5C', '#DAA520', '#BDB76B', '#7FFFD4'];
+  selectedCategory: string[] = ['Select a category', ''];
   creatingCategory: boolean = false;
   newCategory: string = '';
   newColor: string = this.availableColors[0];
@@ -122,8 +123,9 @@ export class AddtaskComponent {
    */
   prepareDataForEditation() {
     this.firebaseService.tasks.subscribe(tasks => {
-      tasks.forEach((task: any) => {
+      tasks.forEach((task: Task) => {
         if (task.id === this.taskId) {
+          task.lastUpdated = new Date;
           this.taskForm.patchValue(task);
           this.selectedCategory = task.category;
           this.assignedUsers = task.assignedTo;
