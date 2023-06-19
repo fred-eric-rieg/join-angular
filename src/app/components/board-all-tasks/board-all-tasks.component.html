@@ -3,13 +3,13 @@
     <span>Kanban Project Management Tool</span>
     <div class="row">
         <h2>Board</h2>
-        <img class="add-primary-btn" src="/../assets/img/board/add_icon_dark.svg" alt="add_icon_dark">
+        <img class="add-primary-btn" routerLink="/addtask" src="/../assets/img/board/add_icon_dark.svg" alt="add icon dark">
     </div>
 
     <div class="searchfield">
         <input type="text" placeholder="Search">
         <div class="grey-line"></div>
-        <img src="/../assets/img/board/search_icon.svg" alt="search_icon">
+        <img src="/../assets/img/board/search_icon.svg" alt="search icon">
     </div>
 </div>
 
@@ -18,7 +18,7 @@
     <div class="container">
         <div class="headline">
             <h3>Todo</h3>
-            <img src="/../assets/img/board/add_icon_white.svg" alt="add_icon">
+            <img src="/../assets/img/board/add_icon_white.svg" alt="add icon">
         </div>
 
         <!-- Todo Template -->
@@ -63,7 +63,7 @@
     <div class="container">
         <div class="headline">
             <h3>In Progress</h3>
-            <img src="/../assets/img/board/add_icon_white.svg" alt="add_icon">
+            <img src="/../assets/img/board/add_icon_white.svg" alt="add icon">
         </div>
 
         <!-- Progress Template -->
@@ -107,7 +107,7 @@
     <div class="container">
         <div class="headline">
             <h3>Awaiting Feedback</h3>
-            <img src="/../assets/img/board/add_icon_white.svg" alt="add_icon">
+            <img src="/../assets/img/board/add_icon_white.svg" alt="add icon">
         </div>
         <!-- Feedback Template -->
         <div *ngFor="let task of tasks">
@@ -150,7 +150,7 @@
     <div class="container">
         <div class="headline">
             <h3>Done</h3>
-            <img src="/../assets/img/board/add_icon_white.svg" alt="add_icon">
+            <img src="/../assets/img/board/add_icon_white.svg" alt="add icon">
         </div>
         <!-- Done Template -->
         <div *ngFor="let task of tasks">
