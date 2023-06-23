@@ -15,6 +15,7 @@ export class BoardTaskDetailComponent {
   users!: any;
   @Output() toggleOverlay = new EventEmitter();
   @Input() task!: Task;
+  toggleStatus = false;
 
   constructor(private firebaseService: FirebaseService, private router: Router) {
     this.firebaseService.users.subscribe(users => {
@@ -75,5 +76,17 @@ export class BoardTaskDetailComponent {
 
   editTask(id: string) {
     this.router.navigate([`/addtask/${id}`]);
+  }
+
+
+  openStatusSelection() {
+    this.toggleStatus = !this.toggleStatus;
+  }
+
+
+  changeStatus(task: Task, status: string) {
+    task.status = status;
+    this.firebaseService.updateTask(task);
+    this.toggleStatus = false;
   }
 }

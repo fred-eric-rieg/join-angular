@@ -47,8 +47,17 @@
 
         <!-- Button group -->
         <div class="rowend">
-            <button (click)="deleteTask(task.id)">Delete</button>
-            <button (click)="editTask(task.id)">Edit</button>
+            <img (click)="deleteTask(task.id)" src="../assets/img/contacts/delete_icon.svg" alt="delete icon">
+            <img (click)="editTask(task.id)" src="../assets/img/contacts/edit_icon.svg" alt="edit icon">
+            <button (click)="openStatusSelection()" class="center primary"><img src="../assets/img/addtask/check_icon_white.svg" alt="check icon"></button>
+            <div *ngIf="toggleStatus">
+                <div class="status-selection">
+                    <div class="status top" (click)="changeStatus(task, 'todo')">To do</div>
+                    <div class="status" (click)="changeStatus(task, 'progress')">In progress</div>
+                    <div class="status" (click)="changeStatus(task, 'feedback')">Awaiting Feedback</div>
+                    <div class="status bottom" (click)="changeStatus(task, 'done')">Done</div>
+                </div>
+            </div>
         </div>
        
     </div>
