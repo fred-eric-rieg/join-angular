@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { Task } from 'src/app/models/task.class';
+import { Timestamp } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-summary',
@@ -12,7 +14,7 @@ export class SummaryComponent implements OnInit {
   username: string = 'Sofia Müller';
   @ViewChild('greeting') greeting: any;
   hasGreeted: boolean = false;
-  tasks: Array<any> = [];
+  tasks: Array<Task> = [];
 
 
   constructor(private firebaseService: FirebaseService) {
@@ -103,18 +105,18 @@ export class SummaryComponent implements OnInit {
 
 
   mostUrgentDueDate() {
-    let urgentDueDate = 'No urgent';
-    let today = new Date();
+    let urgentDueDate: Timestamp = new Timestamp(0, 0);
+    let today = new Date().getTime() / 1000;
     this.tasks.forEach(task => {
       if (task.priority === 'high') {
-        if (urgentDueDate != 'No urgent') {
+        if (urgentDueDate.seconds > 0) {
           // If an dueDate has already been copied, then check if the next dueDate is younger ( e.g. even closer to today's date).
-          task.dueDate < urgentDueDate ? urgentDueDate = task.dueDate : null;
+          task.dueDate.seconds < urgentDueDate.seconds ? urgentDueDate = task.dueDate : null;
         }
         // The first dueDate that is situated in the future (greater than today) is copied into urgentDueDate.
-        task.dueDate > formatDate(today, 'dd.MM.yyyy', 'en-US') ? urgentDueDate = task.dueDate : null;
+        task.dueDate.seconds > today ? urgentDueDate = task.dueDate : null;
       }
     });
-    return urgentDueDate;
+    return formatDate(urgentDueDate.toDate(), 'dd.MM.yyyy', 'en-US');
   }
 }

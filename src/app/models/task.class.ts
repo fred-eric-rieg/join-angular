@@ -1,3 +1,5 @@
+import { Timestamp } from "@angular/fire/firestore";
+
 /**
  * Defines the Task class with its values and parameters for construction.
  */
@@ -6,11 +8,11 @@ export class Task {
     title!: string;
     description!: string;
     status!: string;
-    creationDate!: Date;
-    lastUpdated!: Date;
+    creationDate!: Timestamp;
+    lastUpdated!: Timestamp;
     priority!: string;
     creatorId!: string;
-    dueDate!: Date;
+    dueDate!: Timestamp;
     category!: string[];
     assignedTo!: any[];
     subtasks!: any[];
@@ -32,8 +34,8 @@ export class Task {
      */
     constructor (
         id: string, title: string, description: string,
-        status: string, creationDate: Date, lastUpdated: Date,
-        priority: string, creatorId: string, dueDate: Date,
+        status: string, creationDate: Timestamp, lastUpdated: Timestamp,
+        priority: string, creatorId: string, dueDate: Timestamp,
         category: string[], assignedTo: any[], subtasks: any[]
         ) {
 
