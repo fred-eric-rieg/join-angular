@@ -17,14 +17,15 @@
         background: #FFFFFF;
         box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
         border-radius: 30px;
-        height: fit-content;
-        max-height: 90vh;
+        height: 80vh;
+        max-height: 95vh;
         overflow-y: scroll;
         width: 375px;
         z-index: 6;
 
         .arrow {
             cursor: pointer;
+            margin-bottom: 2rem;
         }
 
         .card-category {
@@ -40,6 +41,7 @@
             margin-bottom: 1rem;
             margin-right: 1rem;
             font-weight: 700;
+            max-width: 300px;
             color: $primary-color;
         }
 
@@ -51,6 +53,7 @@
 
         p {
             color: #A8A8A8;
+            max-width: 300px;
         }
 
         .duedate {
@@ -111,7 +114,9 @@
 }
 
 .rowend {
-    position: sticky;
+    position: fixed;
+    right: 1rem;
+    top: 5rem;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -119,9 +124,27 @@
     gap: 0.5rem;
 }
 
-button {
+.btn {
     cursor: pointer;
-    border: none;
+    width: 40px;
+    min-height: 40px;
+    background: $primary-color;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.edit {
+    background-image: url("/../../assets/img/board/pencil_white.svg");
+}
+
+.delete {
+    background-image: url("/../../assets/img/board/delete.png");
+    background-size: 32px;
+}
+
+.check {
+    background-image: url("/../../assets/img/board/check.svg");
 }
 
 .center {

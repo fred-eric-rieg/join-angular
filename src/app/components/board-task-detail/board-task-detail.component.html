@@ -2,9 +2,20 @@
 
     <div class="card" (click)="stopPropagation($event)" *ngIf="task">
 
-        <!-- Close button -->
+        <!-- Button group -->
         <div class="rowend">
-            <img class="arrow" src="/../assets/img/arrow_icon.svg" alt="arrow icon" (click)="closeOverlay()">
+            <img class="arrow" src="../assets/img/arrow_icon.svg" alt="arrow icon" (click)="closeOverlay()">
+            <div class="btn delete" (click)="deleteTask(task.id)"></div>
+            <div class="btn edit" (click)="editTask(task.id)"></div>
+            <div class="btn check" (click)="openStatusSelection()"></div>
+            <div *ngIf="toggleStatus">
+                <div class="status-selection">
+                    <div class="status top" (click)="changeStatus(task, 'todo')">Todo</div>
+                    <div class="status" (click)="changeStatus(task, 'progress')">In progress</div>
+                    <div class="status" (click)="changeStatus(task, 'feedback')">Awaiting feedback</div>
+                    <div class="status bottom" (click)="changeStatus(task, 'done')">Done</div>
+                </div>
+            </div>
         </div>
 
         <!-- Task category, title & description -->
@@ -42,21 +53,6 @@
             <div class="row" *ngFor="let user of task.assignedTo">
                 <div class="circle" [style]="this.returnUserColor(user.color)">{{ this.returnFirstLetter(user.name) }}</div>
                 <div class="name">{{ user.name }}</div>
-            </div>
-        </div>
-
-        <!-- Button group -->
-        <div class="rowend">
-            <img (click)="deleteTask(task.id)" src="../assets/img/contacts/delete_icon.svg" alt="delete icon">
-            <img (click)="editTask(task.id)" src="../assets/img/contacts/edit_icon.svg" alt="edit icon">
-            <button (click)="openStatusSelection()" class="center primary"><img src="../assets/img/addtask/check_icon_white.svg" alt="check icon"></button>
-            <div *ngIf="toggleStatus">
-                <div class="status-selection">
-                    <div class="status top" (click)="changeStatus(task, 'todo')">To do</div>
-                    <div class="status" (click)="changeStatus(task, 'progress')">In progress</div>
-                    <div class="status" (click)="changeStatus(task, 'feedback')">Awaiting Feedback</div>
-                    <div class="status bottom" (click)="changeStatus(task, 'done')">Done</div>
-                </div>
             </div>
         </div>
        
