@@ -111,12 +111,13 @@ export class AddtaskComponent {
 
 
   /**
-   * Observing changes on route and copying the id into taskId variable.
+   * Observing changes on route and copying the id into taskId variable or
+   * setting the status of the taskForm group to the value of the id.
    */
   subscribeToRoute() {
     this.route.params.subscribe(params => {
       if (params['id']) {
-        this.taskId = params['id'];
+        params['id'].length < 20 ? this.taskForm.patchValue({ status: params['id'] }) : this.taskId = params['id'];
       } else {
         this.taskId = '';
       }
