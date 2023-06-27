@@ -3,6 +3,7 @@ import { formatDate } from '@angular/common';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { Task } from 'src/app/models/task.class';
 import { Timestamp } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-summary',
@@ -11,15 +12,20 @@ import { Timestamp } from '@angular/fire/firestore';
 })
 export class SummaryComponent implements OnInit {
 
-  username: string = 'Sofia Müller';
+  username: string = 'Guest';
   @ViewChild('greeting') greeting: any;
   hasGreeted: boolean = false;
   tasks: Array<Task> = [];
 
 
-  constructor(private firebaseService: FirebaseService) {
+  constructor(private firebaseService: FirebaseService, public auth: AngularFireAuth) {
     this.firebaseService.tasks.subscribe(tasks => {
       this.tasks = tasks;
+    });
+    this.auth.user.subscribe(user => {
+      if (user) {
+        this.username = user.email ? user.email : 'Guest';
+      }
     });
   }
 
@@ -88,7 +94,6 @@ export class SummaryComponent implements OnInit {
     }
     return counter;
   }
-
 
   /**
    * Searches all tasks with priority "high" for a "dueDate" that is
