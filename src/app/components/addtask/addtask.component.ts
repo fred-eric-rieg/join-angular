@@ -346,9 +346,7 @@ export class AddtaskComponent {
   updateTask() {
     if (this.taskForm.valid) {
       this.taskForm.value.lastUpdated = new Timestamp(new Date().getTime() / 1000, 0);
-      console.log(this.taskForm.value.dueDate)
       typeof this.taskForm.value.dueDate === 'string' ? this.taskForm.value.dueDate = new Date(this.taskForm.value.dueDate): null;
-      console.log(this.taskForm.value.dueDate);
       this.firebaseService.updateTask(this.taskForm.value);
       this.router.navigate(['board']);
     } else {
