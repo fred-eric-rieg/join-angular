@@ -3,9 +3,11 @@
     <div class="card" (click)="stopPropagation($event)" *ngIf="task">
 
         <!-- Button group -->
-        <div class="rowend">
+        <div class="btn-group">
             <img class="arrow" src="../assets/img/arrow_icon.svg" alt="arrow icon" (click)="closeOverlay()">
-            <div class="btn delete" (click)="deleteTask(task.id)"></div>
+            <div *ngIf="!toggleDeletable" class="btn delete" (click)="toggleDelete()"></div>
+            <div *ngIf="toggleDeletable" class="btn delete red" (click)="deleteTask(task.id)"></div>
+            <div *ngIf="toggleDeletable" class="cancel" (click)="toggleDelete()"></div>
             <div class="btn edit" (click)="editTask(task.id)"></div>
             <div class="btn check" (click)="openStatusSelection()"></div>
             <div *ngIf="toggleStatus">

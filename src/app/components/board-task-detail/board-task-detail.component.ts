@@ -16,6 +16,7 @@ export class BoardTaskDetailComponent {
   @Output() toggleOverlay = new EventEmitter();
   @Input() task!: Task;
   toggleStatus = false;
+  toggleDeletable = false;
 
   constructor(private firebaseService: FirebaseService, private router: Router) {
     this.firebaseService.users.subscribe(users => {
@@ -71,6 +72,12 @@ export class BoardTaskDetailComponent {
   deleteTask(id: string) {
     this.firebaseService.deleteTask(id);
     this.toggleOverlay.emit(false);
+    this.toggleDeletable = false;
+  }
+
+
+  toggleDelete() {
+    this.toggleDeletable === false ? this.toggleDeletable = true : this.toggleDeletable = false;
   }
 
 
