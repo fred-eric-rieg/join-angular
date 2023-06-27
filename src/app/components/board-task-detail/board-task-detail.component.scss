@@ -13,12 +13,12 @@
     z-index: 5;
 
     .card {
+        box-sizing: border-box;
         padding: 1rem;
         background: #FFFFFF;
         box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
         border-radius: 30px;
-        height: 80vh;
-        max-height: 95vh;
+        height: 90vh;
         overflow-y: scroll;
         width: 375px;
         z-index: 6;
@@ -113,10 +113,10 @@
     gap: 0.5rem;
 }
 
-.rowend {
+.btn-group {
     position: fixed;
-    right: 1rem;
-    top: 5rem;
+    right: calc(50vw  - 167.5px);
+    top: 4rem;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -145,6 +145,24 @@
 
 .check {
     background-image: url("/../../assets/img/board/check.svg");
+}
+
+.red {
+    border: 2px solid #FF0000;
+}
+
+.cancel {
+    position: absolute;
+    top: 4rem;
+    right: 3rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    background: $secondary-color;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("/../../assets/img/addtask/cancel_icon.svg");
 }
 
 .center {
