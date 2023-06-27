@@ -3,6 +3,7 @@ import { Task } from '../../models/task.class';
 import { formatDate } from '@angular/common';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.class';
 
 @Component({
   selector: 'app-board-task-detail',
@@ -11,8 +12,8 @@ import { Router } from '@angular/router';
 })
 export class BoardTaskDetailComponent {
 
-  tasks!: any;
-  users!: any;
+  tasks!: Task[];
+  users!: User[];
   @Output() toggleOverlay = new EventEmitter();
   @Input() task!: Task;
   toggleStatus = false;

@@ -25,14 +25,19 @@ export class ContactAddComponent {
 
   contactForm!: FormGroup;
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private firebaseService: FirebaseService, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private firebaseService: FirebaseService,
+    private router: Router
+    ) { }
+
 
   ngOnInit(): void {
     this.createFormGroup();
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
-    this.contactForm.valueChanges.subscribe(console.log);
     this.id != 'add' ? this.loadUsersFromFirebase() : null;
   }
 
@@ -48,14 +53,14 @@ export class ContactAddComponent {
 
 
   loadUsersFromFirebase() {
-    this.firebaseService.users.subscribe((user: any) => {
+    this.firebaseService.users.subscribe((user: User[]) => {
       this.findUser(user);
     });
   }
 
 
-  findUser(user: any) {
-    user.forEach((singleUser: any) => {
+  findUser(user: User[]) {
+    user.forEach((singleUser: User) => {
       if (singleUser.userId === this.id) {
         this.setUserAndUpdateForm(singleUser);
       };
@@ -63,7 +68,7 @@ export class ContactAddComponent {
   }
 
 
-  setUserAndUpdateForm(singleUser: any) {
+  setUserAndUpdateForm(singleUser: User) {
     this.user = singleUser;
     this.contactForm.patchValue({
       id: this.user.userId,

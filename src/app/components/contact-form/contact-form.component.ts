@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { User } from 'src/app/models/user.class';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
@@ -11,7 +13,7 @@ export class ContactFormComponent implements OnInit {
 
   displayedUser: any;
 
-  constructor(private route: ActivatedRoute, private router: Router, private firebaseService: FirebaseService) { }
+  constructor(private route: ActivatedRoute, private firebaseService: FirebaseService) { }
 
 
   ngOnInit(): void {
@@ -23,8 +25,8 @@ export class ContactFormComponent implements OnInit {
 
 
   getContact(id: string) {
-    this.displayedUser = this.firebaseService.users.subscribe(users => {
-      users.forEach((user: any) => {
+    this.displayedUser = this.firebaseService.users.subscribe((users: User[]) => {
+      users.forEach((user: User) => {
         user.userId === id ? this.displayedUser = user : null;
       });
     });

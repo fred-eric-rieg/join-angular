@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user.class';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class ContactsComponent implements OnInit {
 
-  users!: any[];
+  users!: User[];
   firstLetters: string[] = [];
 
 

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
 import { Timestamp } from '@angular/fire/firestore';
 import { formatDate } from '@angular/common';
+import { User } from 'src/app/models/user.class';
 
 @Component({
   selector: 'app-addtask',
@@ -35,12 +36,12 @@ export class AddtaskComponent {
   assignedUsers: any = [];
 
   // Temporary variables for subtasks.
-  subtasks: any = [];
+  subtasks: Array<any> = [];
   subtask: string = '';
 
   // Temporary storage for fetched data from Firestore
   categories: any = [];
-  users: any = [];
+  users: User[] = [];
 
   // Temporary storage for dueDate
   dueDate: string = '';

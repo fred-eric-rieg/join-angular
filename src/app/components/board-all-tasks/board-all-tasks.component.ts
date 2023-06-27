@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
+import { Task } from 'src/app/models/task.class';
+import { User } from 'src/app/models/user.class';
 
 @Component({
   selector: 'app-board-all-tasks',
@@ -8,8 +10,8 @@ import { FirebaseService } from '../../services/firebase.service';
 })
 export class BoardAllTasksComponent {
 
-  tasks!: any;
-  users!: any;
+  tasks!: Task[];
+  users!: User[];
   @Output() toggleOverlay = new EventEmitter();
   @Output() task = new EventEmitter();
 
@@ -33,8 +35,8 @@ export class BoardAllTasksComponent {
 
 
   returnTaskById(id: string) {
-    let task: any = {};
-    this.tasks.forEach((t: any) => {
+    let task!: Task;
+    this.tasks.forEach((t: Task) => {
       if (t.id === id) {
         task = t;
       }
@@ -43,7 +45,7 @@ export class BoardAllTasksComponent {
   }
 
 
-  countDoneSubtasks(subtasks: any) {
+  countDoneSubtasks(subtasks: Array<object>) {
     let doneSubtasks: number = 0;
     subtasks.forEach((subtask: any) => {
       if (subtask.status === 1) {
