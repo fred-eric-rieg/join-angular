@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from 'src/app/models/task.class';
 import { Timestamp } from '@angular/fire/firestore';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-addtask',
@@ -40,6 +41,9 @@ export class AddtaskComponent {
   // Temporary storage for fetched data from Firestore
   categories: any = [];
   users: any = [];
+
+  // Temporary storage for dueDate
+  dueDate: string = '';
 
   // The form group data collection
   taskForm!: FormGroup;
@@ -126,8 +130,8 @@ export class AddtaskComponent {
     this.firebaseService.tasks.subscribe(tasks => {
       tasks.forEach((task: Task) => {
         if (task.id === this.taskId) {
-          task.lastUpdated = new Timestamp(new Date().getTime(), 0);
           this.taskForm.patchValue(task);
+          this.dueDate = formatDate(task.dueDate.toDate(), 'yyyy-MM-dd', 'en-US');
           this.selectedCategory = task.category;
           this.assignedUsers = task.assignedTo;
           this.subtasks = task.subtasks;
@@ -329,6 +333,7 @@ export class AddtaskComponent {
 
   createTask() {
     if (this.taskForm.valid) {
+      this.taskForm.value.lastUpdated = new Timestamp(new Date().getTime() / 1000, 0);
       this.taskForm.value.dueDate = new Date(this.taskForm.value.dueDate);
       this.firebaseService.createTask(this.taskForm.value);
       this.router.navigate(['board']);
@@ -340,7 +345,7 @@ export class AddtaskComponent {
 
   updateTask() {
     if (this.taskForm.valid) {
-      this.taskForm.value.dueDate = new Date(this.taskForm.value.dueDate);
+      this.taskForm.value.lastUpdated = new Timestamp(new Date().getTime() / 1000, 0);
       this.firebaseService.updateTask(this.taskForm.value);
       this.router.navigate(['board']);
     } else {
