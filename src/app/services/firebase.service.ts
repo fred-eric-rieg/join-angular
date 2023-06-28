@@ -9,10 +9,10 @@ import { Observable } from 'rxjs';
 })
 export class FirebaseService {
 
-  users!: Observable<any>;
-  tasks!: Observable<any>;
-  categories!: Observable<any>;
-
+  users!: Observable<Array<any>>;
+  tasks!: Observable<Array<any>>;
+  categories!: Observable<Array<any>>;
+  
 
   constructor(private firestore: Firestore) {
     this.getAllUsers();
