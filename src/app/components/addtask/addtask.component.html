@@ -7,9 +7,9 @@
         <div class="row">
             <h2 *ngIf="taskId === ''">Add Task</h2>
             <h2 *ngIf="taskId != ''">Edit Task</h2>
-            <img *ngIf="taskId === ''" class="create-btn" src="/../assets/img/addtask/create_btn.svg"
+            <img *ngIf="taskId === ''" class="create-btn" src="/../JoinAngular/assets/img/addtask/create_btn.svg"
                 alt="add icon dark" (click)="createTask()">
-            <img *ngIf="taskId != ''" class="create-btn" src="/../assets/img/addtask/okay_btn.svg"
+            <img *ngIf="taskId != ''" class="create-btn" src="/../JoinAngular/assets/img/addtask/okay_btn.svg"
                 alt="add icon dark" (click)="updateTask()">
         </div>
     </div>
@@ -56,9 +56,9 @@
                             *ngIf="creatingCategory" [(ngModel)]="newCategory" [ngModelOptions]="{standalone: true}">
                         <div class="circle" [style]='"background: " + this.newColor' *ngIf="creatingCategory"
                             (click)="toggleColorSelector()"></div>
-                        <img src="/../assets/img/addtask/check_icon.svg" alt="check icon" *ngIf="newCategory != ''"
+                        <img src="/../JoinAngular/assets/img/addtask/check_icon.svg" alt="check icon" *ngIf="newCategory != ''"
                             (click)="createNewCategory()">
-                        <img src="/../assets/img/addtask/cancel_icon.svg" alt="cancel icon" *ngIf="creatingCategory"
+                        <img src="/../JoinAngular/assets/img/addtask/cancel_icon.svg" alt="cancel icon" *ngIf="creatingCategory"
                             (click)="toggleNewCategory()">
                     </div>
                     <div *ngFor="let category of categories; index as i" class="row selection"
@@ -99,7 +99,7 @@
             <div class="row">
                 <input type="text" placeholder="Add new subtask" [(ngModel)]="subtask"
                     [ngModelOptions]="{standalone: true}">
-                <img class="add-primary-btn" src="/../assets/img/board/add_icon_dark.svg" alt="add subtask"
+                <img class="add-primary-btn" src="/../JoinAngular/assets/img/board/add_icon_dark.svg" alt="add subtask"
                     (click)="addSubtask()">
             </div>
             <div *ngFor="let subtask of subtasks; index as i" class="subtask-row selection"
@@ -107,7 +107,7 @@
                 <input type="checkbox" name="subtask" [checked]="subtask.status === 1">
                 <p>{{ subtask.description }}</p>
                 <button (click)="deleteSubtask(i)">
-                    <img src="/../assets/img/addtask/delete_icon.svg" alt="delete icon">
+                    <img src="/../JoinAngular/assets/img/addtask/delete_icon.svg" alt="delete icon">
                 </button>
             </div>
         </form>

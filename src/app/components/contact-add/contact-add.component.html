@@ -6,7 +6,7 @@
         <div class="row">
             <h2 *ngIf="id === 'new'">Add new contact</h2>
             <h2 *ngIf="id != 'new'">Edit contact</h2>
-            <img src="/../assets/img/arrow_icon.svg" alt="arrow icon" routerLink="/contacts">
+            <img src="/../JoinAngular/assets/img/arrow_icon.svg" alt="arrow icon" routerLink="/contacts">
         </div>
         <span>Better with a team!</span>
         <div class="blue-line"></div>
@@ -14,7 +14,7 @@
 
     <div>
         <form [formGroup]="contactForm">
-            <img src="/../assets/img/contacts/default_profile.svg" alt="default profile picture">
+            <img src="/../JoinAngular/assets/img/contacts/default_profile.svg" alt="default profile picture">
 
             <input type="text" placeholder="Enter name and surname" formControlName="name">
 

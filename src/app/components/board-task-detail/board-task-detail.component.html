@@ -4,7 +4,7 @@
 
         <!-- Button group -->
         <div class="btn-group">
-            <img class="arrow" src="../assets/img/arrow_icon.svg" alt="arrow icon" (click)="closeOverlay()">
+            <img class="arrow" src="/../JoinAngular/assets/img/arrow_icon.svg" alt="arrow icon" (click)="closeOverlay()">
             <div *ngIf="!toggleDeletable" class="btn delete" (click)="toggleDelete()"></div>
             <div *ngIf="toggleDeletable" class="btn delete red" (click)="deleteTask(task.id)"></div>
             <div *ngIf="toggleDeletable" class="cancel" (click)="toggleDelete()"></div>
@@ -44,9 +44,9 @@
         <div class="priority">
             <div class="card-title">Priority:</div>
             <span>{{ task.priority }}</span>
-            <img src="/../assets/img/board/prio_low_icon.svg" alt="priority low icon" *ngIf="task.priority === 'low'">
-            <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority medium icon" *ngIf="task.priority === 'medium'">
-            <img src="/../assets/img/board/prio_high_icon.svg" alt="priority high icon" *ngIf="task.priority === 'high'">
+            <img src="/../JoinAngular/assets/img/board/prio_low_icon.svg" alt="priority low icon" *ngIf="task.priority === 'low'">
+            <img src="/../JoinAngular/assets/img/board/prio_medium_icon.svg" alt="priority medium icon" *ngIf="task.priority === 'medium'">
+            <img src="/../JoinAngular/assets/img/board/prio_high_icon.svg" alt="priority high icon" *ngIf="task.priority === 'high'">
         </div>
 
         <!-- Task assigned to -->
