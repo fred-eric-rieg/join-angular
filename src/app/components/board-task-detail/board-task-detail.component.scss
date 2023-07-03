@@ -22,6 +22,8 @@
         overflow-y: scroll;
         width: 375px;
         z-index: 6;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
 
         .arrow {
             cursor: pointer;
@@ -104,6 +106,10 @@
             align-items: center;
         }
     }
+
+    .card::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 .row {
@@ -115,7 +121,7 @@
 
 .btn-group {
     position: fixed;
-    right: calc(50vw  - 167.5px);
+    right: calc(50vw - 167.5px);
     top: 4rem;
     display: flex;
     flex-direction: column;
@@ -201,6 +207,7 @@
     .status {
         cursor: pointer;
         padding: 0.5rem 1rem;
+
         &:hover {
             background: #D9D9D9;
             color: $primary-color;
