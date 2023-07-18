@@ -5,7 +5,7 @@
     <div class="title">
         <div class="row">
             <h2>Contacts</h2>
-            <img src="/../JoinAngular/assets/img/arrow_icon.svg" alt="arrow icon" routerLink="/contacts">
+            <img src="/../assets/img/arrow_icon.svg" alt="arrow icon" routerLink="/contacts">
         </div>
         <span>Better with a team!</span>
         <div class="blue-line"></div>
@@ -16,7 +16,7 @@
             <div class="circle" [style]="'background: ' + displayedUser.color">{{ returnFirstLetter(displayedUser.firstName + ' ' + displayedUser.lastName) }}</div>
             <div class="column">
                 <div class="large">{{ displayedUser.firstName + ' ' + displayedUser.lastName }}</div>
-                <img src="/../JoinAngular/assets/img/contacts/addtask_icon.svg" alt="add icon">
+                <img src="/../assets/img/contacts/addtask_icon.svg" alt="add icon">
             </div>
         </div>
 
@@ -28,8 +28,8 @@
     </div>
 
     <div class="btn-container">
-        <img src="/../JoinAngular/assets/img/contacts/delete_icon.svg" alt="delete icon">
-        <img src="/../JoinAngular/assets/img/contacts/edit_icon.svg" alt="edit icon" [routerLink]="['/contact-add/edit/', displayedUser.userId]">
+        <img src="/../assets/img/contacts/delete_icon.svg" alt="delete icon">
+        <img src="/../assets/img/contacts/edit_icon.svg" alt="edit icon" [routerLink]="['/contact-add/edit/', displayedUser.userId]">
     </div>
 
     <app-footer></app-footer>

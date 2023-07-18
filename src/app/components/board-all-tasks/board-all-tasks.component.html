@@ -3,13 +3,13 @@
     <span>Kanban Project Management Tool</span>
     <div class="row">
         <h2>Board</h2>
-        <img class="add-primary-btn" routerLink="/addtask" src="/../JoinAngular/assets/img/board/add_icon_dark.svg" alt="add icon dark">
+        <img class="add-primary-btn" routerLink="/addtask" src="/../assets/img/board/add_icon_dark.svg" alt="add icon dark">
     </div>
 
     <div class="searchfield">
         <input type="text" placeholder="Search">
         <div class="grey-line"></div>
-        <img src="/../JoinAngular/assets/img/board/search_icon.svg" alt="search icon">
+        <img src="/../assets/img/board/search_icon.svg" alt="search icon">
     </div>
 </div>
 
@@ -18,7 +18,7 @@
     <div class="container">
         <div class="headline">
             <h3>Todo</h3>
-            <img src="/../JoinAngular/assets/img/board/add_icon_white.svg" routerLink="/addtask" alt="add icon">
+            <img src="/../assets/img/board/add_icon_white.svg" routerLink="/addtask" alt="add icon">
         </div>
 
         <!-- Todo Template -->
@@ -51,9 +51,9 @@
                         <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{ this.returnFirstLetter(task.assignedTo[1].name) }}</div>
                         <div class="circle dark overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">+{{ task.assignedTo.length }}</div>
                     </div>
-                    <img src="/../JoinAngular/assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">
-                    <img src="/../JoinAngular/assets/img/board/prio_medium_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'medium'">
-                    <img src="/../JoinAngular/assets/img/board/prio_high_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'high'">
+                    <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">
+                    <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'medium'">
+                    <img src="/../assets/img/board/prio_high_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'high'">
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
     <div class="container">
         <div class="headline">
             <h3>In Progress</h3>
-            <img src="/../JoinAngular/assets/img/board/add_icon_white.svg" routerLink="/addtask/progress" alt="add icon">
+            <img src="/../assets/img/board/add_icon_white.svg" routerLink="/addtask/progress" alt="add icon">
         </div>
 
         <!-- Progress Template -->
@@ -96,9 +96,9 @@
                         <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{ this.returnFirstLetter(task.assignedTo[1].name) }}</div>
                         <div class="circle dark overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">+{{ task.assignedTo.length }}</div>
                     </div>
-                    <img src="/../JoinAngular/assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">
-                    <img src="/../JoinAngular/assets/img/board/prio_medium_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'medium'">
-                    <img src="/../JoinAngular/assets/img/board/prio_high_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'high'">
+                    <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">
+                    <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'medium'">
+                    <img src="/../assets/img/board/prio_high_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'high'">
                 </div>
             </div>
         </div>
@@ -107,7 +107,7 @@
     <div class="container">
         <div class="headline">
             <h3>Awaiting Feedback</h3>
-            <img src="/../JoinAngular/assets/img/board/add_icon_white.svg" routerLink="/addtask/feedback" alt="add icon">
+            <img src="/../assets/img/board/add_icon_white.svg" routerLink="/addtask/feedback" alt="add icon">
         </div>
         <!-- Feedback Template -->
         <div *ngFor="let task of tasks">
@@ -139,9 +139,9 @@
                         <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{ this.returnFirstLetter(task.assignedTo[1].name) }}</div>
                         <div class="circle dark overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">+{{ task.assignedTo.length }}</div>
                     </div>
-                    <img src="/../JoinAngular/assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">
-                    <img src="/../JoinAngular/assets/img/board/prio_medium_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'medium'">
-                    <img src="/../JoinAngular/assets/img/board/prio_high_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'high'">
+                    <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">
+                    <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'medium'">
+                    <img src="/../assets/img/board/prio_high_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'high'">
                 </div>
             </div>
         </div>
@@ -150,7 +150,7 @@
     <div class="container">
         <div class="headline">
             <h3>Done</h3>
-            <img src="/../JoinAngular/assets/img/board/add_icon_white.svg" routerLink="/addtask/done" alt="add icon">
+            <img src="/../assets/img/board/add_icon_white.svg" routerLink="/addtask/done" alt="add icon">
         </div>
         <!-- Done Template -->
         <div *ngFor="let task of tasks">
@@ -182,9 +182,9 @@
                         <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{ this.returnFirstLetter(task.assignedTo[1].name) }}</div>
                         <div class="circle dark overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">+{{ task.assignedTo.length }}</div>
                     </div>
-                    <img src="/../JoinAngular/assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">
-                    <img src="/../JoinAngular/assets/img/board/prio_medium_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'medium'">
-                    <img src="/../JoinAngular/assets/img/board/prio_high_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'high'">
+                    <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'low'">
+                    <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'medium'">
+                    <img src="/../assets/img/board/prio_high_icon.svg" alt="priority_low_icon" *ngIf="task.priority === 'high'">
                 </div>
             </div>
         </div>
