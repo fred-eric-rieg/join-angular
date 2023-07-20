@@ -200,6 +200,12 @@
     }
 }
 
+.full-width {
+    width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
 .column {
     display: flex;
     flex-direction: column;
@@ -250,6 +256,8 @@
     box-sizing: border-box;
     padding: 0.5rem;
     position: relative;
+    grid-column-start: 1;
+    grid-column-end: 3;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
 

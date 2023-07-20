@@ -224,3 +224,9 @@
         border-bottom-right-radius: 0.5rem;
     }
 }
+
+@media screen and (min-width: 768px) {
+    .btn-group {
+        right: calc(50vw - 167.5px - 6rem) !important;
+    }
+}
