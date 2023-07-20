@@ -20,3 +20,12 @@
     z-index: 20;
     display: none;
 }
+
+
+@media screen and (min-width: 768px) {
+
+    .background {
+        left: 12rem;
+        width: calc(100% - 12rem);
+    }
+}

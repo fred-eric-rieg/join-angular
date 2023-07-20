@@ -112,3 +112,11 @@ img {
 .fat {
     font-weight: 700;
 }
+
+@media screen and (min-width: 768px) {
+
+    .background {
+        left: 12rem;
+        width: calc(100% - 12rem);
+    }
+}

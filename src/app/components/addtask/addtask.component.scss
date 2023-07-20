@@ -264,3 +264,24 @@
         border: 2px solid white;
     }
 }
+
+@media screen and (min-width: 768px) {
+
+    .background {
+        left: 12rem;
+        width: calc(100% - 12rem);
+    }
+
+    .title {
+        width: 50% !important;
+        min-width: 481px;
+    }
+
+    form {
+        width: 50% !important;
+        margin-top: 2rem;
+        display: grid !important;
+        grid-template-columns: 100px 1fr;
+        gap: 1rem;
+    }
+}
