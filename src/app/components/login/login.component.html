@@ -10,16 +10,14 @@
                 <input type="text" placeholder="Email" formControlName="email"
                     pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}">
             </div>
-            <label class="error" *ngIf="form.get('email')!.hasError('required')">Email is required</label>
-            <label class="error" *ngIf="form.get('email')!.hasError('pattern')">Email is invalid</label>
+            <label class="error" *ngIf="form.get('email')!.hasError('required') && form.get('email')?.touched">Email is required</label>
+            <label class="error" *ngIf="form.get('email')!.hasError('pattern') && form.get('email')?.touched">Email is invalid</label>
 
             <div class="inputfield password">
-                <input type="password" placeholder="Password" formControlName="password"
-                    [minlength]="minLengthPassword">
+                <input type="password" placeholder="Password" formControlName="password">
             </div>
-            <label class="error" *ngIf="form.get('password')!.hasError('required')">Password is required</label>
-            <label class="error" *ngIf="form.get('password')!.hasError('minlength')"> Password must contain at least {{
-                minLengthPassword }} characters.</label>
+            <label class="error" *ngIf="form.get('password')!.hasError('required') && form.get('password')?.touched">Password is required</label>
+            <label class="error" *ngIf="form.get('password')!.hasError('minlength') && form.get('password')?.touched"> Password must contain at least 6 characters.</label>
 
             <div class="wrapper">
                 <span routerLink="/forgot-pw">Forgot my password</span>
