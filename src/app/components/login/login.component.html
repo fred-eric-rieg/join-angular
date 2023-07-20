@@ -4,13 +4,22 @@
     <div class="card">
         <h2>Log in</h2>
         <div class="blue-line"></div>
-        <form>
+
+        <form [formGroup]="form">
             <div class="inputfield email">
-                <input type="text" placeholder="Email">
+                <input type="text" placeholder="Email" formControlName="email"
+                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}">
             </div>
+            <label class="error" *ngIf="form.get('email')!.hasError('required')">Email is required</label>
+            <label class="error" *ngIf="form.get('email')!.hasError('pattern')">Email is invalid</label>
+
             <div class="inputfield password">
-                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Password" formControlName="password"
+                    [minlength]="minLengthPassword">
             </div>
+            <label class="error" *ngIf="form.get('password')!.hasError('required')">Password is required</label>
+            <label class="error" *ngIf="form.get('password')!.hasError('minlength')"> Password must contain at least {{
+                minLengthPassword }} characters.</label>
 
             <div class="wrapper">
                 <span routerLink="/forgot-pw">Forgot my password</span>
@@ -20,10 +29,12 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" routerLink="/summary">Regular Login</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!form.valid" (click)="login(this.form.value.email,
+                this.form.value.password)">Login</button>
             <button class="btn btn-primary" appGoogleSignin>Google Login</button>
-            <button type="button" class="btn btn-secondary" routerLink="/summary">Guest Login</button>
+            <button type="button" class="btn btn-secondary" (click)="login('guest@mail.de', 'guest1')">Guest Login</button>
         </form>
+
     </div>
 
     <div class="signup-container">

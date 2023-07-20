@@ -118,6 +118,15 @@
     }
 }
 
+.error {
+    position: relative;
+    align-self: flex-start;
+    top: -1rem;
+    font-size: 0.8rem;
+    color: red;
+    height: 0;
+}
+
 .inputfield {
     border: 1px solid #D1D1D1;
     background: #FFFFFF;
