@@ -12,22 +12,24 @@ import { LegalComponent } from './components/legal/legal.component';
 import { HelpinfoComponent } from './components/helpinfo/helpinfo.component';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
 import { ContactAddComponent } from './components/contact-add/contact-add.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgot-pw', component: ForgotPwComponent },
   { path: 'reset-pw', component: ResetPwComponent },
-  { path: 'summary', component: SummaryComponent },
-  { path: 'board', component: BoardComponent },
-  { path: 'addtask', component: AddtaskComponent },
-  { path: 'addtask/:id', component: AddtaskComponent },
-  { path: 'contacts', component: ContactsComponent },
-  { path: 'legal', component: LegalComponent },
-  { path: 'helpinfo', component: HelpinfoComponent },
-  { path: 'contact-form/:id', component: ContactFormComponent },
-  { path: 'contact-add/:id', component: ContactAddComponent },
-  { path: 'contact-add/edit/:id', component: ContactAddComponent }
+  { path: 'summary', component: SummaryComponent, canActivate: [AuthGuard] },
+  { path: 'board', component: BoardComponent, canActivate: [AuthGuard] },
+  { path: 'addtask', component: AddtaskComponent, canActivate: [AuthGuard] },
+  { path: 'addtask/:id', component: AddtaskComponent, canActivate: [AuthGuard] },
+  { path: 'contacts', component: ContactsComponent, canActivate: [AuthGuard] },
+  { path: 'legal', component: LegalComponent, canActivate: [AuthGuard] },
+  { path: 'helpinfo', component: HelpinfoComponent, canActivate: [AuthGuard] },
+  { path: 'contact-form/:id', component: ContactFormComponent, canActivate: [AuthGuard] },
+  { path: 'contact-add/:id', component: ContactAddComponent, canActivate: [AuthGuard] },
+  { path: 'contact-add/edit/:id', component: ContactAddComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
