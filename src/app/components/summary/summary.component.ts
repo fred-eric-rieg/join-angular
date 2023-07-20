@@ -113,15 +113,20 @@ export class SummaryComponent implements OnInit {
     let urgentDueDate: Timestamp = new Timestamp(0, 0);
     let today = new Date().getTime() / 1000;
     this.tasks.forEach(task => {
-      if (task.priority === 'high') {
+      if (task.priority === 'high' && task.dueDate.seconds > today) {
         if (urgentDueDate.seconds > 0) {
           // If an dueDate has already been copied, then check if the next dueDate is younger ( e.g. even closer to today's date).
           task.dueDate.seconds < urgentDueDate.seconds ? urgentDueDate = task.dueDate : null;
+        } else {
+          // The first dueDate that is situated in the future (greater than today) is copied into urgentDueDate.
+          urgentDueDate = task.dueDate;
         }
-        // The first dueDate that is situated in the future (greater than today) is copied into urgentDueDate.
-        task.dueDate.seconds > today ? urgentDueDate = task.dueDate : null;
       }
     });
-    return formatDate(urgentDueDate.toDate(), 'dd.MM.yyyy', 'en-US');
+    if (urgentDueDate.seconds === 0) {
+      return 'No urgent';
+    } else {
+      return formatDate(urgentDueDate.toDate(), 'dd.MM.yyyy', 'en-US');
+    }
   }
 }
