@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -11,10 +13,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   form!: FormGroup;
+  // loading boolean for the signup button: prevents user from clicking multiple times
+  loading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AngularFireAuth
+    private authService: AngularFireAuth,
+    private router: Router
     ) {}
 
   ngOnInit(): void {
@@ -27,12 +32,15 @@ export class LoginComponent implements OnInit {
 
 
   async login(email: string, password: string) {
+    this.loading = true;
     return await this.authService.signInWithEmailAndPassword(email, password).then((user) => {
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('hasGreeted', 'false');
-      window.location.href = '/summary';
+      this.loading = false;
+      this.router.navigate(['/summary']);
     }).catch((error) => {
       alert(error.message);
+      this.loading = false;
     });
   }
 }

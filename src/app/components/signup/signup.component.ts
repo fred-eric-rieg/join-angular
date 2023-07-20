@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +16,8 @@ export class SignupComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AngularFireAuth
+    private authService: AngularFireAuth,
+    private router: Router
     ) {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -31,7 +33,7 @@ export class SignupComponent {
       this.authService.createUserWithEmailAndPassword(this.form.value.email, this.form.value.password).then((user) => {
         localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('hasGreeted', 'false');
-        window.location.href = '/summary';
+        this.router.navigate(['/summary']);
       }).catch((error) => {
         alert(error.message);
       });
