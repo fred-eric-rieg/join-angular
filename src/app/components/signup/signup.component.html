@@ -4,19 +4,28 @@
     <div class="card">
         <h2>Sign up</h2>
         <div class="blue-line"></div>
-        <form>
-            <div class="inputfield user">
-                <input type="text" placeholder="Username">
-            </div>
-            <div class="inputfield email">
-                <input type="text" placeholder="Email">
-            </div>
-            <div class="inputfield password">
-                <input type="password" placeholder="Password">
-            </div>
 
-            <button type="submit" class="btn btn-primary" routerLink="">Sign up</button>
+        <form [formGroup]="form">
+            <div class="inputfield email">
+                <input type="text" placeholder="Email" formControlName="email"
+                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}">
+            </div>
+            <label class="error" *ngIf="form.get('email')!.hasError('required') && form.get('email')?.touched">Email is required</label>
+            <label class="error" *ngIf="form.get('email')!.hasError('pattern')">Email is invalid</label>
+            <div class="inputfield password">
+                <input type="password" placeholder="Password" formControlName="password">
+            </div>
+            <label class="error" *ngIf="form.get('password')!.hasError('required') && form.get('password')?.touched">Password is required</label>
+            <label class="error" *ngIf="form.get('password')!.hasError('minlength')"> Password must contain at least 6 characters.</label>
+
+            <div class="inputfield password">
+                <input type="password" placeholder="Repeat Password" formControlName="passwordRepeat">
+            </div>
+            <label class="error" *ngIf="form.get('passwordRepeat')?.touched && !passwordMatch()">Passwords do not match</label>
+
+            <button type="submit" class="btn btn-primary" [disabled]="!form.valid || loading" (click)="signup()">Sign up</button>
         </form>
+
     </div>
 
 </div>
