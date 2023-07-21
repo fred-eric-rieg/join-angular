@@ -8,8 +8,6 @@ import {
   CdkDrag,
   CdkDropList,
   CdkDropListGroup,
-  moveItemInArray,
-  transferArrayItem,
   DragDropModule
 } from '@angular/cdk/drag-drop';
 
@@ -21,6 +19,11 @@ import {
 export class BoardAllTasksComponent implements OnDestroy {
 
   tasks!: Task[];
+  todoTasks!: Task[];
+  inProgressTasks!: Task[];
+  feedbackTasks!: Task[];
+  doneTasks!: Task[];
+
   users!: User[];
   @Output() toggleOverlay = new EventEmitter();
   @Output() task = new EventEmitter();
@@ -36,6 +39,7 @@ export class BoardAllTasksComponent implements OnDestroy {
     });
     this.taskSubscription = this.firebaseService.tasks.subscribe(tasks => {
       this.tasks = tasks;
+      this.filterTaskStatus();
     });
   }
 
@@ -46,9 +50,26 @@ export class BoardAllTasksComponent implements OnDestroy {
   }
 
 
-  drop($event: CdkDragDrop<string[]>) {
-    console.log($event);
+  filterTaskStatus() {
+    this.todoTasks = this.tasks.filter(task => task.status === 'todo');
+    this.inProgressTasks = this.tasks.filter(task => task.status === 'progress');
+    this.feedbackTasks = this.tasks.filter(task => task.status === 'feedback');
+    this.doneTasks = this.tasks.filter(task => task.status === 'done');
+  }
 
+  /**
+   * Handles the drop event when a task is dropped into another column (same column has no effect).
+   * Each drop container has an id which is the same as the task status that is to be updated.
+   * The task status is updated in Firestore and the tasks are reloaded.
+   * @param $event as CdkDragDrop<Task[]>
+   */
+  drop($event: CdkDragDrop<Task[]>) {
+    if($event.previousContainer != $event.container) {
+      let task: Task = $event.previousContainer.data[$event.previousIndex];
+      task.status = $event.container.id;
+      this.firebaseService.updateTask(task);
+      this.firebaseService.getAllTasks();
+    }
   }
 
   /**
@@ -105,7 +126,7 @@ export class BoardAllTasksComponent implements OnDestroy {
   /**
    * Filters the tasks according to the search input. Only title and description are filtered.
    */
-  filterTasks() {
+  filterTasksSearch() {
     this.taskSubscription.unsubscribe(); // unsubscribe to prevent subscription overlap with filter
     if (this.search != '') {
       this.tasks = this.tasks.filter(task => {

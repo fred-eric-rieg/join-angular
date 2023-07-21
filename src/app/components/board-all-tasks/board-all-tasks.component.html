@@ -7,13 +7,13 @@
     </div>
 
     <div class="searchfield">
-        <input type="text" placeholder="Search" [(ngModel)]="search" (keyup)="filterTasks()">
+        <input type="text" placeholder="Search" [(ngModel)]="search" (keyup)="filterTasksSearch()">
         <div class="grey-line"></div>
         <img src="/../assets/img/board/search_icon.svg" alt="search icon">
     </div>
 </div>
 
-<div class="scrollable" cdkDropListGroup cdkDropListOrientation="horizontal">
+<div class="scrollable" cdkDropListGroup>
 
     <div class="container">
         <div class="headline">
@@ -22,53 +22,51 @@
         </div>
 
         <!-- Todo Template -->
-        <div cdkDropList (cdkDropListDropped)="drop($any($event))">
-            <div *ngFor="let task of tasks">
-                <div class="card" *ngIf="task.status === 'todo'" (click)="showTaskDetails(task.id)" cdkDrag="true">
-                    <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
-                    <div class="card-title">{{ task.title }}</div>
-                    <p>{{ task.description }}</p>
-                    <div class="row margin-bottom" *ngIf="task.subtasks.length > 0">
-                        <div class="progressbar">
-                            <div class="progress" [style]="this.returnProgressWidth(task.subtasks)"></div>
-                        </div>
-                        <div class="progressbar-text"> {{ this.countDoneSubtasks(task.subtasks) }}/{{
-                            task.subtasks.length }} Done</div>
+        <div cdkDropList [cdkDropListData]="todoTasks" (cdkDropListDropped)="drop($event)" class="minheight" id="todo">
+            <div class="card" *ngFor="let task of todoTasks" (click)="showTaskDetails(task.id)" cdkDrag>
+                <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
+                <div class="card-title">{{ task.title }}</div>
+                <p>{{ task.description }}</p>
+                <div class="row margin-bottom" *ngIf="task.subtasks.length > 0">
+                    <div class="progressbar">
+                        <div class="progress" [style]="this.returnProgressWidth(task.subtasks)"></div>
                     </div>
-                    <div class="row">
-                        <div class="row" *ngIf="task.assignedTo.length === 1">
-                            <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
-                                this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                        </div>
-                        <div class="row" *ngIf="task.assignedTo.length === 2">
-                            <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
-                                this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                            <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
-                                this.returnFirstLetter(task.assignedTo[1].name)}}</div>
-                        </div>
-                        <div class="row" *ngIf="task.assignedTo.length === 3">
-                            <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
-                                this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                            <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
-                                this.returnFirstLetter(task.assignedTo[1].name) }}</div>
-                            <div class="circle overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">{{
-                                this.returnFirstLetter(task.assignedTo[2].name) }}</div>
-                        </div>
-                        <div class="row" *ngIf="task.assignedTo.length > 3">
-                            <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
-                                this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                            <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
-                                this.returnFirstLetter(task.assignedTo[1].name) }}</div>
-                            <div class="circle dark overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">
-                                +{{ task.assignedTo.length }}</div>
-                        </div>
-                        <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon"
-                            *ngIf="task.priority === 'low'">
-                        <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon"
-                            *ngIf="task.priority === 'medium'">
-                        <img src="/../assets/img/board/prio_high_icon.svg" alt="priority_low_icon"
-                            *ngIf="task.priority === 'high'">
+                    <div class="progressbar-text"> {{ this.countDoneSubtasks(task.subtasks) }}/{{
+                        task.subtasks.length }} Done</div>
+                </div>
+                <div class="row">
+                    <div class="row" *ngIf="task.assignedTo.length === 1">
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
+                            this.returnFirstLetter(task.assignedTo[0].name) }}</div>
                     </div>
+                    <div class="row" *ngIf="task.assignedTo.length === 2">
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
+                            this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                        <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
+                            this.returnFirstLetter(task.assignedTo[1].name)}}</div>
+                    </div>
+                    <div class="row" *ngIf="task.assignedTo.length === 3">
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
+                            this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                        <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
+                            this.returnFirstLetter(task.assignedTo[1].name) }}</div>
+                        <div class="circle overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">{{
+                            this.returnFirstLetter(task.assignedTo[2].name) }}</div>
+                    </div>
+                    <div class="row" *ngIf="task.assignedTo.length > 3">
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
+                            this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                        <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
+                            this.returnFirstLetter(task.assignedTo[1].name) }}</div>
+                        <div class="circle dark overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">
+                            +{{ task.assignedTo.length }}</div>
+                    </div>
+                    <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon"
+                        *ngIf="task.priority === 'low'">
+                    <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon"
+                        *ngIf="task.priority === 'medium'">
+                    <img src="/../assets/img/board/prio_high_icon.svg" alt="priority_low_icon"
+                        *ngIf="task.priority === 'high'">
                 </div>
             </div>
         </div>
@@ -82,55 +80,53 @@
         </div>
 
         <!-- Progress Template -->
-        <div cdkDropList (cdkDropListDropped)="drop($any($event))">
-            <div *ngFor="let task of tasks">
-                <div class="card" *ngIf="task.status === 'progress'" (click)="showTaskDetails(task.id)" cdkDrag>
-                    <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
-                    <div class="card-title">{{ task.title }}</div>
-                    <p>{{ task.description }}</p>
-                    <div class="row margin-bottom" *ngIf="task.subtasks.length > 0">
-                        <div class="progressbar">
-                            <div class="progress" [style]="this.returnProgressWidth(task.subtasks)"></div>
-                        </div>
-                        <div class="progressbar-text"> {{ this.countDoneSubtasks(task.subtasks) }}/{{
-                            task.subtasks.length
-                            }} Done</div>
+        <div cdkDropList [cdkDropListData]="inProgressTasks" (cdkDropListDropped)="drop($event)" id="progress">
+            <div class="card" *ngFor="let task of inProgressTasks" (click)="showTaskDetails(task.id)" cdkDrag>
+                <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
+                <div class="card-title">{{ task.title }}</div>
+                <p>{{ task.description }}</p>
+                <div class="row margin-bottom" *ngIf="task.subtasks.length > 0">
+                    <div class="progressbar">
+                        <div class="progress" [style]="this.returnProgressWidth(task.subtasks)"></div>
                     </div>
-                    <div class="row">
-                        <div class="row" *ngIf="task.assignedTo.length === 1">
-                            <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
-                                this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                        </div>
-                        <div class="row" *ngIf="task.assignedTo.length === 2">
-                            <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
-                                this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                            <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
-                                this.returnFirstLetter(task.assignedTo[1].name)}}</div>
-                        </div>
-                        <div class="row" *ngIf="task.assignedTo.length === 3">
-                            <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
-                                this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                            <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
-                                this.returnFirstLetter(task.assignedTo[1].name) }}</div>
-                            <div class="circle overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">{{
-                                this.returnFirstLetter(task.assignedTo[2].name) }}</div>
-                        </div>
-                        <div class="row" *ngIf="task.assignedTo.length > 3">
-                            <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
-                                this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                            <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
-                                this.returnFirstLetter(task.assignedTo[1].name) }}</div>
-                            <div class="circle dark overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">
-                                +{{
-                                task.assignedTo.length }}</div>
-                        </div>
-                        <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon"
-                            *ngIf="task.priority === 'low'">
-                        <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon"
-                            *ngIf="task.priority === 'medium'">
-                        <img src="/../assets/img/board/prio_high_icon.svg" alt="priority_low_icon"
-                            *ngIf="task.priority === 'high'">
+                    <div class="progressbar-text"> {{ this.countDoneSubtasks(task.subtasks) }}/{{
+                        task.subtasks.length
+                        }} Done</div>
+                </div>
+                <div class="row">
+                    <div class="row" *ngIf="task.assignedTo.length === 1">
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
+                            this.returnFirstLetter(task.assignedTo[0].name) }}</div>
                     </div>
+                    <div class="row" *ngIf="task.assignedTo.length === 2">
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
+                            this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                        <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
+                            this.returnFirstLetter(task.assignedTo[1].name)}}</div>
+                    </div>
+                    <div class="row" *ngIf="task.assignedTo.length === 3">
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
+                            this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                        <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
+                            this.returnFirstLetter(task.assignedTo[1].name) }}</div>
+                        <div class="circle overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">{{
+                            this.returnFirstLetter(task.assignedTo[2].name) }}</div>
+                    </div>
+                    <div class="row" *ngIf="task.assignedTo.length > 3">
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
+                            this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                        <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
+                            this.returnFirstLetter(task.assignedTo[1].name) }}</div>
+                        <div class="circle dark overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">
+                            +{{
+                            task.assignedTo.length }}</div>
+                    </div>
+                    <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon"
+                        *ngIf="task.priority === 'low'">
+                    <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon"
+                        *ngIf="task.priority === 'medium'">
+                    <img src="/../assets/img/board/prio_high_icon.svg" alt="priority_low_icon"
+                        *ngIf="task.priority === 'high'">
                 </div>
             </div>
         </div>
@@ -143,55 +139,53 @@
         </div>
 
         <!-- Feedback Template -->
-        <div cdkDropList (cdkDropListDropped)="drop($any($event))">
-            <div *ngFor="let task of tasks">
-                <div class="card" *ngIf="task.status === 'feedback'" (click)="showTaskDetails(task.id)" cdkDrag>
-                    <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
-                    <div class="card-title">{{ task.title }}</div>
-                    <p>{{ task.description }}</p>
-                    <div class="row margin-bottom" *ngIf="task.subtasks.length > 0">
-                        <div class="progressbar">
-                            <div class="progress" [style]="this.returnProgressWidth(task.subtasks)"></div>
-                        </div>
-                        <div class="progressbar-text"> {{ this.countDoneSubtasks(task.subtasks) }}/{{
-                            task.subtasks.length
-                            }} Done</div>
+        <div cdkDropList [cdkDropListData]="feedbackTasks" (cdkDropListDropped)="drop($event)" id="feedback">
+            <div class="card" *ngFor="let task of feedbackTasks" (click)="showTaskDetails(task.id)" cdkDrag>
+                <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
+                <div class="card-title">{{ task.title }}</div>
+                <p>{{ task.description }}</p>
+                <div class="row margin-bottom" *ngIf="task.subtasks.length > 0">
+                    <div class="progressbar">
+                        <div class="progress" [style]="this.returnProgressWidth(task.subtasks)"></div>
                     </div>
-                    <div class="row">
-                        <div class="row" *ngIf="task.assignedTo.length === 1">
-                            <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
-                                this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                        </div>
-                        <div class="row" *ngIf="task.assignedTo.length === 2">
-                            <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
-                                this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                            <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
-                                this.returnFirstLetter(task.assignedTo[1].name)}}</div>
-                        </div>
-                        <div class="row" *ngIf="task.assignedTo.length === 3">
-                            <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
-                                this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                            <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
-                                this.returnFirstLetter(task.assignedTo[1].name) }}</div>
-                            <div class="circle overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">{{
-                                this.returnFirstLetter(task.assignedTo[2].name) }}</div>
-                        </div>
-                        <div class="row" *ngIf="task.assignedTo.length > 3">
-                            <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
-                                this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                            <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
-                                this.returnFirstLetter(task.assignedTo[1].name) }}</div>
-                            <div class="circle dark overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">
-                                +{{
-                                task.assignedTo.length }}</div>
-                        </div>
-                        <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon"
-                            *ngIf="task.priority === 'low'">
-                        <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon"
-                            *ngIf="task.priority === 'medium'">
-                        <img src="/../assets/img/board/prio_high_icon.svg" alt="priority_low_icon"
-                            *ngIf="task.priority === 'high'">
+                    <div class="progressbar-text"> {{ this.countDoneSubtasks(task.subtasks) }}/{{
+                        task.subtasks.length
+                        }} Done</div>
+                </div>
+                <div class="row">
+                    <div class="row" *ngIf="task.assignedTo.length === 1">
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
+                            this.returnFirstLetter(task.assignedTo[0].name) }}</div>
                     </div>
+                    <div class="row" *ngIf="task.assignedTo.length === 2">
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
+                            this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                        <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
+                            this.returnFirstLetter(task.assignedTo[1].name)}}</div>
+                    </div>
+                    <div class="row" *ngIf="task.assignedTo.length === 3">
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
+                            this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                        <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
+                            this.returnFirstLetter(task.assignedTo[1].name) }}</div>
+                        <div class="circle overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">{{
+                            this.returnFirstLetter(task.assignedTo[2].name) }}</div>
+                    </div>
+                    <div class="row" *ngIf="task.assignedTo.length > 3">
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
+                            this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                        <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
+                            this.returnFirstLetter(task.assignedTo[1].name) }}</div>
+                        <div class="circle dark overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">
+                            +{{
+                            task.assignedTo.length }}</div>
+                    </div>
+                    <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon"
+                        *ngIf="task.priority === 'low'">
+                    <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon"
+                        *ngIf="task.priority === 'medium'">
+                    <img src="/../assets/img/board/prio_high_icon.svg" alt="priority_low_icon"
+                        *ngIf="task.priority === 'high'">
                 </div>
             </div>
         </div>
@@ -204,55 +198,53 @@
         </div>
 
         <!-- Done Template -->
-        <div cdkDropList (cdkDropListDropped)="drop($any($event))">
-            <div *ngFor="let task of tasks">
-                <div class="card" *ngIf="task.status === 'done'" (click)="showTaskDetails(task.id)" cdkDrag>
-                    <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
-                    <div class="card-title">{{ task.title }}</div>
-                    <p>{{ task.description }}</p>
-                    <div class="row margin-bottom" *ngIf="task.subtasks.length > 0">
-                        <div class="progressbar">
-                            <div class="progress" [style]="this.returnProgressWidth(task.subtasks)"></div>
-                        </div>
-                        <div class="progressbar-text"> {{ this.countDoneSubtasks(task.subtasks) }}/{{
-                            task.subtasks.length
-                            }} Done</div>
+        <div cdkDropList [cdkDropListData]="doneTasks" (cdkDropListDropped)="drop($event)" id="done">
+            <div class="card" *ngFor="let task of doneTasks" (click)="showTaskDetails(task.id)" cdkDrag>
+                <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
+                <div class="card-title">{{ task.title }}</div>
+                <p>{{ task.description }}</p>
+                <div class="row margin-bottom" *ngIf="task.subtasks.length > 0">
+                    <div class="progressbar">
+                        <div class="progress" [style]="this.returnProgressWidth(task.subtasks)"></div>
                     </div>
-                    <div class="row">
-                        <div class="row" *ngIf="task.assignedTo.length === 1">
-                            <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
-                                this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                        </div>
-                        <div class="row" *ngIf="task.assignedTo.length === 2">
-                            <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
-                                this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                            <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
-                                this.returnFirstLetter(task.assignedTo[1].name)}}</div>
-                        </div>
-                        <div class="row" *ngIf="task.assignedTo.length === 3">
-                            <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
-                                this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                            <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
-                                this.returnFirstLetter(task.assignedTo[1].name) }}</div>
-                            <div class="circle overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">{{
-                                this.returnFirstLetter(task.assignedTo[2].name) }}</div>
-                        </div>
-                        <div class="row" *ngIf="task.assignedTo.length > 3">
-                            <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
-                                this.returnFirstLetter(task.assignedTo[0].name) }}</div>
-                            <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
-                                this.returnFirstLetter(task.assignedTo[1].name) }}</div>
-                            <div class="circle dark overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">
-                                +{{
-                                task.assignedTo.length }}</div>
-                        </div>
-                        <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon"
-                            *ngIf="task.priority === 'low'">
-                        <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon"
-                            *ngIf="task.priority === 'medium'">
-                        <img src="/../assets/img/board/prio_high_icon.svg" alt="priority_low_icon"
-                            *ngIf="task.priority === 'high'">
+                    <div class="progressbar-text"> {{ this.countDoneSubtasks(task.subtasks) }}/{{
+                        task.subtasks.length
+                        }} Done</div>
+                </div>
+                <div class="row">
+                    <div class="row" *ngIf="task.assignedTo.length === 1">
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
+                            this.returnFirstLetter(task.assignedTo[0].name) }}</div>
                     </div>
+                    <div class="row" *ngIf="task.assignedTo.length === 2">
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
+                            this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                        <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
+                            this.returnFirstLetter(task.assignedTo[1].name)}}</div>
+                    </div>
+                    <div class="row" *ngIf="task.assignedTo.length === 3">
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
+                            this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                        <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
+                            this.returnFirstLetter(task.assignedTo[1].name) }}</div>
+                        <div class="circle overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">{{
+                            this.returnFirstLetter(task.assignedTo[2].name) }}</div>
+                    </div>
+                    <div class="row" *ngIf="task.assignedTo.length > 3">
+                        <div class="circle" [style]="this.returnUserColor(task.assignedTo[0].color)">{{
+                            this.returnFirstLetter(task.assignedTo[0].name) }}</div>
+                        <div class="circle overlap" [style]="this.returnUserColor(task.assignedTo[1].color)">{{
+                            this.returnFirstLetter(task.assignedTo[1].name) }}</div>
+                        <div class="circle dark overlap2" [style]="this.returnUserColor(task.assignedTo[2].color)">
+                            +{{
+                            task.assignedTo.length }}</div>
+                    </div>
+                    <img src="/../assets/img/board/prio_low_icon.svg" alt="priority_low_icon"
+                        *ngIf="task.priority === 'low'">
+                    <img src="/../assets/img/board/prio_medium_icon.svg" alt="priority_low_icon"
+                        *ngIf="task.priority === 'medium'">
+                    <img src="/../assets/img/board/prio_high_icon.svg" alt="priority_low_icon"
+                        *ngIf="task.priority === 'high'">
                 </div>
             </div>
         </div>

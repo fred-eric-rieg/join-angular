@@ -67,6 +67,10 @@
     width: min(100%, 350px);
     margin-top: 1rem;
 
+    .minheight {
+        min-height: 100px;
+    }
+
     .headline {
         display: flex;
         flex-direction: row;
