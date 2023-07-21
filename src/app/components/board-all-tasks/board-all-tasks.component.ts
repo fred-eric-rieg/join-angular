@@ -3,6 +3,15 @@ import { FirebaseService } from '../../services/firebase.service';
 import { Task } from 'src/app/models/task.class';
 import { User } from 'src/app/models/user.class';
 import { Subscription } from 'rxjs';
+import {
+  CdkDragDrop,
+  CdkDrag,
+  CdkDropList,
+  CdkDropListGroup,
+  moveItemInArray,
+  transferArrayItem,
+  DragDropModule
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-board-all-tasks',
@@ -34,6 +43,12 @@ export class BoardAllTasksComponent implements OnDestroy {
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
     this.taskSubscription.unsubscribe();
+  }
+
+
+  drop($event: CdkDragDrop<string[]>) {
+    console.log($event);
+
   }
 
   /**
