@@ -109,6 +109,10 @@ img {
 
 @media screen and (min-width: 768px) {
 
+    form {
+        width: min(100%, 450px);
+    }
+
     .background {
         left: 12rem;
         width: calc(100% - 12rem);
