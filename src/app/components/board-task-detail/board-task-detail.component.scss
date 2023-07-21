@@ -228,5 +228,10 @@
 @media screen and (min-width: 768px) {
     .btn-group {
         right: calc(50vw - 167.5px - 6rem) !important;
+        top: calc(30vh) !important;
+    }
+
+    .card {
+        height: min(90vh, 600px) !important;
     }
 }
