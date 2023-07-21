@@ -7,7 +7,7 @@
     </div>
 
     <div class="searchfield">
-        <input type="text" placeholder="Search">
+        <input type="text" placeholder="Search" [(ngModel)]="search" (keyup)="filterTasks()">
         <div class="grey-line"></div>
         <img src="/../assets/img/board/search_icon.svg" alt="search icon">
     </div>

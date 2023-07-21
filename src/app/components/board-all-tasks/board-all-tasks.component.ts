@@ -1,27 +1,39 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Task } from 'src/app/models/task.class';
 import { User } from 'src/app/models/user.class';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-board-all-tasks',
   templateUrl: './board-all-tasks.component.html',
   styleUrls: ['./board-all-tasks.component.scss']
 })
-export class BoardAllTasksComponent {
+export class BoardAllTasksComponent implements OnDestroy {
 
   tasks!: Task[];
   users!: User[];
   @Output() toggleOverlay = new EventEmitter();
   @Output() task = new EventEmitter();
+  search: string = '';
+
+  taskSubscription: Subscription;
+  userSubscription: Subscription;
+
 
   constructor(private firebaseService: FirebaseService) {
-    this.firebaseService.users.subscribe(users => {
+    this.userSubscription = this.firebaseService.users.subscribe(users => {
       this.users = users;
     });
-    this.firebaseService.tasks.subscribe(tasks => {
+    this.taskSubscription = this.firebaseService.tasks.subscribe(tasks => {
       this.tasks = tasks;
     });
+  }
+
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
+    this.taskSubscription.unsubscribe();
   }
 
   /**
@@ -73,5 +85,21 @@ export class BoardAllTasksComponent {
 
   returnUserColor(color: string) {
     return `background: ${color}`;
+  }
+
+  /**
+   * Filters the tasks according to the search input. Only title and description are filtered.
+   */
+  filterTasks() {
+    this.taskSubscription.unsubscribe(); // unsubscribe to prevent subscription overlap with filter
+    if (this.search != '') {
+      this.tasks = this.tasks.filter(task => {
+        return task.title.toLocaleLowerCase().includes(this.search.toLocaleLowerCase()) || task.description.toLocaleLowerCase().includes(this.search.toLocaleLowerCase());
+      });
+    } else {
+      this.taskSubscription = this.firebaseService.tasks.subscribe(tasks => {
+        this.tasks = tasks;
+      });
+    }
   }
 }
