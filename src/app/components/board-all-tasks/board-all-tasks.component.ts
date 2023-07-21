@@ -132,9 +132,11 @@ export class BoardAllTasksComponent implements OnDestroy {
       this.tasks = this.tasks.filter(task => {
         return task.title.toLocaleLowerCase().includes(this.search.toLocaleLowerCase()) || task.description.toLocaleLowerCase().includes(this.search.toLocaleLowerCase());
       });
+      this.filterTaskStatus();
     } else {
       this.taskSubscription = this.firebaseService.tasks.subscribe(tasks => {
         this.tasks = tasks;
+        this.filterTaskStatus();
       });
     }
   }

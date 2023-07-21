@@ -23,6 +23,7 @@
 
         <!-- Todo Template -->
         <div cdkDropList [cdkDropListData]="todoTasks" (cdkDropListDropped)="drop($event)" class="minheight" id="todo">
+            <p *ngIf="!todoTasks">No todos</p>
             <div class="card" *ngFor="let task of todoTasks" (click)="showTaskDetails(task.id)" cdkDrag>
                 <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
                 <div class="card-title">{{ task.title }}</div>
@@ -80,7 +81,7 @@
         </div>
 
         <!-- Progress Template -->
-        <div cdkDropList [cdkDropListData]="inProgressTasks" (cdkDropListDropped)="drop($event)" id="progress">
+        <div cdkDropList [cdkDropListData]="inProgressTasks" (cdkDropListDropped)="drop($event)" class="minheight" id="progress">
             <div class="card" *ngFor="let task of inProgressTasks" (click)="showTaskDetails(task.id)" cdkDrag>
                 <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
                 <div class="card-title">{{ task.title }}</div>
@@ -139,7 +140,7 @@
         </div>
 
         <!-- Feedback Template -->
-        <div cdkDropList [cdkDropListData]="feedbackTasks" (cdkDropListDropped)="drop($event)" id="feedback">
+        <div cdkDropList [cdkDropListData]="feedbackTasks" (cdkDropListDropped)="drop($event)" class="minheight" id="feedback">
             <div class="card" *ngFor="let task of feedbackTasks" (click)="showTaskDetails(task.id)" cdkDrag>
                 <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
                 <div class="card-title">{{ task.title }}</div>
@@ -198,7 +199,7 @@
         </div>
 
         <!-- Done Template -->
-        <div cdkDropList [cdkDropListData]="doneTasks" (cdkDropListDropped)="drop($event)" id="done">
+        <div cdkDropList [cdkDropListData]="doneTasks" (cdkDropListDropped)="drop($event)" class="minheight" id="done">
             <div class="card" *ngFor="let task of doneTasks" (click)="showTaskDetails(task.id)" cdkDrag>
                 <div class="card-category" [style]='"background: " + task.category[1]'>{{ task.category[0] }}</div>
                 <div class="card-title">{{ task.title }}</div>
