@@ -24,7 +24,7 @@ export class SummaryComponent implements OnInit {
     });
     this.auth.user.subscribe(user => {
       if (user) {
-        this.username = user.email ? user.email : 'Guest';
+        this.username = user.email ? user.email.split('@')[0] : 'Guest';
       }
     });
   }
