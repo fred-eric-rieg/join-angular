@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, doc, setDoc, updateDoc, deleteDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, setDoc, deleteDoc } from '@angular/fire/firestore';
 import { Task } from '../models/task.class';
 import { User } from '../models/user.class';
 import { Observable } from 'rxjs';
@@ -19,7 +19,6 @@ export class FirebaseService {
     this.getAllTasks();
     this.getCategories();
   }
-
 
   /**
    * Creates a task in Firestore collection "tasks".
@@ -124,7 +123,6 @@ export class FirebaseService {
     }
     );
   }
-
 
   /**
    * Gets all users from Firestore collection "users".
