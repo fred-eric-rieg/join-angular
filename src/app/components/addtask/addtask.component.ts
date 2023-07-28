@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -7,13 +7,14 @@ import { Task } from 'src/app/models/task.class';
 import { Timestamp } from '@angular/fire/firestore';
 import { formatDate } from '@angular/common';
 import { User } from 'src/app/models/user.class';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-addtask',
   templateUrl: './addtask.component.html',
   styleUrls: ['./addtask.component.scss']
 })
-export class AddtaskComponent {
+export class AddtaskComponent implements OnInit, OnDestroy {
 
   // For setting the priority buttons to default (low = true).
   lowPrio: boolean = true;
@@ -52,8 +53,19 @@ export class AddtaskComponent {
   // The id of the task to be edited
   taskId: string = '';
 
+  // Subscriptions
+  categoriesSub!: Subscription;
+  usersSub!: Subscription;
+  routeSub!: Subscription;
+  tasksSub!: Subscription;
 
-  constructor(private firebaseService: FirebaseService, private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute) { }
+
+  constructor(
+    private firebaseService: FirebaseService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute
+    ) { }
 
 
   ngOnInit() {
@@ -63,6 +75,14 @@ export class AddtaskComponent {
     this.subscribeToRoute();
     this.prepareDataForEditation();
     this.taskForm.valueChanges.subscribe(console.log);
+  }
+
+
+  ngOnDestroy() {
+    this.categoriesSub.unsubscribe();
+    this.usersSub.unsubscribe();
+    this.routeSub.unsubscribe();
+    this.tasksSub.unsubscribe();
   }
 
 
@@ -91,7 +111,7 @@ export class AddtaskComponent {
    * Observing changes on categories and copying them into categories variable.
    */
   subscribeToCategories() {
-    this.firebaseService.categories.subscribe(categories => {
+    this.categoriesSub = this.firebaseService.categories.subscribe(categories => {
       categories.forEach((category: any) => {
         this.categories.push(category);
       });
@@ -103,7 +123,7 @@ export class AddtaskComponent {
    * Observing changes on users and copying them into users variable.
    */
   subscribeToUsers() {
-    this.firebaseService.users.subscribe(users => {
+    this.usersSub = this.firebaseService.users.subscribe(users => {
       users.forEach((user: any) => {
         this.users.push(user);
       });
@@ -116,7 +136,7 @@ export class AddtaskComponent {
    * setting the status of the taskForm group to the value of the id.
    */
   subscribeToRoute() {
-    this.route.params.subscribe(params => {
+    this.routeSub = this.route.params.subscribe(params => {
       if (params['id']) {
         params['id'].length < 20 ? this.taskForm.patchValue({ status: params['id'] }) : this.taskId = params['id'];
       } else {
@@ -129,7 +149,7 @@ export class AddtaskComponent {
    * If the user is editing a task, this function will fetch the data from Firestore and prepare it for editation.
    */
   prepareDataForEditation() {
-    this.firebaseService.tasks.subscribe(tasks => {
+    this.tasksSub = this.firebaseService.tasks.subscribe(tasks => {
       tasks.forEach((task: Task) => {
         if (task.id === this.taskId) {
           this.taskForm.patchValue(task);
