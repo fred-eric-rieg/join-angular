@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.class';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
@@ -9,7 +10,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
   templateUrl: './contact-add.component.html',
   styleUrls: ['./contact-add.component.scss']
 })
-export class ContactAddComponent {
+export class ContactAddComponent implements OnInit, OnDestroy {
 
   id: string = '';
   user: User = new User(
@@ -25,6 +26,9 @@ export class ContactAddComponent {
 
   contactForm!: FormGroup;
 
+  // Subscription
+  paramsSub!: Subscription;
+
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -35,10 +39,15 @@ export class ContactAddComponent {
 
   ngOnInit(): void {
     this.createFormGroup();
-    this.route.params.subscribe(params => {
+    this.paramsSub = this.route.params.subscribe(params => {
       this.id = params['id'];
     });
     this.id != 'add' ? this.loadUsersFromFirebase() : null;
+  }
+
+
+  ngOnDestroy() {
+    this.paramsSub.unsubscribe();
   }
 
 

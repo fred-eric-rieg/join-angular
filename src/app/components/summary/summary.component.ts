@@ -1,28 +1,33 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { Task } from 'src/app/models/task.class';
 import { Timestamp } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss']
 })
-export class SummaryComponent implements OnInit {
+export class SummaryComponent implements OnInit, OnDestroy {
 
   username: string = 'Guest';
   @ViewChild('greeting') greeting: any;
   hasGreeted: boolean = false;
   tasks: Array<Task> = [];
 
+  // Subscriptions
+  taskSub!: Subscription;
+  authSub! : Subscription;
+
 
   constructor(private firebaseService: FirebaseService, public auth: AngularFireAuth) {
-    this.firebaseService.tasks.subscribe(tasks => {
+    this.taskSub = this.firebaseService.tasks.subscribe(tasks => {
       this.tasks = tasks;
     });
-    this.auth.user.subscribe(user => {
+    this.authSub = this.auth.user.subscribe(user => {
       if (user) {
         this.username = user.email ? user.email.split('@')[0] : 'Guest';
       }
@@ -35,6 +40,12 @@ export class SummaryComponent implements OnInit {
     if (!this.hasGreeted) {
       this.fadeOutGreeting();
     }
+  }
+
+
+  ngOnDestroy() {
+    this.taskSub.unsubscribe();
+    this.authSub.unsubscribe();
   }
 
   /**

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.class';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
@@ -7,20 +8,28 @@ import { FirebaseService } from 'src/app/services/firebase.service';
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.scss']
 })
-export class ContactsComponent implements OnInit {
+export class ContactsComponent implements OnInit, OnDestroy {
 
   users!: User[];
   firstLetters: string[] = [];
+
+  // Subscription
+  userSub!: Subscription;
 
 
   constructor(private firebaseService: FirebaseService) { }
 
 
   ngOnInit(): void {
-    this.firebaseService.users.subscribe(users => {
+    this.userSub = this.firebaseService.users.subscribe(users => {
       this.users = users;
       this.listSortedFirstLetters();
     });
+  }
+
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
   }
 
   /**

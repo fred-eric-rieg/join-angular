@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.class';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
@@ -9,18 +9,26 @@ import { FirebaseService } from 'src/app/services/firebase.service';
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss']
 })
-export class ContactFormComponent implements OnInit {
+export class ContactFormComponent implements OnInit, OnDestroy {
 
   displayedUser: any;
+
+  // Subscription
+  paramsSub!: Subscription;
 
   constructor(private route: ActivatedRoute, private firebaseService: FirebaseService) { }
 
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.paramsSub = this.route.paramMap.subscribe(params => {
       let id = params.get('id');
       this.getContact(id!);
     });
+  }
+
+
+  ngOnDestroy() {
+    this.paramsSub.unsubscribe();
   }
 
 
