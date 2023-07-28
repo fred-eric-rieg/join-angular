@@ -29,15 +29,15 @@ export class BoardAllTasksComponent implements OnDestroy {
   @Output() task = new EventEmitter();
   search: string = '';
 
-  taskSubscription: Subscription;
-  userSubscription: Subscription;
+  taskSub!: Subscription;
+  userSub!: Subscription;
 
 
   constructor(private firebaseService: FirebaseService) {
-    this.userSubscription = this.firebaseService.users.subscribe(users => {
+    this.userSub = this.firebaseService.users.subscribe(users => {
       this.users = users;
     });
-    this.taskSubscription = this.firebaseService.tasks.subscribe(tasks => {
+    this.taskSub = this.firebaseService.tasks.subscribe(tasks => {
       this.tasks = tasks;
       this.filterTaskStatus();
     });
@@ -45,8 +45,8 @@ export class BoardAllTasksComponent implements OnDestroy {
 
 
   ngOnDestroy() {
-    this.userSubscription.unsubscribe();
-    this.taskSubscription.unsubscribe();
+    this.userSub.unsubscribe();
+    this.taskSub.unsubscribe();
   }
 
 
@@ -127,14 +127,14 @@ export class BoardAllTasksComponent implements OnDestroy {
    * Filters the tasks according to the search input. Only title and description are filtered.
    */
   filterTasksSearch() {
-    this.taskSubscription.unsubscribe(); // unsubscribe to prevent subscription overlap with filter
+    this.taskSub.unsubscribe(); // unsubscribe to prevent subscription overlap with filter
     if (this.search != '') {
       this.tasks = this.tasks.filter(task => {
         return task.title.toLocaleLowerCase().includes(this.search.toLocaleLowerCase()) || task.description.toLocaleLowerCase().includes(this.search.toLocaleLowerCase());
       });
       this.filterTaskStatus();
     } else {
-      this.taskSubscription = this.firebaseService.tasks.subscribe(tasks => {
+      this.taskSub = this.firebaseService.tasks.subscribe(tasks => {
         this.tasks = tasks;
         this.filterTaskStatus();
       });

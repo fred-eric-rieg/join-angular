@@ -25,10 +25,10 @@ export class BoardTaskDetailComponent implements OnDestroy {
   userSub!: Subscription;
 
   constructor(private firebaseService: FirebaseService, private router: Router) {
-    this.firebaseService.users.subscribe(users => {
+    this.userSub = this.firebaseService.users.subscribe(users => {
       this.users = users;
     });
-    this.firebaseService.tasks.subscribe(tasks => {
+    this.taskSub = this.firebaseService.tasks.subscribe(tasks => {
       this.tasks = tasks;
     });
   }
