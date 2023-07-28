@@ -1,16 +1,17 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { Task } from '../../models/task.class';
 import { formatDate } from '@angular/common';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.class';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-board-task-detail',
   templateUrl: './board-task-detail.component.html',
   styleUrls: ['./board-task-detail.component.scss']
 })
-export class BoardTaskDetailComponent {
+export class BoardTaskDetailComponent implements OnDestroy {
 
   tasks!: Task[];
   users!: User[];
@@ -19,6 +20,10 @@ export class BoardTaskDetailComponent {
   toggleStatus = false;
   toggleDeletable = false;
 
+  // Subscriptions 
+  taskSub!: Subscription;
+  userSub!: Subscription;
+
   constructor(private firebaseService: FirebaseService, private router: Router) {
     this.firebaseService.users.subscribe(users => {
       this.users = users;
@@ -26,6 +31,12 @@ export class BoardTaskDetailComponent {
     this.firebaseService.tasks.subscribe(tasks => {
       this.tasks = tasks;
     });
+  }
+
+
+  ngOnDestroy() {
+    this.taskSub.unsubscribe();
+    this.userSub.unsubscribe();
   }
 
 
