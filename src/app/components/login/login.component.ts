@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   async login(email: string, password: string) {
     this.loading = true;
     return await this.authService.signInWithEmailAndPassword(email, password).then((user) => {
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', JSON.stringify(user.user?.refreshToken));
       localStorage.setItem('hasGreeted', 'false');
       this.loading = false;
       this.router.navigate(['/summary']);

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth/auth.guard';
+
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent} from './components/signup/signup.component';
 import { ForgotPwComponent } from './components/forgot-pw/forgot-pw.component';
@@ -12,7 +14,7 @@ import { LegalComponent } from './components/legal/legal.component';
 import { HelpinfoComponent } from './components/helpinfo/helpinfo.component';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
 import { ContactAddComponent } from './components/contact-add/contact-add.component';
-import { AuthGuard } from './services/auth.guard';
+
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -29,13 +31,10 @@ const routes: Routes = [
   { path: 'contact-form/:id', component: ContactFormComponent, canActivate: [AuthGuard] },
   { path: 'contact-add/:id', component: ContactAddComponent, canActivate: [AuthGuard] },
   { path: 'contact-add/edit/:id', component: ContactAddComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    onSameUrlNavigation: 'reload',
-  })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

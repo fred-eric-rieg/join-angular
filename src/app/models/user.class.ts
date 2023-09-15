@@ -19,7 +19,6 @@ export class User {
      * @param email as string
      * @param phone as string
      * @param password as string
-     * @param role as string
      * @param creationDate as Date
      * @param lastUpdated as Date
      * @param color as string
